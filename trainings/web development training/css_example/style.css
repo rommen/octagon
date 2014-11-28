@@ -3,11 +3,11 @@ body{
 	margin:0px;
 	line-height: 1;
 	padding: 0px;
-	background-color: lightgreen;	
+	background-color: lightblue;	
 }
 
 #header{
-	background-color: darkgreen;
+	background-color: darkblue;
 	height: 35px;
 }
 
