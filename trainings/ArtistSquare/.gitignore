@@ -8,4 +8,5 @@
 /build/
 /vendor/
 /bin/
+/app/cache/
 /composer.phar
