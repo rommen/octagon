@@ -1,0 +1,82 @@
+<?php
+
+namespace ArtistSquare\ArtistBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Picture
+ *
+ * @ORM\Table(name="Picture")
+ * @ORM\Entity
+ */
+class Picture
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=true)
+     */
+    private $active;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="block_reason", type="text", nullable=true)
+     */
+    private $blockReason;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="ArtistSquare\ArtistBundle\Entity\Tag", mappedBy="picture")
+     */
+    private $tag;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="ArtistSquare\ArtistBundle\Entity\Gallery", mappedBy="picture")
+     */
+    private $gallery;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->gallery = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

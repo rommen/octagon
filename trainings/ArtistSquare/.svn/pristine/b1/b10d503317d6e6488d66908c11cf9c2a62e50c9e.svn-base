@@ -1,0 +1,12 @@
+_home:
+    path:     /
+    defaults: { _controller: ArtistBundle:Home:index }
+_galleries:
+    path:     /galleries
+    defaults: { _controller: ArtistBundle:Gallery:list }
+_gallery:
+    path:     /galleries/{name}
+    defaults: { _controller: ArtistBundle:Gallery:view }
+_about:
+    path:     /about
+    defaults: { _controller: ArtistBundle:About:about }

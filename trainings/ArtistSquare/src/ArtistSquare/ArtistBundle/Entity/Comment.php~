@@ -1,0 +1,96 @@
+<?php
+
+namespace ArtistSquare\ArtistBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Comment
+ *
+ * @ORM\Table(name="Comment", indexes={@ORM\Index(name="user_idx", columns={"owner"}), @ORM\Index(name="pic_idx", columns={"picture"}), @ORM\Index(name="fk_Comment_Article1_idx", columns={"article"}), @ORM\Index(name="fk_Comment_Gallery1_idx", columns={"gallery"}), @ORM\Index(name="fk_Comment_User1_idx", columns={"deleter"})})
+ * @ORM\Entity
+ */
+class Comment
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="string", length=250, nullable=false)
+     */
+    private $text;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create", type="datetime", nullable=false)
+     */
+    private $create;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleted", type="datetime", nullable=true)
+     */
+    private $deleted;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \ArtistSquare\ArtistBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="ArtistSquare\ArtistBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="deleter", referencedColumnName="id")
+     * })
+     */
+    private $deleter;
+
+    /**
+     * @var \ArtistSquare\ArtistBundle\Entity\Gallery
+     *
+     * @ORM\ManyToOne(targetEntity="ArtistSquare\ArtistBundle\Entity\Gallery")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="gallery", referencedColumnName="id")
+     * })
+     */
+    private $gallery;
+
+    /**
+     * @var \ArtistSquare\ArtistBundle\Entity\Article
+     *
+     * @ORM\ManyToOne(targetEntity="ArtistSquare\ArtistBundle\Entity\Article")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="article", referencedColumnName="id")
+     * })
+     */
+    private $article;
+
+    /**
+     * @var \ArtistSquare\ArtistBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="ArtistSquare\ArtistBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="owner", referencedColumnName="id")
+     * })
+     */
+    private $owner;
+
+    /**
+     * @var \ArtistSquare\ArtistBundle\Entity\Picture
+     *
+     * @ORM\ManyToOne(targetEntity="ArtistSquare\ArtistBundle\Entity\Picture")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="picture", referencedColumnName="id")
+     * })
+     */
+    private $picture;
+
+
+}

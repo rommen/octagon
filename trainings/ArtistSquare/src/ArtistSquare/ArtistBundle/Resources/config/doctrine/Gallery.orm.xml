@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ArtistSquare\ArtistBundle\Entity\Gallery" table="Gallery">
+    <indexes>
+      <index name="idx_gallery_owner" columns="owner"/>
+      <index name="fk_gallery_category1_idx" columns="category_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="100" nullable="false"/>
+    <field name="active" type="boolean" column="active" nullable="false"/>
+    <field name="created" type="datetime" column="created" nullable="false"/>
+    <field name="modified" type="datetime" column="modified" nullable="true"/>
+    <field name="description" type="string" column="description" length="250" nullable="true"/>
+    <field name="tile" type="integer" column="tile" nullable="true"/>
+    <field name="blockReason" type="text" column="block_reason" nullable="true"/>
+    <many-to-one field="owner" target-entity="User">
+      <join-columns>
+        <join-column name="owner" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="category" target-entity="Category">
+      <join-columns>
+        <join-column name="category_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="tag" target-entity="Tag" inversed-by="gallery">
+      <join-table name="gallery_has_tag">
+        <join-columns>
+          <join-column name="gallery" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="tag" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="picture" target-entity="Picture" inversed-by="gallery">
+      <join-table name="gallerypicture">
+        <join-columns>
+          <join-column name="gallery" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="picture" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

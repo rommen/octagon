@@ -1,0 +1,17 @@
+{% extends "index.html.twig" %}
+{% block stylesheets %}
+     <link href="{{ asset('bundles/artist/css/gallery.css') }}" rel="stylesheet" media="screen">
+{% endblock %}  
+{% block content %}
+    Galleries
+    
+    
+    <div id="galleries_grid">
+        
+    {% for gallery in galleries %}
+        {% include 'ArtistBundle:Gallery:gallery_fence.html.twig' with {'gallery': gallery} %}
+    {% endfor %}
+    </div>
+{% endblock %}  
+    
+    

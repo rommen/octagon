@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ArtistSquare\ArtistBundle\Entity\Tag" table="Tag">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tag" type="string" column="tag" length="30" nullable="false"/>
+    <many-to-many field="picture" target-entity="Picture" inversed-by="tag">
+      <join-table name="picturetag">
+        <join-columns>
+          <join-column name="tag" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="picture" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="gallery" target-entity="Gallery" mapped-by="tag"/>
+    <many-to-many field="article" target-entity="Article" inversed-by="tag">
+      <join-table name="articletag">
+        <join-columns>
+          <join-column name="tag" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="article" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>
