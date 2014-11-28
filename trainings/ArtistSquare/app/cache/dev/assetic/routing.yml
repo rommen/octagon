@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: 'D:/GIT/octagon/trainings/ArtistSquare/app/config/routing_dev.yml'
