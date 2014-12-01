@@ -1,0 +1,10 @@
+octagon_shoe_portal_admin:
+    resource: "@OctagonShoePortalAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+octagon_shoe_portal_customer:
+    resource: "@OctagonShoePortalCustomerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
