@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    {% block navigation %}
+        <nav id="top-navigation" class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav" > 
+                    <li class="dropdown active">
+                        <a id="logo" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img style="margin-left: 20px" height="25px" src="{{ asset('images/logo.png') }}"/>
+                            Sportstar Shoe Portal
+                        </a>                                          
+                    </li>                    
+                </ul>               
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{{path('_home')}}">Home</a></li>
+                    <li><a href="{{path('_shoes')}}">Shoes</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+                    {% block navigationAuthentication %}
+                        <li><a href="#">Sign up</a></li>
+                        <li><a href="#">Login</a></li>
+                        {% endblock %}
+                </ul>
+            </div><!-- /.container-fluid -->
+        </nav>
+    {% endblock %}
+{% block header %}{% endblock %}
+
+<div id="content" style="margin-top:58px;">
+    {% block content %}
+    {% endblock %}
+</div>
+{% block footer %}
+    <div id="footer">
+        <span style="margin-left:15px">(c) All rights server by Octagon team</span>
+    </div>
+{% endblock %}
+
+{% endblock %}
+

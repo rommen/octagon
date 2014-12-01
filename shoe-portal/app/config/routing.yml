@@ -1,10 +1,8 @@
 octagon_shoe_portal_admin:
-    resource: "@OctagonShoePortalAdminBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
+    resource:  "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+    
 octagon_shoe_portal_customer:
-    resource: "@OctagonShoePortalCustomerBundle/Controller/"
-    type:     annotation
+    resource: "@CustomerBundle/Resources/config/routing.yml"
     prefix:   /
 

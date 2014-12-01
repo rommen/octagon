@@ -16,9 +16,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Octagon\ShoePortal\CustomerBundle\OctagonShoePortalCustomerBundle(),
-            new Octagon\ShoePortal\AdminBundle\OctagonShoePortalAdminBundle(),
-	    new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),        
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new Octagon\ShoePortal\CustomerBundle\CustomerBundle(),
+            new Octagon\ShoePortal\AdminBundle\AdminBundle(),
 );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
