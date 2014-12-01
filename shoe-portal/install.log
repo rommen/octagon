@@ -1,0 +1,169 @@
+Credentails and proeprties
+-----------------------------------------
+Database: db4free.net
+DB Name: octagon
+Username: sportshoeowner
+Password: sportshoeexchnage
+Secret Key: SportstarsAlwaysWearGoodShoes
+
+Commands
+php app/console generate:bundle --namespace=Octagon/ShoePortal/CustomerBundle --no-interaction --dir src  --structure
+php app/console generate:bundle --namespace=Octagon/ShoePortal/AdminBundle --no-interaction --dir src --structure
+
+
+Log
+-----------------------------------------
+sudo composer create-project symfony/framework-standard-edition shoe-portal/ '~2.6'
+Installing symfony/framework-standard-edition (v2.6.0)
+  - Installing symfony/framework-standard-edition (v2.6.0)
+    Loading from cache
+
+Created project in shoe-portal/
+Loading composer repositories with package information
+Installing dependencies (including require-dev)
+  - Installing doctrine/lexer (v1.0)
+    Loading from cache
+
+  - Installing doctrine/annotations (v1.2.1)
+    Loading from cache
+
+  - Installing psr/log (1.0.0)
+    Loading from cache
+
+  - Installing twig/twig (v1.16.2)
+    Loading from cache
+
+  - Installing doctrine/collections (v1.2)
+    Loading from cache
+
+  - Installing doctrine/cache (v1.3.1)
+    Loading from cache
+
+  - Installing doctrine/inflector (v1.0)
+    Loading from cache
+
+  - Installing doctrine/common (v2.4.2)
+    Loading from cache
+
+  - Installing symfony/symfony (2.6.x-dev 5b6a95c)
+    Cloning 5b6a95c4c2ffbf0bfc57197fd1464ba65f26518d
+
+  - Installing doctrine/dbal (v2.4.3)
+    Loading from cache
+
+  - Installing doctrine/orm (v2.4.6)
+    Loading from cache
+
+  - Installing doctrine/doctrine-cache-bundle (v1.0.1)
+    Loading from cache
+
+  - Installing jdorn/sql-formatter (v1.2.17)
+    Loading from cache
+
+  - Installing doctrine/doctrine-bundle (v1.3.0)
+    Loading from cache
+
+  - Installing twig/extensions (v1.2.0)
+    Loading from cache
+
+  - Installing kriswallsmith/assetic (v1.2.0)
+    Loading from cache
+
+  - Installing symfony/assetic-bundle (v2.5.0)
+    Loading from cache
+
+  - Installing swiftmailer/swiftmailer (v5.3.0)
+    Loading from cache
+
+  - Installing symfony/swiftmailer-bundle (v2.3.7)
+    Loading from cache
+
+  - Installing monolog/monolog (1.11.0)
+    Loading from cache
+
+  - Installing symfony/monolog-bundle (v2.6.1)
+    Loading from cache
+
+  - Installing sensio/distribution-bundle (v3.0.2)
+    Loading from cache
+
+  - Installing sensio/framework-extra-bundle (v3.0.3)
+    Loading from cache
+
+  - Installing incenteev/composer-parameter-handler (v2.1.0)
+    Loading from cache
+
+  - Installing sensio/generator-bundle (v2.4.2)
+    Loading from cache
+
+kriswallsmith/assetic suggests installing leafo/lessphp (Assetic provides the integration with the lessphp LESS compiler)
+kriswallsmith/assetic suggests installing leafo/scssphp (Assetic provides the integration with the scssphp SCSS compiler)
+kriswallsmith/assetic suggests installing ptachoire/cssembed (Assetic provides the integration with phpcssembed to embed data uris)
+kriswallsmith/assetic suggests installing leafo/scssphp-compass (Assetic provides the integration with the SCSS compass plugin)
+kriswallsmith/assetic suggests installing patchwork/jsqueeze (Assetic provides the integration with the JSqueeze JavaScript compressor)
+symfony/assetic-bundle suggests installing kriswallsmith/spork (to be able to dump assets in parallel)
+monolog/monolog suggests installing graylog2/gelf-php (Allow sending log messages to a GrayLog2 server)
+monolog/monolog suggests installing raven/raven (Allow sending log messages to a Sentry server)
+monolog/monolog suggests installing doctrine/couchdb (Allow sending log messages to a CouchDB server)
+monolog/monolog suggests installing ruflin/elastica (Allow sending log messages to an Elastic Search server)
+monolog/monolog suggests installing videlalvaro/php-amqplib (Allow sending log messages to an AMQP server using php-amqplib)
+monolog/monolog suggests installing ext-amqp (Allow sending log messages to an AMQP server (1.0+ required))
+monolog/monolog suggests installing ext-mongo (Allow sending log messages to a MongoDB server)
+monolog/monolog suggests installing aws/aws-sdk-php (Allow sending log messages to AWS services like DynamoDB)
+monolog/monolog suggests installing rollbar/rollbar (Allow sending log messages to Rollbar)
+Writing lock file
+Generating autoload files
+Would you like to install Acme demo bundle? [y/N] n
+Creating the "app/config/parameters.yml" file
+Some parameters are missing. Please provide them.
+database_driver (pdo_mysql): 
+database_host (127.0.0.1): db4free.net
+database_port (null): 3306
+database_name (symfony): octagon
+database_user (root): sportshoeowner
+database_password (null): sportshoeexchnage
+mailer_transport (smtp): 
+mailer_host (127.0.0.1): 
+mailer_user (null): 
+mailer_password (null): 
+locale (en): 
+secret (ThisTokenIsNotSoSecretChangeIt): SportstarsAlwaysWearGoodShoes
+Clearing the cache for the dev environment with debug true
+Trying to install assets as symbolic links.
+Installing assets for Symfony\Bundle\FrameworkBundle into web/bundles/framework
+The assets were installed using symbolic links.
+Installing assets for Sensio\Bundle\DistributionBundle into web/bundles/sensiodistribution
+The assets were installed using symbolic links.
+-------------------------------------------------------
+php app/console generate:bundle --namespace=Octagon/ShoePortal/CustomerBundle --no-interaction --dir src
+
+                     
+  Bundle generation  
+                     
+
+Generating the bundle code: OK
+Checking that the bundle is autoloaded: OK
+Enabling the bundle inside the Kernel: OK
+Importing the bundle routing resource: OK
+
+                                               
+  You can now start using the generated code!  
+                                               
+
+rommen@Rommen-Note:~/GIT/octagon/shoe-portal$ php app/console generate:bundle --namespace=Octagon/ShoePortal/AdminBundle --no-interaction --dir src
+
+                     
+  Bundle generation  
+                     
+
+Generating the bundle code: OK
+Checking that the bundle is autoloaded: OK
+Enabling the bundle inside the Kernel: OK
+Importing the bundle routing resource: OK
+
+                                               
+  You can now start using the generated code!  
+                                               
+
+
+
