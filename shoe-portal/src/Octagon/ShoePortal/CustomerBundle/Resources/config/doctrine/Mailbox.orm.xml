@@ -5,21 +5,21 @@
       <index name="fk_Mailbox_User1_idx" columns="idSender"/>
       <index name="fk_Mailbox_User2_idx" columns="idReceiver"/>
     </indexes>
-    <id name="idmailbox" type="integer" column="idMailbox">
+    <id name="idMailbox" type="integer" column="idMailbox">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="title" type="string" column="title" length="145" nullable="false"/>
     <field name="text" type="text" column="text" nullable="false"/>
     <field name="date" type="date" column="date" nullable="false"/>
     <field name="read" type="boolean" column="read" nullable="true"/>
-    <field name="deletebysender" type="boolean" column="deleteBySender" nullable="true"/>
-    <field name="deleteyreceiver" type="boolean" column="deleteyReceiver" nullable="true"/>
-    <many-to-one field="idreceiver" target-entity="User">
+    <field name="deleteBySender" type="boolean" column="deleteBySender" nullable="true"/>
+    <field name="deleteByReceiver" type="boolean" column="deleteyReceiver" nullable="true"/>
+    <many-to-one field="idReceiver" target-entity="User">
       <join-columns>
         <join-column name="idReceiver" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idsender" target-entity="User">
+    <many-to-one field="idSender" target-entity="User">
       <join-columns>
         <join-column name="idSender" referenced-column-name="idUser"/>
       </join-columns>

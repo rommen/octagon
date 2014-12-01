@@ -5,7 +5,7 @@
       <unique-constraint name="username_UNIQUE" columns="username"/>
       <unique-constraint name="email_UNIQUE" columns="email"/>
     </unique-constraints>
-    <id name="iduser" type="integer" column="idUser">
+    <id name="idUser" type="integer" column="idUser">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="username" type="string" column="username" length="45" nullable="false"/>

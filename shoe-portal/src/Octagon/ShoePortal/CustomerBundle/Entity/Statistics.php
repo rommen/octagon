@@ -33,7 +33,7 @@ class Statistics
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idstatistics;
+    private $idStatistics;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
@@ -43,7 +43,7 @@ class Statistics
      *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")
      * })
      */
-    private $idcategories;
+    private $idCategories;
 
 
 
@@ -94,35 +94,35 @@ class Statistics
     }
 
     /**
-     * Get idstatistics
+     * Get idStatistics
      *
      * @return integer 
      */
-    public function getIdstatistics()
+    public function getIdStatistics()
     {
-        return $this->idstatistics;
+        return $this->idStatistics;
     }
 
     /**
-     * Set idcategories
+     * Set idCategories
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idcategories
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories
      * @return Statistics
      */
-    public function setIdcategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idcategories = null)
+    public function setIdCategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories = null)
     {
-        $this->idcategories = $idcategories;
+        $this->idCategories = $idCategories;
 
         return $this;
     }
 
     /**
-     * Get idcategories
+     * Get idCategories
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Categories 
      */
-    public function getIdcategories()
+    public function getIdCategories()
     {
-        return $this->idcategories;
+        return $this->idCategories;
     }
 }

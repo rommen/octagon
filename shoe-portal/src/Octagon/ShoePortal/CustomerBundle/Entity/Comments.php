@@ -33,7 +33,7 @@ class Comments
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idcomments;
+    private $idComments;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
@@ -43,7 +43,7 @@ class Comments
      *   @ORM\JoinColumn(name="idSeller", referencedColumnName="idUser")
      * })
      */
-    private $idseller;
+    private $seller;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
@@ -53,7 +53,7 @@ class Comments
      *   @ORM\JoinColumn(name="idOwner", referencedColumnName="idUser")
      * })
      */
-    private $idowner;
+    private $owner;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Shoe
@@ -63,7 +63,7 @@ class Comments
      *   @ORM\JoinColumn(name="idShoe", referencedColumnName="idShoe")
      * })
      */
-    private $idshoe;
+    private $shoe;
 
 
 
@@ -114,81 +114,81 @@ class Comments
     }
 
     /**
-     * Get idcomments
+     * Get idComments
      *
      * @return integer 
      */
-    public function getIdcomments()
+    public function getIdComments()
     {
-        return $this->idcomments;
+        return $this->idComments;
     }
 
     /**
-     * Set idseller
+     * Set seller
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idseller
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $seller
      * @return Comments
      */
-    public function setIdseller(\Octagon\ShoePortal\CustomerBundle\Entity\User $idseller = null)
+    public function setSeller(\Octagon\ShoePortal\CustomerBundle\Entity\User $seller = null)
     {
-        $this->idseller = $idseller;
+        $this->seller = $seller;
 
         return $this;
     }
 
     /**
-     * Get idseller
+     * Get seller
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdseller()
+    public function getSeller()
     {
-        return $this->idseller;
+        return $this->seller;
     }
 
     /**
-     * Set idowner
+     * Set owner
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idowner
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $owner
      * @return Comments
      */
-    public function setIdowner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idowner = null)
+    public function setOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $owner = null)
     {
-        $this->idowner = $idowner;
+        $this->owner = $owner;
 
         return $this;
     }
 
     /**
-     * Get idowner
+     * Get owner
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdowner()
+    public function getOwner()
     {
-        return $this->idowner;
+        return $this->owner;
     }
 
     /**
-     * Set idshoe
+     * Set shoe
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idshoe
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Shoe $shoe
      * @return Comments
      */
-    public function setIdshoe(\Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idshoe = null)
+    public function setShoe(\Octagon\ShoePortal\CustomerBundle\Entity\Shoe $shoe = null)
     {
-        $this->idshoe = $idshoe;
+        $this->shoe = $shoe;
 
         return $this;
     }
 
     /**
-     * Get idshoe
+     * Get shoe
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Shoe 
      */
-    public function getIdshoe()
+    public function getShoe()
     {
-        return $this->idshoe;
+        return $this->shoe;
     }
 }

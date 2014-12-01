@@ -6,7 +6,7 @@
       <index name="fk_Comments_User2_idx" columns="idSeller"/>
       <index name="fk_Comments_Shoe1_idx" columns="idShoe"/>
     </indexes>
-    <id name="idcomments" type="integer" column="idComments">
+    <id name="idComments" type="integer" column="idComments">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="text" type="text" column="text" nullable="false"/>
@@ -16,12 +16,12 @@
         <join-column name="idSeller" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idowner" target-entity="User">
+    <many-to-one field="idOwner" target-entity="User">
       <join-columns>
         <join-column name="idOwner" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idshoe" target-entity="Shoe">
+    <many-to-one field="idShoe" target-entity="Shoe">
       <join-columns>
         <join-column name="idShoe" referenced-column-name="idShoe"/>
       </join-columns>

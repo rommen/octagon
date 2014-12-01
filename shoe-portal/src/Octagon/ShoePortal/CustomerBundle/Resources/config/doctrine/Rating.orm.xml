@@ -6,21 +6,21 @@
       <index name="fk_Rating_User1_idx" columns="idSeller"/>
       <index name="fk_Rating_User2_idx" columns="idOwner"/>
     </indexes>
-    <id name="idrating" type="integer" column="idRating">
+    <id name="idRating" type="integer" column="idRating">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="value" type="boolean" column="value" nullable="false"/>
-    <many-to-one field="idowner" target-entity="User">
+    <many-to-one field="idOwner" target-entity="User">
       <join-columns>
         <join-column name="idOwner" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idseller" target-entity="User">
+    <many-to-one field="idSeller" target-entity="User">
       <join-columns>
         <join-column name="idSeller" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idshoe" target-entity="Shoe">
+    <many-to-one field="idShoe" target-entity="Shoe">
       <join-columns>
         <join-column name="idShoe" referenced-column-name="idShoe"/>
       </join-columns>

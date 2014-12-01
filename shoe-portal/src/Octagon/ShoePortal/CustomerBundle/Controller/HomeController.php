@@ -8,6 +8,10 @@ class HomeController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CustomerBundle:Home:index.html.twig');
+        //Doctrine test
+        
+        $shoes = $this->getDoctrine()
+               ->getRepository('CustomerBundle:Shoe')->findAll();
+        return $this->render('CustomerBundle:Home:index.html.twig', array('shoes' => $shoes));
     }
 }

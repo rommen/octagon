@@ -33,7 +33,7 @@ class Categories
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idcategories;
+    private $idCategories;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
@@ -43,7 +43,7 @@ class Categories
      *   @ORM\JoinColumn(name="idParent", referencedColumnName="idCategories")
      * })
      */
-    private $idparent;
+    private $idParent;
 
 
 
@@ -94,35 +94,35 @@ class Categories
     }
 
     /**
-     * Get idcategories
+     * Get idCategories
      *
      * @return integer 
      */
-    public function getIdcategories()
+    public function getIdCategories()
     {
-        return $this->idcategories;
+        return $this->idCategories;
     }
 
     /**
-     * Set idparent
+     * Set idParent
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idparent
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idParent
      * @return Categories
      */
-    public function setIdparent(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idparent = null)
+    public function setIdCarent(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idParent = null)
     {
-        $this->idparent = $idparent;
+        $this->idParent = $idParent;
 
         return $this;
     }
 
     /**
-     * Get idparent
+     * Get idParent
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Categories 
      */
-    public function getIdparent()
+    public function getIdParent()
     {
-        return $this->idparent;
+        return $this->idParent;
     }
 }

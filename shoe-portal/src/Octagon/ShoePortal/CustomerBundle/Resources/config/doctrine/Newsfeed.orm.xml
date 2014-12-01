@@ -5,7 +5,7 @@
       <index name="fk_Newsfeed_Categories1_idx" columns="idCategories"/>
       <index name="fk_Newsfeed_User1_idx" columns="idOwner"/>
     </indexes>
-    <id name="idnewsfeed" type="integer" column="idNewsfeed">
+    <id name="idNewsfeed" type="integer" column="idNewsfeed">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="tile" type="string" column="tile" length="145" nullable="false"/>
@@ -16,7 +16,7 @@
         <join-column name="idOwner" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idcategories" target-entity="Categories">
+    <many-to-one field="idCategories" target-entity="Categories">
       <join-columns>
         <join-column name="idCategories" referenced-column-name="idCategories"/>
       </join-columns>

@@ -4,12 +4,12 @@
     <indexes>
       <index name="fk_Categories_Categories1_idx" columns="idParent"/>
     </indexes>
-    <id name="idcategories" type="integer" column="idCategories">
+    <id name="idCategories" type="integer" column="idCategories">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="name" type="string" column="name" length="45" nullable="false"/>
     <field name="level" type="integer" column="level" nullable="true"/>
-    <many-to-one field="idparent" target-entity="Categories">
+    <many-to-one field="idParent" target-entity="Categories">
       <join-columns>
         <join-column name="idParent" referenced-column-name="idCategories"/>
       </join-columns>

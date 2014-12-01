@@ -45,14 +45,14 @@ class Mailbox
      *
      * @ORM\Column(name="deleteBySender", type="boolean", nullable=true)
      */
-    private $deletebysender;
+    private $deleteBySender;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="deleteyReceiver", type="boolean", nullable=true)
      */
-    private $deleteyreceiver;
+    private $deleteByReceiver;
 
     /**
      * @var integer
@@ -61,7 +61,7 @@ class Mailbox
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idmailbox;
+    private $idMailbox;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
@@ -71,7 +71,7 @@ class Mailbox
      *   @ORM\JoinColumn(name="idReceiver", referencedColumnName="idUser")
      * })
      */
-    private $idreceiver;
+    private $idReceiver;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
@@ -81,7 +81,7 @@ class Mailbox
      *   @ORM\JoinColumn(name="idSender", referencedColumnName="idUser")
      * })
      */
-    private $idsender;
+    private $idSender;
 
 
 
@@ -178,104 +178,104 @@ class Mailbox
     }
 
     /**
-     * Set deletebysender
+     * Set deleteBySender
      *
-     * @param boolean $deletebysender
+     * @param boolean $deleteBySender
      * @return Mailbox
      */
-    public function setDeletebysender($deletebysender)
+    public function setDeleteBySender($deleteBySender)
     {
-        $this->deletebysender = $deletebysender;
+        $this->deleteBySender = $deleteBySender;
 
         return $this;
     }
 
     /**
-     * Get deletebysender
+     * Get deleteBySender
      *
      * @return boolean 
      */
-    public function getDeletebysender()
+    public function getDeleteBySender()
     {
-        return $this->deletebysender;
+        return $this->deleteBySender;
     }
 
     /**
-     * Set deleteyreceiver
+     * Set deleteByReceiver
      *
-     * @param boolean $deleteyreceiver
+     * @param boolean $deleteByReceiver
      * @return Mailbox
      */
-    public function setDeleteyreceiver($deleteyreceiver)
+    public function setDeleteyreceiver($deleteByReceiver)
     {
-        $this->deleteyreceiver = $deleteyreceiver;
+        $this->deleteByReceiver = $deleteByReceiver;
 
         return $this;
     }
 
     /**
-     * Get deleteyreceiver
+     * Get deleteByReceiver
      *
      * @return boolean 
      */
-    public function getDeleteyreceiver()
+    public function getDeleteByReceiver()
     {
-        return $this->deleteyreceiver;
+        return $this->deleteByReceiver;
     }
 
     /**
-     * Get idmailbox
+     * Get idMailbox
      *
      * @return integer 
      */
-    public function getIdmailbox()
+    public function getIdMailbox()
     {
-        return $this->idmailbox;
+        return $this->idMailbox;
     }
 
     /**
-     * Set idreceiver
+     * Set idReceiver
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idreceiver
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idReceiver
      * @return Mailbox
      */
-    public function setIdreceiver(\Octagon\ShoePortal\CustomerBundle\Entity\User $idreceiver = null)
+    public function setIdreceiver(\Octagon\ShoePortal\CustomerBundle\Entity\User $idReceiver = null)
     {
-        $this->idreceiver = $idreceiver;
+        $this->idReceiver = $idReceiver;
 
         return $this;
     }
 
     /**
-     * Get idreceiver
+     * Get idReceiver
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdreceiver()
+    public function getIdReceiver()
     {
-        return $this->idreceiver;
+        return $this->idReceiver;
     }
 
     /**
-     * Set idsender
+     * Set idSender
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idsender
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idSender
      * @return Mailbox
      */
-    public function setIdsender(\Octagon\ShoePortal\CustomerBundle\Entity\User $idsender = null)
+    public function setIdsender(\Octagon\ShoePortal\CustomerBundle\Entity\User $idSender = null)
     {
-        $this->idsender = $idsender;
+        $this->idSender = $idSender;
 
         return $this;
     }
 
     /**
-     * Get idsender
+     * Get idSender
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
     public function getIdsender()
     {
-        return $this->idsender;
+        return $this->idSender;
     }
 }

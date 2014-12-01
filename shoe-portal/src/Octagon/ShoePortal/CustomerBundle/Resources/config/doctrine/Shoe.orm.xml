@@ -5,7 +5,7 @@
       <index name="fk_Shoe_Categories_idx" columns="idCategories"/>
       <index name="fk_Shoe_User1_idx" columns="idOwner"/>
     </indexes>
-    <id name="idshoe" type="integer" column="idShoe">
+    <id name="idShoe" type="integer" column="idShoe">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="name" type="string" column="name" length="145" nullable="false"/>
@@ -15,15 +15,15 @@
     <field name="brand" type="string" column="brand" length="45" nullable="false"/>
     <field name="prize" type="decimal" column="prize" precision="5" scale="2" nullable="true"/>
     <field name="sportstar" type="string" column="sportstar" length="45" nullable="true"/>
-    <field name="year" type="date" column="year" nullable="true"/>
+    <field name="year" type="integer" column="year" nullable="true"/>
     <field name="edition" type="string" column="edition" length="20" nullable="true"/>
     <field name="extension" type="string" column="extension" length="4" nullable="true"/>
-    <many-to-one field="idowner" target-entity="User">
+    <many-to-one field="idOwner" target-entity="User">
       <join-columns>
         <join-column name="idOwner" referenced-column-name="idUser"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idcategories" target-entity="Categories">
+    <many-to-one field="idCategories" target-entity="Categories">
       <join-columns>
         <join-column name="idCategories" referenced-column-name="idCategories"/>
       </join-columns>

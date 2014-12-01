@@ -2,5 +2,20 @@
 
 {% block content %}
     <span style="color:white">Home page</span>
+    
+    <div>
+        <table>
+       <!--Doctrine Test -->
+            {% for shoe in shoes %}
+                <tr>
+                    <td>Name:{{shoe.name}};</td>
+                    <td>Categ:{{shoe.idCategories.name}} ;</td>
+                    <td>Username:{{shoe.idOwner.username}}; </td>
+                </tr>
+            {% endfor %}
+            
+        </table>
+        
+    </div>
 {% endblock %}  
     

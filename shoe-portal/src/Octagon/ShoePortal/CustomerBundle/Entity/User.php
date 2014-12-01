@@ -68,7 +68,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $iduser;
+    private $idUser;
 
 
 
@@ -234,12 +234,12 @@ class User
     }
 
     /**
-     * Get iduser
+     * Get idUser
      *
      * @return integer 
      */
-    public function getIduser()
+    public function getIdUser()
     {
-        return $this->iduser;
+        return $this->idUser;
     }
 }

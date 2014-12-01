@@ -62,9 +62,9 @@ class Shoe
     private $sportstar;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="year", type="date", nullable=true)
+     * @ORM\Column(name="year", type="integer", nullable=true)
      */
     private $year;
 
@@ -89,7 +89,7 @@ class Shoe
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idshoe;
+    private $idShoe;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
@@ -99,7 +99,7 @@ class Shoe
      *   @ORM\JoinColumn(name="idOwner", referencedColumnName="idUser")
      * })
      */
-    private $idowner;
+    private $idOwner;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
@@ -109,7 +109,7 @@ class Shoe
      *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")
      * })
      */
-    private $idcategories;
+    private $idCategories;
 
 
 
@@ -344,58 +344,58 @@ class Shoe
     }
 
     /**
-     * Get idshoe
+     * Get idShoe
      *
      * @return integer 
      */
-    public function getIdshoe()
+    public function getIdShoe()
     {
-        return $this->idshoe;
+        return $this->idShoe;
     }
 
     /**
-     * Set idowner
+     * Set idOwner
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idowner
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner
      * @return Shoe
      */
-    public function setIdowner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idowner = null)
+    public function setIdowner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
     {
-        $this->idowner = $idowner;
+        $this->idOwner = $idOwner;
 
         return $this;
     }
 
     /**
-     * Get idowner
+     * Get idOwner
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdowner()
+    public function getIdOwner()
     {
-        return $this->idowner;
+        return $this->idOwner;
     }
 
     /**
-     * Set idcategories
+     * Set idCategories
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idcategories
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories
      * @return Shoe
      */
-    public function setIdcategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idcategories = null)
+    public function setIdCategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories = null)
     {
-        $this->idcategories = $idcategories;
+        $this->idCategories = $idCategories;
 
         return $this;
     }
 
     /**
-     * Get idcategories
+     * Get idCategories
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Categories 
      */
-    public function getIdcategories()
+    public function getIdCategories()
     {
-        return $this->idcategories;
+        return $this->idCategories;
     }
 }
