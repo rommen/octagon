@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Octagon\ShoePortal\CustomerBundle\OctagonShoePortalCustomerBundle(),
             new Octagon\ShoePortal\AdminBundle\OctagonShoePortalAdminBundle(),
-        );
+	    new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),        
+);
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
