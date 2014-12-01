@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Octagon\ShoePortal\CustomerBundle\Entity\Newsfeed" table="Newsfeed">
+    <indexes>
+      <index name="fk_Newsfeed_Categories1_idx" columns="idCategories"/>
+      <index name="fk_Newsfeed_User1_idx" columns="idOwner"/>
+    </indexes>
+    <id name="idnewsfeed" type="integer" column="idNewsfeed">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tile" type="string" column="tile" length="145" nullable="false"/>
+    <field name="text" type="text" column="text" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="false"/>
+    <many-to-one field="idowner" target-entity="User">
+      <join-columns>
+        <join-column name="idOwner" referenced-column-name="idUser"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idcategories" target-entity="Categories">
+      <join-columns>
+        <join-column name="idCategories" referenced-column-name="idCategories"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

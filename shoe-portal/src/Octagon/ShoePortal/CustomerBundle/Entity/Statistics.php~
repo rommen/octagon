@@ -1,0 +1,49 @@
+<?php
+
+namespace Octagon\ShoePortal\CustomerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Statistics
+ *
+ * @ORM\Table(name="Statistics", indexes={@ORM\Index(name="fk_Statistics_Categories1_idx", columns={"idCategories"})})
+ * @ORM\Entity
+ */
+class Statistics
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tile", type="string", length=145, nullable=false)
+     */
+    private $tile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="text", nullable=false)
+     */
+    private $text;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idStatistics", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idstatistics;
+
+    /**
+     * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\Categories")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")
+     * })
+     */
+    private $idcategories;
+
+
+}

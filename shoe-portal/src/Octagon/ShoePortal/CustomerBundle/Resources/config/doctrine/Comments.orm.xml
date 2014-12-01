@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Octagon\ShoePortal\CustomerBundle\Entity\Comments" table="Comments">
+    <indexes>
+      <index name="fk_Comments_User1_idx" columns="idOwner"/>
+      <index name="fk_Comments_User2_idx" columns="idSeller"/>
+      <index name="fk_Comments_Shoe1_idx" columns="idShoe"/>
+    </indexes>
+    <id name="idcomments" type="integer" column="idComments">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="text" type="text" column="text" nullable="false"/>
+    <field name="date" type="date" column="date" nullable="false"/>
+    <many-to-one field="idseller" target-entity="User">
+      <join-columns>
+        <join-column name="idSeller" referenced-column-name="idUser"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idowner" target-entity="User">
+      <join-columns>
+        <join-column name="idOwner" referenced-column-name="idUser"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idshoe" target-entity="Shoe">
+      <join-columns>
+        <join-column name="idShoe" referenced-column-name="idShoe"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

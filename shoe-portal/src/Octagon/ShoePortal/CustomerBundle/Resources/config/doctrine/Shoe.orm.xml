@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Octagon\ShoePortal\CustomerBundle\Entity\Shoe" table="Shoe">
+    <indexes>
+      <index name="fk_Shoe_Categories_idx" columns="idCategories"/>
+      <index name="fk_Shoe_User1_idx" columns="idOwner"/>
+    </indexes>
+    <id name="idshoe" type="integer" column="idShoe">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="145" nullable="false"/>
+    <field name="color" type="string" column="color" length="145" nullable="false"/>
+    <field name="size" type="decimal" column="size" precision="3" scale="1" nullable="false"/>
+    <field name="text" type="text" column="text" nullable="false"/>
+    <field name="brand" type="string" column="brand" length="45" nullable="false"/>
+    <field name="prize" type="decimal" column="prize" precision="5" scale="2" nullable="true"/>
+    <field name="sportstar" type="string" column="sportstar" length="45" nullable="true"/>
+    <field name="year" type="date" column="year" nullable="true"/>
+    <field name="edition" type="string" column="edition" length="20" nullable="true"/>
+    <field name="extension" type="string" column="extension" length="4" nullable="true"/>
+    <many-to-one field="idowner" target-entity="User">
+      <join-columns>
+        <join-column name="idOwner" referenced-column-name="idUser"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idcategories" target-entity="Categories">
+      <join-columns>
+        <join-column name="idCategories" referenced-column-name="idCategories"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

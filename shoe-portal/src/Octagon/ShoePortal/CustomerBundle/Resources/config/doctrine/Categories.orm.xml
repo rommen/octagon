@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Octagon\ShoePortal\CustomerBundle\Entity\Categories" table="Categories">
+    <indexes>
+      <index name="fk_Categories_Categories1_idx" columns="idParent"/>
+    </indexes>
+    <id name="idcategories" type="integer" column="idCategories">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="45" nullable="false"/>
+    <field name="level" type="integer" column="level" nullable="true"/>
+    <many-to-one field="idparent" target-entity="Categories">
+      <join-columns>
+        <join-column name="idParent" referenced-column-name="idCategories"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

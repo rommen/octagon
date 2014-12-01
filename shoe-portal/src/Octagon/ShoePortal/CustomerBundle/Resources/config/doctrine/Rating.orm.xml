@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Octagon\ShoePortal\CustomerBundle\Entity\Rating" table="Rating">
+    <indexes>
+      <index name="fk_Rating_Shoe1_idx" columns="idShoe"/>
+      <index name="fk_Rating_User1_idx" columns="idSeller"/>
+      <index name="fk_Rating_User2_idx" columns="idOwner"/>
+    </indexes>
+    <id name="idrating" type="integer" column="idRating">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="value" type="boolean" column="value" nullable="false"/>
+    <many-to-one field="idowner" target-entity="User">
+      <join-columns>
+        <join-column name="idOwner" referenced-column-name="idUser"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idseller" target-entity="User">
+      <join-columns>
+        <join-column name="idSeller" referenced-column-name="idUser"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idshoe" target-entity="Shoe">
+      <join-columns>
+        <join-column name="idShoe" referenced-column-name="idShoe"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

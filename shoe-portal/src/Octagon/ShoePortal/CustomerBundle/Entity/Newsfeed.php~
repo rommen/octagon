@@ -1,0 +1,66 @@
+<?php
+
+namespace Octagon\ShoePortal\CustomerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Newsfeed
+ *
+ * @ORM\Table(name="Newsfeed", indexes={@ORM\Index(name="fk_Newsfeed_Categories1_idx", columns={"idCategories"}), @ORM\Index(name="fk_Newsfeed_User1_idx", columns={"idOwner"})})
+ * @ORM\Entity
+ */
+class Newsfeed
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tile", type="string", length=145, nullable=false)
+     */
+    private $tile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="text", nullable=true)
+     */
+    private $text;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=false)
+     */
+    private $date;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idNewsfeed", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idnewsfeed;
+
+    /**
+     * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idOwner", referencedColumnName="idUser")
+     * })
+     */
+    private $idowner;
+
+    /**
+     * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\Categories")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")
+     * })
+     */
+    private $idcategories;
+
+
+}
