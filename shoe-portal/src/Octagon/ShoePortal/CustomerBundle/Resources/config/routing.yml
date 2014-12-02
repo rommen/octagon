@@ -1,6 +1,6 @@
 _home:
     path:     /
-    defaults: { _controller: CustomerBundle:Home:index }
+    defaults: { _controller: CustomerBundle:Home:home }
 _shoes:
     path:     /shoes/list
     defaults: { _controller: CustomerBundle:Shoes:list }
