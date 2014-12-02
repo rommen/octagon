@@ -8,6 +8,6 @@ class ShoesController extends Controller
 {
     public function listAction()
     {
-        return $this->render('CustomerBundle:Shoes:list.html.twig');
+        return $this->render('CustomerBundle:Shoes:shoes.html.twig');
     }
 }

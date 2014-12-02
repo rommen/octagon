@@ -2,5 +2,5 @@ _home:
     path:     /
     defaults: { _controller: CustomerBundle:Home:index }
 _shoes:
-    path:     /shoes
+    path:     /shoes/list
     defaults: { _controller: CustomerBundle:Shoes:list }

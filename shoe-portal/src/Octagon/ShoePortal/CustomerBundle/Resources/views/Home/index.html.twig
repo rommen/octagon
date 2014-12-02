@@ -1,21 +1,56 @@
 {% extends "index.html.twig" %}
 
-{% block content %}
-    <span style="color:white">Home page</span>
-    
-    <div>
-        <table>
-       <!--Doctrine Test -->
-            {% for shoe in shoes %}
-                <tr>
-                    <td>Name:{{shoe.name}};</td>
-                    <td>Categ:{{shoe.idCategories.name}} ;</td>
-                    <td>Username:{{shoe.idOwner.username}}; </td>
-                </tr>
-            {% endfor %}
-            
-        </table>
-        
+{% block header %} <!-- Carousel -->
+    <div id="myCarousel1" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="{{asset('images/carusel/koscielny-suarez.jpeg')}}" alt="">
+            </div>
+            <div class="item">
+                <img src="{{asset('images/carusel/2be8199218f8a518570f6a706700325a-676x338.jpg')}}" alt="">
+            </div>
+            <div class="item">
+                <img src="{{asset('images/carusel/mary-kantrantzou-for-adidas.png')}}" alt="">
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel1" data-slide="prev" style="background-image:none">‹</a>
+        <a class="right carousel-control" href="#myCarousel1" data-slide="next" style="background-image:none">›</a>
     </div>
-{% endblock %}  
-    
+    <script>
+        !function ($) {
+            $(function () {
+                $('#myCarousel1').carousel();
+                $('#nav_home').carousel();
+            });
+            navigation('nav_home');
+        }(window.jQuery);
+
+    </script> <!-- /.carousel -->
+{% endblock %}   
+{% block content_container %}
+    <div id="content-container-home">
+        <div id="content-home">&nbsp;
+
+            <h1>Home page</h1>
+            {% include "CustomerBundle:Shoes:list.html.twig" %}
+            <div>
+                <table>
+                    <!--Doctrine Test -->
+                    {# {% for shoe in shoes %}
+                         <tr>
+                             <td>Name:{{shoe.name}};</td>
+                             <td>Categ:{{shoe.idCategories.name}} ;</td>
+                             <td>Username:{{shoe.idOwner.username}}; </td>
+                         </tr>
+                     {% endfor %}#}
+
+                </table>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -1,38 +1,47 @@
 {% extends "base.html.twig" %}
 {% block body %}
 
-    {% block navigation %}
-        <nav id="top-navigation" class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav" > 
-                    <li class="dropdown active">
-                        <a id="logo" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img style="margin-left: 20px" height="25px" src="{{ asset('images/logo.png') }}"/>
-                            Sportstar Shoe Portal
-                        </a>                                          
-                    </li>                    
-                </ul>               
 
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{{path('_home')}}">Home</a></li>
-                    <li><a href="{{path('_shoes')}}">Shoes</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-                    {% block navigationAuthentication %}
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Login</a></li>
-                        {% endblock %}
-                </ul>
-            </div><!-- /.container-fluid -->
-        </nav>
+    {% block navigation %}
+        <div class="navbar-wrapper">
+            <div class="container-fluid">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="brand" href="{{path('_home')}}">Sport Star Shoe portal</a>
+                        <div class="nav-collapse" style="height: 0px;">
+                            <ul id="navigation" class="nav">
+                                <li id="nav_home" class="active">
+                                    <a href="{{path('_home')}}"> Home</a>
+                                </li>
+                                <li id="nav_shoes">
+                                    <a href="{{path('_shoes')}}">Shoes</a>
+                                </li>
+                            </ul>                       
+                            <form class="navbar-form pull-right">
+                                <button type="submit" class="btn">Login</button>
+                                <button type="submit" class="btn">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endblock %}
 {% block header %}{% endblock %}
-
-<div id="content" style="margin-top:58px;">
-    {% block content %}
-    {% endblock %}
-</div>
-{% block footer %}
+{% block content_container %}
+    <div id="content-container">
+        <div id="content">&nbsp;
+            {% block content %}
+            {% endblock %}
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}   
     <div id="footer">
         <span style="margin-left:15px">(c) All rights server by Octagon team</span>
     </div>

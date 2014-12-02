@@ -1,0 +1,13 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <script>
+        navigation('nav_shoes');
+    </script> 
+    <h1>Shoe page</h1>
+    <div class="page_container">
+        {% include "CustomerBundle:Categories:list.html.twig" %}
+        {% include "CustomerBundle:Shoes:list.html.twig" %}       
+    </div>
+{% endblock %}  
+    

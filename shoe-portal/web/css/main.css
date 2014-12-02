@@ -1,62 +1,43 @@
-/* 
-    Created on : Oct 3, 2014, 12:22:36 AM
-    Author     : rommen
-*/
 body{
-    background-color: #192E41;
-}
-
-/*=========Header===================*/
-
-#top-navigation, #top-navigation *{
-    background-color:#202229;  
-    color: white;    
-    border-bottom-color: #0580B0;
-    border-top-width: 0px;
-    border-bottom-width: 3px;
-}
-
-#logo{
-   color:#0580B0;
-   font-size: 13pt;
-   font-family: Arial;
-}
-/*=========Content===================*/
-
-#content{
     height:100%;
-    
-    color: #ABABAD;
-    margin-left:50px;
-    margin-right:50px;
+    line-height: 1;
 }
 
-/*=========Footer===================*/
 #footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 27px;
-    
-    color: #ABABAD;
-    background-color:#202229; 
-    
-    border-top-color: #0580B0;
-    border-top-width: 3px;    
-}
-
-#footer *{
-    height: 100%;
-    vertical-align: middle;
+    height: 20px;
+    background-color: #1b1b1b;
+    float:bottom;
+    color:white;
+    margin-top: 10px;
+    padding-top: 2px;
     font-size: 10pt;
 }
-
-#footer div{
-    margin-right: 25px;
-    margin-top: 5px;
+#content-container{
+    padding-left: 20px;
+    padding-right: 20px;
 }
-#footer img{
-    height:15px;    
-    margin-right:4px;
+
+#content-container-home{
+    top: -60px;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#content{
+    height: 100%;
+    width:100%;
+    background-color: #EEF;
+    margin-top: 77px;
+    padding: 20px 25px;
+}
+
+.page_container{
+
+}
+.page_container div{
+    float:left;    
+}
+.clear{
+    clear: both;    
 }
 
