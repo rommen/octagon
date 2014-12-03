@@ -22,7 +22,7 @@
                                 </li>
                             </ul>            
                             <ul class="nav pull-right">
-                                {% if app.user != null%}
+                                {% if app.user == null%}
                                     <li><a href="{{path('_login')}}">Login</a></li>
                                     <li><a href="{{path('_register')}}">Sign up</a></li>
                                 {% else %}
