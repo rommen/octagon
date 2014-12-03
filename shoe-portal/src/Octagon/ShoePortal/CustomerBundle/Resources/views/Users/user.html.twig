@@ -1,0 +1,12 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+    <script>
+        navigation('nav_users');
+    </script> 
+    <h1>User profile page</h1>
+    <div class="page_container">
+        {% include "CustomerBundle:Users:user_details.html.twig" %}
+    </div>
+{% endblock %}  
+    

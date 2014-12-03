@@ -1,6 +1,34 @@
 _home:
     path:     /
     defaults: { _controller: CustomerBundle:Home:home }
+
+#Shoes
 _shoes:
     path:     /shoes/list
     defaults: { _controller: CustomerBundle:Shoes:list }
+_shoe:
+    path:     /shoes/view
+    defaults: { _controller: CustomerBundle:Shoes:view }
+_shoe_edit:
+    path:     /shoes/edit
+    defaults: { _controller: CustomerBundle:Shoes:edit }
+#Categories
+
+_categories:
+    path:     /categories/list
+    defaults: { _controller: CustomerBundle:Categories:list }
+
+#Security
+_login:
+    path:     /security/login
+    defaults: { _controller: CustomerBundle:Security:login }
+
+#Users
+_register:
+    path:     /users/register
+    defaults: { _controller: CustomerBundle:Users:register }
+_user:
+    path:     /users/view
+    defaults: { _controller: CustomerBundle:Users:view}
+
+    

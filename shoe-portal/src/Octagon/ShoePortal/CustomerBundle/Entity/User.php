@@ -2,6 +2,7 @@
 
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,8 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User
-{
+class User implements UserInterface{
     /**
      * @var string
      *
@@ -242,4 +242,45 @@ class User
     {
         return $this->idUser;
     }
+
+    public function eraseCredentials() {
+        $this->password = null;
+        $this->username = null;
+    }
+
+    public function getRoles() {
+        if($this->admin){
+            return array('ROLE_ADMIN');
+        }else{
+            return array('ROLE_USER');
+        }
+    }
+
+    public function getSalt() {
+        return $this->username . $this->email;
+    }
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize(){
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+        ) = unserialize($serialized);
+    }
+
 }
