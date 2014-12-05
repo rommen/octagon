@@ -4,6 +4,7 @@ namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * User
@@ -11,7 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User implements UserInterface{
+class User implements UserInterface {
+
     /**
      * @var string
      *
@@ -70,16 +72,13 @@ class User implements UserInterface{
      */
     private $idUser;
 
-
-
     /**
      * Set username
      *
      * @param string $username
      * @return User
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->username = $username;
 
         return $this;
@@ -90,8 +89,7 @@ class User implements UserInterface{
      *
      * @return string 
      */
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
@@ -101,8 +99,7 @@ class User implements UserInterface{
      * @param string $password
      * @return User
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -113,8 +110,7 @@ class User implements UserInterface{
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -124,8 +120,7 @@ class User implements UserInterface{
      * @param string $address
      * @return User
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
 
         return $this;
@@ -136,8 +131,7 @@ class User implements UserInterface{
      *
      * @return string 
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -147,8 +141,7 @@ class User implements UserInterface{
      * @param string $email
      * @return User
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -159,8 +152,7 @@ class User implements UserInterface{
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -170,8 +162,7 @@ class User implements UserInterface{
      * @param string $avatar
      * @return User
      */
-    public function setAvatar($avatar)
-    {
+    public function setAvatar($avatar) {
         $this->avatar = $avatar;
 
         return $this;
@@ -182,8 +173,7 @@ class User implements UserInterface{
      *
      * @return string 
      */
-    public function getAvatar()
-    {
+    public function getAvatar() {
         return $this->avatar;
     }
 
@@ -193,8 +183,7 @@ class User implements UserInterface{
      * @param boolean $admin
      * @return User
      */
-    public function setAdmin($admin)
-    {
+    public function setAdmin($admin) {
         $this->admin = $admin;
 
         return $this;
@@ -205,8 +194,7 @@ class User implements UserInterface{
      *
      * @return boolean 
      */
-    public function getAdmin()
-    {
+    public function getAdmin() {
         return $this->admin;
     }
 
@@ -216,8 +204,7 @@ class User implements UserInterface{
      * @param \DateTime $blocked
      * @return User
      */
-    public function setBlocked($blocked)
-    {
+    public function setBlocked($blocked) {
         $this->blocked = $blocked;
 
         return $this;
@@ -228,8 +215,7 @@ class User implements UserInterface{
      *
      * @return \DateTime 
      */
-    public function getBlocked()
-    {
+    public function getBlocked() {
         return $this->blocked;
     }
 
@@ -238,9 +224,17 @@ class User implements UserInterface{
      *
      * @return integer 
      */
-    public function getIdUser()
-    {
+    public function getIdUser() {
         return $this->idUser;
+    }
+
+    /**
+     * Get idUser as Base64 representation
+     *
+     * @return string 
+     */
+    public function getIdUserHash() {
+        return base64_encode($this->idUser);
     }
 
     public function eraseCredentials() {
@@ -249,23 +243,27 @@ class User implements UserInterface{
     }
 
     public function getRoles() {
-        if($this->admin){
-            return array('ROLE_ADMIN');
+        if ($this->blocked == null || ($this->blocked->getTimestamp() - time()) <= 0) {
+            if ($this->admin) {
+                return array('ROLE_ADMIN');
+            } else {
+                return array('ROLE_USER');
+            }
         }else{
-            return array('ROLE_USER');
+            return array();//User has no rights, maybe need to show some notification
         }
     }
 
     public function getSalt() {
-        return $this->username . $this->email;
+        
     }
-    
+
     /**
      * @see \Serializable::serialize()
      */
-    public function serialize(){
+    public function serialize() {
         return serialize(array(
-            $this->id,
+            $this->idUser,
             $this->username,
             $this->password,
         ));
@@ -274,13 +272,16 @@ class User implements UserInterface{
     /**
      * @see \Serializable::unserialize()
      */
-    public function unserialize($serialized)
-    {
+    public function unserialize($serialized) {
         list (
-            $this->id,
-            $this->username,
-            $this->password,
-        ) = unserialize($serialized);
+                $this->idUser,
+                $this->username,
+                $this->password,
+                ) = unserialize($serialized);
+    }
+
+    public function isEqualTo(UserInterface $user) {
+        return $this->idUser === $user->getIdUser();
     }
 
 }

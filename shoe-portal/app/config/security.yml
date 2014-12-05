@@ -1,12 +1,36 @@
+# app/config/security.yml
 security:
-    providers:
-        in_memory:
-            memory: ~
-
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        default:
+        login_firewall:
+            pattern:   ^/security/login$
             anonymous: ~
+        secured_area:
+            pattern:   ^/
+            anonymous: ~
+            logout:
+                path:   _logout
+                target: /
+            form_login:
+                login_path: _login
+                check_path: _login_check
+            http_basic:
+                realm: "Secured Demo Area"
+
+    access_control:
+        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/admin$, roles: ROLE_ADMIN }
+        - { path: ^/security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Include the following line to also secure the /admin path itself
+
+    providers:
+         main:
+            entity:
+                class: Octagon\ShoePortal\CustomerBundle\Entity\User
+                property: username
+
+    encoders:
+        Octagon\ShoePortal\CustomerBundle\Entity\User: 
+           algorithm: sha256
+           iterations: 1
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER]

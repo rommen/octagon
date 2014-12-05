@@ -22,7 +22,12 @@ _categories:
 _login:
     path:     /security/login
     defaults: { _controller: CustomerBundle:Security:login }
+    
+_login_check:
+    path: /security/login_check
 
+_logout:
+    path: /security/logout   
 #Users
 _register:
     path:     /users/register

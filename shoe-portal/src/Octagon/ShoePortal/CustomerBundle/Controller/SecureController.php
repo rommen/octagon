@@ -18,10 +18,15 @@ class SecureController extends Controller {
      * @return redirect to login page or null
      */
     public function checkIfUserLoggedIn() {
-        if(!$this->isLoggedIn()){
-            return $this->redirect($this->generateUrl('_login')); 
-        }else
-            return null;
+        if (false == $this->isLoggedIn()) {
+            $logger = $this->get('logger');
+            $logger->info('User is not logged in, throwing AccessDeniedException');
+            throw $this->createAccessDeniedException('Unable to access this page!');
+        }
+//        if(!$this->isLoggedIn()){
+//            return $this->redirect($this->generateUrl('_login')); 
+//        }else
+//            return null;
     }
 
     /**
@@ -61,7 +66,7 @@ class SecureController extends Controller {
     public function getAuthUsername() {
         
     }
-    
+
     /**
      * Checks if user is logged in and it is admin
      * Also in Twig this template may be used

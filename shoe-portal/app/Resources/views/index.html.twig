@@ -26,7 +26,8 @@
                                     <li><a href="{{path('_login')}}">Login</a></li>
                                     <li><a href="{{path('_register')}}">Sign up</a></li>
                                 {% else %}
-                                    <li><a href="{{path('_user')}}?id=base64(?)">Hello User</a></li>
+                                    <li><a href="{{path('_user')}}?id={{app.user.idUserHash}}">Hello, {{app.user.username}}!</a></li>
+                                    <li><a href="{{path('_logout')}}">Logout</a></li>
                                 {% endif %}
                             </ul>
                         </div>
