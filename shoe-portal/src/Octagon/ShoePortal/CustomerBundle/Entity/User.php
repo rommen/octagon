@@ -2,7 +2,7 @@
 
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User implements UserInterface {
+class User implements AdvancedUserInterface {
 
     /**
      * @var string
@@ -271,15 +271,27 @@ class User implements UserInterface {
             return false;
         }
 
-//        if ($this->salt !== $user->getSalt()) {
-//            return false;
-//        }
-
         if ($this->username !== $user->getUsername()) {
             return false;
         }
 
         return true;
+    }
+
+    public function isAccountNonExpired() {
+        
+    }
+
+    public function isAccountNonLocked() {
+        
+    }
+
+    public function isCredentialsNonExpired() {
+        
+    }
+
+    public function isEnabled() {
+        return $this->blocked == null || ($this->blocked->getTimestamp() - time()) <= 0;
     }
 
 }
