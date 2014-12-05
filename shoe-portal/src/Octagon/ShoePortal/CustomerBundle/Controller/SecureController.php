@@ -51,7 +51,11 @@ class SecureController extends Controller {
     public function isLoggedIn() {
         try {
             $securityContext = $this->container->get('security.context');
-            return !$securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY');
+            if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')){
+                return true;
+            }else{
+                return false;
+            }
         } catch (\Exception $e) {
             $logger = $this->get('logger');
             $logger->error('Cannot determine if user is logged in: ' . $e->getMessage());

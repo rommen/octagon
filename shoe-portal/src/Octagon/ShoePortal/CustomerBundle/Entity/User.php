@@ -72,6 +72,11 @@ class User implements UserInterface {
      */
     private $idUser;
 
+    
+    public function __construct($username, $password, $salt, array $roles){
+        $this->username = $username;
+        $this->password = $password;
+    }
     /**
      * Set username
      *
@@ -238,8 +243,6 @@ class User implements UserInterface {
     }
 
     public function eraseCredentials() {
-        $this->password = null;
-        $this->username = null;
     }
 
     public function getRoles() {
@@ -258,30 +261,25 @@ class User implements UserInterface {
         
     }
 
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize() {
-        return serialize(array(
-            $this->idUser,
-            $this->username,
-            $this->password,
-        ));
-    }
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized) {
-        list (
-                $this->idUser,
-                $this->username,
-                $this->password,
-                ) = unserialize($serialized);
-    }
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
 
-    public function isEqualTo(UserInterface $user) {
-        return $this->idUser === $user->getIdUser();
+//        if ($this->salt !== $user->getSalt()) {
+//            return false;
+//        }
+
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 
 }
