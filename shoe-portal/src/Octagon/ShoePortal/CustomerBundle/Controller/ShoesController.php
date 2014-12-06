@@ -15,10 +15,8 @@ class ShoesController extends SecureController {
     }
 
     public function editAction(Request $request) {
-        //check if user is logged in
-        $login = $this->checkIfUserLoggedIn();
-        if ($login != null)
-            return $login;
+        $this->checkIfUserLoggedIn();//check if user is logged in
+        return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig');
     }
 
 }

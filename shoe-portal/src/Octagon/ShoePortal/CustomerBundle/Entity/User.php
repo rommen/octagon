@@ -2,7 +2,7 @@
 
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User implements UserInterface {
+class User implements AdvancedUserInterface {
 
     /**
      * @var string
@@ -72,6 +72,11 @@ class User implements UserInterface {
      */
     private $idUser;
 
+    
+    public function __construct($username, $password, $salt, array $roles){
+        $this->username = $username;
+        $this->password = $password;
+    }
     /**
      * Set username
      *
@@ -238,8 +243,6 @@ class User implements UserInterface {
     }
 
     public function eraseCredentials() {
-        $this->password = null;
-        $this->username = null;
     }
 
     public function getRoles() {
@@ -258,30 +261,37 @@ class User implements UserInterface {
         
     }
 
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize() {
-        return serialize(array(
-            $this->idUser,
-            $this->username,
-            $this->password,
-        ));
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized) {
-        list (
-                $this->idUser,
-                $this->username,
-                $this->password,
-                ) = unserialize($serialized);
+    public function isAccountNonExpired() {
+        
     }
 
-    public function isEqualTo(UserInterface $user) {
-        return $this->idUser === $user->getIdUser();
+    public function isAccountNonLocked() {
+        
+    }
+
+    public function isCredentialsNonExpired() {
+        
+    }
+
+    public function isEnabled() {
+        return $this->blocked == null || ($this->blocked->getTimestamp() - time()) <= 0;
     }
 
 }
