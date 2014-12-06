@@ -2,10 +2,9 @@
 
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
-//use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+//use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * User
@@ -13,7 +12,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User implements UserInterface {
+class User implements AdvancedUserInterface {
 
     /**
      * @var string
@@ -262,29 +261,12 @@ class User implements UserInterface {
         
     }
 
-    public function isEqualTo(UserInterface $user)
-    {
-        if (!$user instanceof User) {
-            return false;
-        }
-
-        if ($this->password !== $user->getPassword()) {
-            return false;
-        }
-
-        if ($this->username !== $user->getUsername()) {
-            return false;
-        }
-
+    public function isAccountNonExpired() {
         return true;
     }
 
-    public function isAccountNonExpired() {
-        
-    }
-
     public function isAccountNonLocked() {
-        
+        return $this->blocked == null || ($this->blocked->getTimestamp() - time()) <= 0;
     }
 
     public function isCredentialsNonExpired() {
@@ -292,8 +274,7 @@ class User implements UserInterface {
     }
 
     public function isEnabled() {
-return true;        
-//return $this->blocked == null;// || ($this->blocked->getTimestamp() - time()) <= 0;
+        return true;
     }
 
 }
