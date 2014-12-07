@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>User list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Avatar</th>
+                <th>Admin</th>
+                <th>Blocked</th>
+                <th>Iduser</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_user_show', { 'id': entity.idUser }) }}">{{ entity.username }}</a></td>
+                <td>{{ entity.password }}</td>
+                <td>{{ entity.address }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.avatar }}</td>
+                <td>{{ entity.admin }}</td>
+                <td>{% if entity.blocked %}{{ entity.blocked|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.idUser }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_user_show', { 'id': entity.idUser }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_user_edit', { 'id': entity.idUser }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_user_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

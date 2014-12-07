@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Shoe</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ entity.color }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ entity.size }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ entity.text }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ entity.brand }}</td>
+            </tr>
+            <tr>
+                <th>Prize</th>
+                <td>{{ entity.prize }}</td>
+            </tr>
+            <tr>
+                <th>Sportstar</th>
+                <td>{{ entity.sportstar }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ entity.year }}</td>
+            </tr>
+            <tr>
+                <th>Edition</th>
+                <td>{{ entity.edition }}</td>
+            </tr>
+            <tr>
+                <th>Extension</th>
+                <td>{{ entity.extension }}</td>
+            </tr>
+            <tr>
+                <th>Idshoe</th>
+                <td>{{ entity.idShoe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_shoe') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_shoe_edit', { 'id': entity.idShoe }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

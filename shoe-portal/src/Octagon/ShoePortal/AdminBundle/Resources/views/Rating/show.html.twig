@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Rating</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Value</th>
+                <td>{{ entity.value }}</td>
+            </tr>
+            <tr>
+                <th>Idrating</th>
+                <td>{{ entity.idRating }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_rating') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_rating_edit', { 'id': entity.idRating }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
