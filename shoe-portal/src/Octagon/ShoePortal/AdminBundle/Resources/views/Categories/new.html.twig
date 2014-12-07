@@ -1,6 +1,9 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Categories{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_categories');
+    </script> 
     <h1>Categories creation</h1>
 
     {{ form(form) }}

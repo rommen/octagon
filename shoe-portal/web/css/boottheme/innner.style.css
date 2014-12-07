@@ -199,3 +199,6 @@ body {
     
     div#myCarousel1 a.carousel-control{ background-image: none;}
 }
+button a{
+    color:white;
+}

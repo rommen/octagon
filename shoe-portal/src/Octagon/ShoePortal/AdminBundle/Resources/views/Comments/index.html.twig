@@ -1,6 +1,9 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Comments{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_comments');
+    </script> 
     <h1>Comments list</h1>
 
     <table class="records_list">
@@ -40,4 +43,4 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}

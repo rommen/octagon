@@ -1,6 +1,6 @@
 <?php
 
-namespace Octagon\ShoePortal\CustomerBundle\Form;
+namespace Octagon\ShoePortal\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +17,7 @@ class CategoriesType extends AbstractType
         $builder
             ->add('name')
             ->add('level')
-            ->add('idParent')
-        ;
+            ->add('idParent');
     }
     
     /**

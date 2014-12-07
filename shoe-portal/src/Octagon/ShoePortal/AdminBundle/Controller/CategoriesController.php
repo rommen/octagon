@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\Categories;
-use Octagon\ShoePortal\CustomerBundle\Form\CategoriesType;
+use Octagon\ShoePortal\AdminBundle\Form\CategoriesType;
 
 /**
  * Categories controller.
@@ -161,12 +161,11 @@ class CategoriesController extends Controller
     private function createEditForm(Categories $entity)
     {
         $form = $this->createForm(new CategoriesType(), $entity, array(
-            'action' => $this->generateUrl('admin_categories_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_categories_update', array('id' => $entity->getIdCategories())),
             'method' => 'PUT',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
     /**
@@ -183,7 +182,7 @@ class CategoriesController extends Controller
         $entity = $em->getRepository('CustomerBundle:Categories')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categories entity.');
+            throw $this->createNotFoundException('Unable to find Category.');
         }
 
         $deleteForm = $this->createDeleteForm($id);

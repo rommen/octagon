@@ -125,4 +125,7 @@ class Categories
     {
         return $this->idParent;
     }
+    public function __toString() {
+        return $this->name;
+    }
 }
