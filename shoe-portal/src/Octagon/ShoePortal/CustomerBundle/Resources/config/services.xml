@@ -3,8 +3,12 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <!--
+/*
+     security.authentication.customized_success_handler:
+        class: %security.authentication.success_handler.class%
+        public: false
+        arguments:  [@router, @security.context]*/
+    
     <services>
         <service id="octagon_shoe_portal_customer.example" class="Octagon\ShoePortal\CustomerBundle\Example">
             <argument type="service" id="service_id" />
@@ -12,5 +16,5 @@
             <argument>%parameter_name%</argument>
         </service>
     </services>
-    -->
+    
 </container>

@@ -15,7 +15,7 @@ class DefaultController extends Controller{
     /**
      * Lists all entities.
      *
-     * @Route("/")
+     * @Route("/", name="default_admin_page")
      * @Method("GET")
      * @Template("AdminBundle:Default:index.html.twig")
      */
