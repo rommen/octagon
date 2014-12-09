@@ -3,6 +3,7 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Shoe
@@ -30,6 +31,13 @@ class Shoe
      * @var string
      *
      * @ORM\Column(name="size", type="decimal", precision=3, scale=1, nullable=false)
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 99,
+     *      minMessage = "You must enter least {{ limit }}",
+     *      maxMessage = "You cannot enter more than {{ limit }}"
+     * )
+     *
      */
     private $size;
 
@@ -37,6 +45,7 @@ class Shoe
      * @var string
      *
      * @ORM\Column(name="text", type="text", nullable=false)
+     * 
      */
     private $text;
 
@@ -48,11 +57,16 @@ class Shoe
     private $brand;
 
     /**
-     * @var string
-     *
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 999,
+     *      minMessage = "You must enter least {{ limit }}",
+     *      maxMessage = "You cannot enter more than {{ limit }}"
+     * )
+     * @var decimal
      * @ORM\Column(name="prize", type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $prize;
+    private $price  = 0;
 
     /**
      * @var string
@@ -63,7 +77,12 @@ class Shoe
 
     /**
      * @var integer
-     *
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 2155,
+     *      minMessage = "You must enter least {{ limit }}",
+     *      maxMessage = "You cannot enter more than {{ limit }}"
+     * )
      * @ORM\Column(name="year", type="integer", nullable=true)
      */
     private $year;
@@ -93,7 +112,7 @@ class Shoe
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idOwner", referencedColumnName="idUser")
@@ -103,7 +122,7 @@ class Shoe
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\Categories")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")
@@ -229,26 +248,26 @@ class Shoe
     }
 
     /**
-     * Set prize
+     * Set price
      *
-     * @param string $prize
+     * @param string price
      * @return Shoe
      */
-    public function setPrize($prize)
+    public function setPrice($price)
     {
-        $this->prize = $prize;
+        $this->price = $price;
 
         return $this;
     }
 
     /**
-     * Get prize
+     * Get price
      *
      * @return string 
      */
-    public function getPrize()
+    public function getPrice()
     {
-        return $this->prize;
+        return $this->price;
     }
 
     /**

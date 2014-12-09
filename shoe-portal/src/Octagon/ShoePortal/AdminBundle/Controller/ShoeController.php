@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\Shoe;
-use Octagon\ShoePortal\CustomerBundle\Form\ShoeType;
+use Octagon\ShoePortal\AdminBundle\Form\ShoeType;
 
 /**
  * Shoe controller.
@@ -40,7 +40,7 @@ class ShoeController extends Controller
      *
      * @Route("/", name="admin_shoe_create")
      * @Method("POST")
-     * @Template("CustomerBundle:Shoe:new.html.twig")
+     * @Template("AdminBundle:Shoe:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -53,7 +53,7 @@ class ShoeController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_shoe_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_shoe_show', array('id' => $entity->getIdShoe())));
         }
 
         return array(
@@ -161,7 +161,7 @@ class ShoeController extends Controller
     private function createEditForm(Shoe $entity)
     {
         $form = $this->createForm(new ShoeType(), $entity, array(
-            'action' => $this->generateUrl('admin_shoe_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_shoe_update', array('id' => $entity->getIdShoe())),
             'method' => 'PUT',
         ));
 
@@ -174,7 +174,7 @@ class ShoeController extends Controller
      *
      * @Route("/{id}", name="admin_shoe_update")
      * @Method("PUT")
-     * @Template("CustomerBundle:Shoe:edit.html.twig")
+     * @Template("AdminBundle:Shoe:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

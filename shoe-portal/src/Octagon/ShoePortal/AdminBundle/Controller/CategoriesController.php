@@ -40,7 +40,7 @@ class CategoriesController extends Controller
      *
      * @Route("/", name="admin_categories_create")
      * @Method("POST")
-     * @Template("CustomerBundle:Categories:new.html.twig")
+     * @Template("AdminBundle:Categories:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -53,7 +53,7 @@ class CategoriesController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_categories_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_categories_show', array('id' => $entity->getIdCategories())));
         }
 
         return array(
@@ -173,7 +173,7 @@ class CategoriesController extends Controller
      *
      * @Route("/{id}", name="admin_categories_update")
      * @Method("PUT")
-     * @Template("CustomerBundle:Categories:edit.html.twig")
+     * @Template("AdminBundle:Categories:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

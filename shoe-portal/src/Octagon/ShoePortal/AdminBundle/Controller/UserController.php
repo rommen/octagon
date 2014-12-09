@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\User;
-use Octagon\ShoePortal\CustomerBundle\Form\UserType;
+use Octagon\ShoePortal\AdminBundle\Form\UserType;
 
 /**
  * User controller.
@@ -40,7 +40,7 @@ class UserController extends Controller
      *
      * @Route("/", name="admin_user_create")
      * @Method("POST")
-     * @Template("CustomerBundle:User:new.html.twig")
+     * @Template("AdminBundle:User:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -53,51 +53,14 @@ class UserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_user_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_user_show', array('id' => $entity->getIdUser())));
         }
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-    }
-
-    /**
-     * Creates a form to create a User entity.
-     *
-     * @param User $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(User $entity)
-    {
-        $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('admin_user_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new User entity.
-     *
-     * @Route("/new", name="admin_user_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new User();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
+    } 
 
     /**
      * Finds and displays a User entity.
@@ -161,7 +124,7 @@ class UserController extends Controller
     private function createEditForm(User $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('admin_user_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_user_update', array('id' => $entity->getIdUser())),
             'method' => 'PUT',
         ));
 
@@ -174,7 +137,7 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="admin_user_update")
      * @Method("PUT")
-     * @Template("CustomerBundle:User:edit.html.twig")
+     * @Template("AdminBundle:User:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

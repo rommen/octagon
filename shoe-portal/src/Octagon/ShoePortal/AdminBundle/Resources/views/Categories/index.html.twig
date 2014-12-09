@@ -4,8 +4,11 @@
     <script>
         navigation('nav_categories');
     </script> 
-    <h1>Categories list</h1>
-
+    <button type="button" class="btn btn-primary">
+        <a href="{{ path('admin_categories_new') }}">
+            Create a new entry
+        </a>
+    </button>
     <table class="table records_list">
         <thead>
             <tr>
@@ -35,9 +38,5 @@
             {% endfor %}
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary">
-        <a href="{{ path('admin_categories_new') }}">
-            Create a new entry
-        </a>
-    </button>
+
 {% endblock %}

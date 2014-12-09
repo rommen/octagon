@@ -17,16 +17,16 @@ class ShoeType extends AbstractType
         $builder
             ->add('name')
             ->add('color')
-            ->add('size')
+            ->add('size', 'number', array('precision'=>'1'))
             ->add('text')
             ->add('brand')
-            ->add('prize')
+            ->add('price', 'money', array('label'=>'Price', 'required'=>'false'))
             ->add('sportstar')
             ->add('year')
             ->add('edition')
             ->add('extension')
-            ->add('idOwner')
-            ->add('idCategories')
+            ->add('idOwner', null, array('label'=>'Owner'))
+            ->add('idCategories', null, array('label'=>'Categories'))
         ;
     }
     

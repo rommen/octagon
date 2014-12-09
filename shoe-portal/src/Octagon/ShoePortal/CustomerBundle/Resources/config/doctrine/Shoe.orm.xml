@@ -13,7 +13,7 @@
     <field name="size" type="decimal" column="size" precision="3" scale="1" nullable="false"/>
     <field name="text" type="text" column="text" nullable="false"/>
     <field name="brand" type="string" column="brand" length="45" nullable="false"/>
-    <field name="prize" type="decimal" column="prize" precision="5" scale="2" nullable="true"/>
+    <field name="price" type="decimal" column="prize" precision="5" scale="2" nullable="true"/>
     <field name="sportstar" type="string" column="sportstar" length="45" nullable="true"/>
     <field name="year" type="integer" column="year" nullable="true"/>
     <field name="edition" type="string" column="edition" length="20" nullable="true"/>

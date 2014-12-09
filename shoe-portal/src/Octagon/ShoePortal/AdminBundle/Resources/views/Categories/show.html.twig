@@ -1,11 +1,26 @@
 {% extends "AdminBundle:Default:index_admin.html.twig" %}
-{% block title %}Categories{% endblock%}
+{% block title %}Category{% endblock%}
 {% block content %}
     <script>
         navigation('nav_categories');
     </script> 
-    <h1>Categories</h1>
 
+     <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('admin_categories') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ path('admin_categories_edit', { 'id': entity.idCategories }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
+        
     <table class="table">
         <tbody>
             <tr>
@@ -22,22 +37,4 @@
             </tr>
         </tbody>
     </table>
-
-    <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary"> 
-            <a href="{{ path('admin_categories') }}">
-                Back to the list
-            </a>
-        </button>
-        <button type="button" class="btn btn-primary">
-            <a href="{{ path('admin_categories_edit', { 'id': entity.idCategories }) }}">
-                Edit
-            </a>
-        </button>
-        <div>
-            {{ form(delete_form) }}
-        </div>
-    </div>
-
-
 {% endblock %}

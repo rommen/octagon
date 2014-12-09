@@ -72,8 +72,9 @@ class User implements AdvancedUserInterface {
      */
     private $idUser;
 
+   
     
-    public function __construct($username, $password, $salt, array $roles){
+    public function __construct($username=null, $password=null, $salt=null, array $roles=null){
         $this->username = $username;
         $this->password = $password;
     }
@@ -275,6 +276,9 @@ class User implements AdvancedUserInterface {
 
     public function isEnabled() {
         return true;
+    }
+    public function __toString() {
+        return $this->username;
     }
 
 }

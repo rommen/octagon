@@ -1,17 +1,35 @@
-{% extends '::base.html.twig' %}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}User{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_users');
+    </script> 
 
-{% block body -%}
-    <h1>User</h1>
-
-    <table class="record_properties">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('admin_user') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ path('admin_user_edit', { 'id': entity.idUser }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>   
+    <table class="table record_properties">
         <tbody>
+
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idUser }}</td>
+            </tr>
             <tr>
                 <th>Username</th>
                 <td>{{ entity.username }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
             </tr>
             <tr>
                 <th>Address</th>
@@ -22,7 +40,7 @@
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Avatar</th>
+                <th>Avatar Extension</th>
                 <td>{{ entity.avatar }}</td>
             </tr>
             <tr>
@@ -31,26 +49,12 @@
             </tr>
             <tr>
                 <th>Blocked</th>
-                <td>{{ entity.blocked|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Iduser</th>
-                <td>{{ entity.idUser }}</td>
+                <td>
+                    {%if entity.blocked != null%}
+                        {{ entity.blocked|date('Y-m-d H:i:s') }}
+                    {%endif%}
+                </td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_user') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_user_edit', { 'id': entity.idUser }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

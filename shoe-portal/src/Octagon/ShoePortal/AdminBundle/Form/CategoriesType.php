@@ -17,7 +17,7 @@ class CategoriesType extends AbstractType
         $builder
             ->add('name')
             ->add('level')
-            ->add('idParent');
+            ->add('idParent', null, array('label'=>'Parent'));
     }
     
     /**

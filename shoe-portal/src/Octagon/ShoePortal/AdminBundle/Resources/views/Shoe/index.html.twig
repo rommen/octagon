@@ -1,59 +1,57 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Shoe list</h1>
-
-    <table class="records_list">
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Shoes{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_shoes');
+    </script> 
+    <button type="button" class="btn btn-primary">
+        <a href="{{ path('admin_shoe_new') }}">
+            Create a new entry
+        </a>
+    </button>
+    <table class="table records_list">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Color</th>
                 <th>Size</th>
-                <th>Text</th>
                 <th>Brand</th>
-                <th>Prize</th>
+                <th>Price</th>
                 <th>Sportstar</th>
                 <th>Year</th>
                 <th>Edition</th>
+                <th>Text</th>
                 <th>Extension</th>
-                <th>Idshoe</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('admin_shoe_show', { 'id': entity.idShoe }) }}">{{ entity.name }}</a></td>
-                <td>{{ entity.color }}</td>
-                <td>{{ entity.size }}</td>
-                <td>{{ entity.text }}</td>
-                <td>{{ entity.brand }}</td>
-                <td>{{ entity.prize }}</td>
-                <td>{{ entity.sportstar }}</td>
-                <td>{{ entity.year }}</td>
-                <td>{{ entity.edition }}</td>
-                <td>{{ entity.extension }}</td>
-                <td>{{ entity.idShoe }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_shoe_show', { 'id': entity.idShoe }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_shoe_edit', { 'id': entity.idShoe }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_shoe_show', { 'id': entity.idShoe }) }}">{{ entity.idShoe }}</a></td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.color }}</td>
+                    <td>{{ entity.size }}</td>
+                    <td>{{ entity.brand }}</td>
+                    <td>{{ entity.price }}</td>
+                    <td>{{ entity.sportstar }}</td>
+                    <td>{{ entity.year }}</td>
+                    <td>{{ entity.edition }}</td>
+                    <td>{{ entity.text }}</td>
+                    <td>{{ entity.extension }}</td>
+                    <td>
+                        <div class="btn-group" role="group" style="color:white">
+                            <button type="button" class="btn btn-primary"> 
+                                <a href="{{ path('admin_shoe_show', { 'id': entity.idShoe }) }}">show</a>
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                <a href="{{ path('admin_shoe_edit', { 'id': entity.idShoe }) }}">edit</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('admin_shoe_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% endblock %}

@@ -1,18 +1,18 @@
 {% extends "AdminBundle:Default:index_admin.html.twig" %}
-{% block title %}Categories{% endblock%}
+{% block title %}New category{% endblock%}
 {% block content %}
     <script>
         navigation('nav_categories');
     </script> 
-    <h1>Categories creation</h1>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('admin_categories') }}">
+                Back to the list
+            </a>
+        </button>
+    </div>
+    <div style="width:300px">
+        {{ form(form) }}
+    </div>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_categories') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}
