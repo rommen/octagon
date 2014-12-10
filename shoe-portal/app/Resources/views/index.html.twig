@@ -13,7 +13,7 @@
                                 <li id="nav_home" class="active">
                                     <a href="{{path('_home')}}"> Home</a>
                                 </li>
-                                {%if true == app.user.admin%}
+                                {%if app.user!= null and true == app.user.admin%}
                                     <li id="nav_home" class="active">
                                         <a href="{{path('default_admin_page')}}">Administration</a>
                                     </li>
