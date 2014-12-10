@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User implements AdvancedUserInterface {
+class User extends UploadableEntity implements AdvancedUserInterface{
 
     /**
      * @var string
@@ -279,6 +279,18 @@ class User implements AdvancedUserInterface {
     }
     public function __toString() {
         return $this->username;
+    }
+
+    public function getFileExtension() {
+        return $this->avatar;
+    }
+
+    public function getImageName() {
+        return 'User_' . $this->idUser;
+    }
+
+    public function setFileExtension($extension) {
+        $this->setAvatar($extension);
     }
 
 }

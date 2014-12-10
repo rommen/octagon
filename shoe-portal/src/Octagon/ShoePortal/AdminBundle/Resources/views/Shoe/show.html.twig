@@ -7,7 +7,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" class="btn btn-primary"> 
-             <a href="{{ path('admin_shoe') }}">
+            <a href="{{ path('admin_shoe') }}">
                 Back to the list
             </a>
         </button>
@@ -20,7 +20,7 @@
             {{ form(delete_form) }}
         </div>
     </div>
-        
+
     <table class="table">
         <tbody>
             <tr>
@@ -63,10 +63,18 @@
                 <th>Edition</th>
                 <td>{{ entity.edition }}</td>
             </tr>
-            <tr>
+           {# <tr>
                 <th>Extension</th>
                 <td>{{ entity.extension }}</td>
-            </tr>            
+            </tr>  #}          
+            <tr>
+                <th>Image</th>
+                <td>
+                    {%if entity.extension!=null and entity.fullFileName != null%}
+                        <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+                    {%endif%}
+                </td>
+            </tr> 
         </tbody>
     </table>
 {% endblock %}

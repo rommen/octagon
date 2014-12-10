@@ -13,4 +13,10 @@
         <div>{{ form(delete_form) }}</div>
     </div>
     {{ form(edit_form) }}
+    <div>
+        <span>Image</span><br/>
+        {%if entity.extension!=null and entity.fullFileName != null%}
+            <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+        {%endif%}
+    </div>
 {% endblock %}

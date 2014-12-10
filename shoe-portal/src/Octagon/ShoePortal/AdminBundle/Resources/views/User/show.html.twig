@@ -39,10 +39,10 @@
                 <th>Email</th>
                 <td>{{ entity.email }}</td>
             </tr>
-            <tr>
+            <tr>{#
                 <th>Avatar Extension</th>
                 <td>{{ entity.avatar }}</td>
-            </tr>
+            </tr>#}
             <tr>
                 <th>Admin</th>
                 <td>{{ entity.admin }}</td>
@@ -55,6 +55,14 @@
                     {%endif%}
                 </td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    {%if entity.avatar != null and entity.fullFileName != null%}
+                        <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+                    {%endif%}
+                </td>
+            </tr> 
         </tbody>
     </table>
 {% endblock %}
