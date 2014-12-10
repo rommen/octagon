@@ -241,7 +241,7 @@ class ShoesController extends SecureController {
     	->setAction($this->generateUrl('customer_shoe_delete', array('id' => $id)))
     	->setMethod('DELETE')
     	->add('submit', 'submit', array('label' => 'Delete'))
-    	->getForm()
+    	->getForm() 
     	;
     }
 }
