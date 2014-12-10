@@ -1,6 +1,0 @@
-artist:
-    resource: "@ArtistBundle/Resources/config/routing.yml"
-    prefix:   /
-
-
-
