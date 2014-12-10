@@ -1,0 +1,68 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}User{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_users');
+    </script> 
+
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('admin_user') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ path('admin_user_edit', { 'id': entity.idUser }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>   
+    <table class="table record_properties">
+        <tbody>
+
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ entity.username }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ entity.address }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>{#
+                <th>Avatar Extension</th>
+                <td>{{ entity.avatar }}</td>
+            </tr>#}
+            <tr>
+                <th>Admin</th>
+                <td>{{ entity.admin }}</td>
+            </tr>
+            <tr>
+                <th>Blocked unitl</th>
+                <td>
+                    {%if entity.blocked != null%}
+                        {{ entity.blocked|date('Y-m-d H:i:s') }}
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    {%if entity.avatar != null and entity.fullFileName != null%}
+                        <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+                    {%endif%}
+                </td>
+            </tr> 
+        </tbody>
+    </table>
+{% endblock %}

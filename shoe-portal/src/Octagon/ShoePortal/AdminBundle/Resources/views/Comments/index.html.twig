@@ -1,0 +1,46 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Comments{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_comments');
+    </script> 
+    <h1>Comments list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Text</th>
+                <th>Date</th>
+                <th>Idcomments</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">{{ entity.text }}</a></td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.idComments }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_comments_edit', { 'id': entity.idComments }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_comments_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,19 +1,25 @@
 <?php
-
 namespace Octagon\ShoePortal\AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
-{
+/**
+ * Description of DefaultController
+ * @Route("/")
+ */
+class DefaultController extends Controller{
     /**
-     * @Route("/hello/{name}")
-     * @Template()
+     * Lists all entities.
+     *
+     * @Route("/", name="default_admin_page")
+     * @Method("GET")
+     * @Template("AdminBundle:Default:index.html.twig")
      */
-    public function indexAction($name)
-    {
-        return array('name' => $name);
+    public function indexAction() {
+        return array();
     }
 }

@@ -1,0 +1,49 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Users{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_users');
+    </script> 
+    <button type="button" class="btn btn-primary">
+        <a href="{{ path('_register') }}">
+            Create a new entry
+        </a>
+    </button>
+    <table class="table records_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Avatar extension</th>
+                <th>Admin</th>
+                <th>Blocked until</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_user_show', { 'id': entity.idUser }) }}">{{ entity.idUser }}</a></td>
+                    <td>{{ entity.username }}</td>
+                    <td>{{ entity.address }}</td>
+                    <td>{{ entity.email }}</td>
+                    <td>{{ entity.avatar }}</td>
+                    <td>{{ entity.admin}}</td>
+                    <td>{% if entity.blocked %}{{ entity.blocked|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <div class="btn-group" role="group" style="color:white">
+                            <button type="button" class="btn btn-primary"> 
+                                <a href="{{ path('admin_user_show', { 'id': entity.idUser }) }}">show</a>
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                <a href="{{ path('admin_user_edit', { 'id': entity.idUser }) }}">edit</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

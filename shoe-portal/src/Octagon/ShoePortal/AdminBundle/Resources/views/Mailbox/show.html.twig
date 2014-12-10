@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Mailbox</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ entity.text }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Read</th>
+                <td>{{ entity.read }}</td>
+            </tr>
+            <tr>
+                <th>Deletebysender</th>
+                <td>{{ entity.deleteBySender }}</td>
+            </tr>
+            <tr>
+                <th>Deletebyreceiver</th>
+                <td>{{ entity.deleteByReceiver }}</td>
+            </tr>
+            <tr>
+                <th>Idmailbox</th>
+                <td>{{ entity.idMailbox }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_mailbox') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_mailbox_edit', { 'id': entity.idMailbox }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

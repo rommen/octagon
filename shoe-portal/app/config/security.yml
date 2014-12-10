@@ -13,6 +13,7 @@ security:
             form_login:
                 login_path: _login
                 check_path: _login_check
+                success_handler: security.authentication.success_handler
             http_basic:
                 realm: "Secured Demo Area"
 

@@ -1,1 +1,21 @@
-Hello {{ name }}!
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Administration{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_admin');
+    </script> 
+    <h1>Entities</h1>
+    <div class="page_container">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{path('admin_categories')}}">Categories</a></li>
+            <li class="list-group-item"><a href="{{path('admin_shoe')}}">Shoes</a></li>
+            <li class="list-group-item"><a href="{{path('admin_user')}}">Users</a></li>
+            {#<li class="list-group-item"><a href="{{path('admin_comments')}}">Comments</a></li>
+            <li class="list-group-item"><a href="{{path('admin_rating')}}">Raitings</a></li>
+            <li class="list-group-item"><a href="{{path('admin_mailbox')}}">Mailbox</a></li>
+            <li class="list-group-item"><a href="{{path('admin_newsfeed')}}">News feeds</a></li>
+            <li class="list-group-item"><a href="{{path('admin_statistics')}}">Statistics</a></li>#}
+
+        </ul>
+    </div>
+{% endblock %}  

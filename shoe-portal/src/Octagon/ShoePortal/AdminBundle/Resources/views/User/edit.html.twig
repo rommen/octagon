@@ -1,0 +1,22 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Edit User{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_users');
+    </script> 
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+          <a href="{{ path('admin_user') }}">
+                Back to the list
+            </a>
+        </button>           
+        <div>{{ form(delete_form) }}</div>
+    </div>
+    {{ form(edit_form) }}
+    <div>
+        <span>Image</span><br/>
+        {%if entity.avatar != null and entity.fullFileName != null%}
+            <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+        {%endif%}
+    </div>
+{% endblock %}

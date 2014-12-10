@@ -1,0 +1,80 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Shoe{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_shoes');
+    </script> 
+
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('admin_shoe') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary">
+            <a href="{{ path('admin_shoe_edit', { 'id': entity.idShoe }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idShoe }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ entity.color }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ entity.size }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ entity.text }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ entity.brand }}</td>
+            </tr>
+            <tr>
+                <th>Prize</th>
+                <td>{{ entity.price }}€</td>
+            </tr>
+            <tr>
+                <th>Sportstar</th>
+                <td>{{ entity.sportstar }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ entity.year }}</td>
+            </tr>
+            <tr>
+                <th>Edition</th>
+                <td>{{ entity.edition }}</td>
+            </tr>
+           {# <tr>
+                <th>Extension</th>
+                <td>{{ entity.extension }}</td>
+            </tr>  #}          
+            <tr>
+                <th>Image</th>
+                <td>
+                    {%if entity.extension!=null and entity.fullFileName != null%}
+                        <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+                    {%endif%}
+                </td>
+            </tr> 
+        </tbody>
+    </table>
+{% endblock %}

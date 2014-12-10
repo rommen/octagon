@@ -1,0 +1,42 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Categories{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_categories');
+    </script> 
+    <button type="button" class="btn btn-primary">
+        <a href="{{ path('admin_categories_new') }}">
+            Create a new entry
+        </a>
+    </button>
+    <table class="table records_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_categories_show', { 'id': entity.idCategories }) }}">{{ entity.idCategories }}</a></td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.level }}</td>
+                    <td>
+                        <div class="btn-group" role="group" style="color:white">
+                            <button type="button" class="btn btn-primary"> 
+                                <a href="{{ path('admin_categories_show', { 'id': entity.idCategories }) }}">show</a>
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                <a href="{{ path('admin_categories_edit', { 'id': entity.idCategories }) }}">edit</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

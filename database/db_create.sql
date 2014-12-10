@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Categories` (
   `idCategories` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `level` INT NULL,
-  `idParent` INT NOT NULL,
+  `idParent` INT NULL,
   PRIMARY KEY (`idCategories`),
   INDEX `fk_Categories_Categories1_idx` (`idParent` ASC),
   CONSTRAINT `fk_Categories_Categories1`
@@ -176,8 +176,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `octagon`.`Rating` (
   `idRating` INT NOT NULL AUTO_INCREMENT,
   `value` TINYINT(5) NOT NULL,
-  `idShoe` INT NOT NULL,
-  `idSeller` INT NOT NULL,
+  `idShoe` INT NULL,
+  `idSeller` INT NULL,
   `idOwner` INT NOT NULL,
   PRIMARY KEY (`idRating`),
   INDEX `fk_Rating_Shoe1_idx` (`idShoe` ASC),

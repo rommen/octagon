@@ -1,0 +1,19 @@
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Edit category{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_categories');
+    </script> 
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('admin_categories') }}">
+                Back to the list
+            </a>
+        </button>           
+        <div>{{ form(delete_form) }}</div>
+    </div>
+    <div style="width:300px">
+        {{ form(edit_form) }}
+    </div>
+
+{% endblock %}
