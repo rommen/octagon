@@ -13,11 +13,7 @@ class ShoesController extends SecureController {
     public function viewAction(Request $request) {
         return $this->render('CustomerBundle:Shoes:shoe.html.twig');
     }
-    
-    public function editAction(Request $request) {
-        $this->checkIfUserLoggedIn();//check if user is logged in
-        return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig');
-    }
+
     /**
      * Lists all Shoe entities.
      *
