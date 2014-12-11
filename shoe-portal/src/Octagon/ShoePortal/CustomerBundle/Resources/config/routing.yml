@@ -38,5 +38,4 @@ _register:
 _user:
     path:     /users/view
     defaults: { _controller: CustomerBundle:Users:view}
-
     

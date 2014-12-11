@@ -102,6 +102,16 @@ class Categories
     {
         return $this->idCategories;
     }
+    
+     /**
+     * Get idCategories base64 version
+     *
+     * @return string 
+     */
+    public function getIdCategoriesHash()
+    {
+        return base64_encode($this->idCategories);
+    }
 
     /**
      * Set idParent
