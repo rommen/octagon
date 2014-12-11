@@ -1,7 +1,12 @@
-<div>List of categories</div>
-{% if categoryId == null %}
-    categoryId is null
-{%else%}
-    categoryId is not null
-{% endif %}
-    
+<div id="categories">      
+    <div class="list-group">
+
+        {% for category in categories %}
+            {%if categoryId != null and category.idCategoriesHash == categoryId%}
+                <a class="list-group-item active" href="{{app.request.getBaseUrl}}?categoryId={{category.idCategoriesHash}}">{{category.name}}</a>
+            {%else%}
+                <a class="list-group-item" href="{{app.request.getBaseUrl}}?categoryId={{category.idCategoriesHash}}">{{category.name}}</a>
+            {%endif%}
+        {% endfor %}        
+    </div>
+</div>

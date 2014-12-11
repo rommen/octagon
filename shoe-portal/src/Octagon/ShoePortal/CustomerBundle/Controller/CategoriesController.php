@@ -11,8 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CategoriesController extends Controller{
     
-    public function listAction(Request $request){        
+    public function listAction(Request $request){     
+         $categories = $this->getDoctrine()
+               ->getRepository('CustomerBundle:Categories')->findAll();
         return $this->render('CustomerBundle:Categories:list.html.twig', 
-                array('categoryId'=>$request->get("categoryId")));
+                array('categories'=>$categories, 
+                    'categoryId'=>$request->get("categoryId")));
     }
 }
