@@ -35,5 +35,7 @@ _register:
 _user:
     path:     /users/view
     defaults: { _controller: CustomerBundle:Users:view}
-
+_edit:
+    path: /users/edit
+    defaults: { _controller: CustomerBundle:Users:edit}
     

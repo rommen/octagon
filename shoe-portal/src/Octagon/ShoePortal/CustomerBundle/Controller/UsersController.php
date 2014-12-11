@@ -51,4 +51,38 @@ class UsersController extends SecureController{
         }
         return $this->render('CustomerBundle:Users:register.html.twig');
     }
+     public function editAction($id)
+    {
+    $request = $this->get('request');
+
+    $em = $this->getDoctrine()->getEntityManager();
+    $user = $em->getRepository('CustomerBundle:User')->find($id);
+    $form = $this->createFormBuilder($user)
+             ->add('username')
+//            ->add('password', 'password', array())
+            ->add('address')
+            ->add('email', 'email')
+            ->add('avatar')
+            ->getForm();
+    $request = $this->get('request');
+    if ($request->getMethod() == 'POST') {
+        $form->bindRequest($request);
+
+        echo $user->getName();
+
+        if ($form->isValid()) {
+            // perform some action, such as save the object to the database
+            //$testimonial = $form->getData();
+            echo 'user: ';          
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('MyBundle_list_testimonials'));
+        }
+    }
+
+    return $this->render('CustomerBundle:Users:edit.html.twig', array(
+        'form' => $form->createView()
+    ));
+}
 }
