@@ -5,7 +5,7 @@
         navigation('nav_shoes');
     </script> 
     <div class="page_container">
-        {% render "/categories/list?categoryId=" ~ app.request.get('categoryId')%}
-        {% include "CustomerBundle:Shoes:list.html.twig" %}       
+        {{render(controller('CustomerBundle:Categories:list', {'categoryId' : app.request.get('categoryId')})) }}
+        {% include "CustomerBundle:Shoes:list.html.twig" with shoes%}       
     </div>
 {% endblock %}  

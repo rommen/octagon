@@ -1,11 +1,34 @@
 <div id="categories">      
     <div class="list-group">
-
+        <script>
+            function click(category) {
+                var url = window.location.href;
+                var cIdIdx = url.indexOf("categoryId");
+                var qi = url.indexOf("?");
+                
+                var href = null;
+                if (qi >= 0) {
+                    if (cIdIdx >= 0) {
+                       url = url.replace(/(&?categoryId=[a-zA-Z=]*)/i,"");
+                    }
+                    href = url + "&categoryId=" + category;
+                } else {
+                    href = url + "?categoryId=" + category;
+                }
+                window.location.href = href;
+                
+            }
+        </script>
+        {%if '?' in app.request.getBaseUrl%}
+            {%set base = app.request.getBaseUrl ~ "&categoryId="%}
+        {%else%}
+            {%set base = app.request.getBaseUrl ~ "?categoryId="%}
+        {%endif%}
         {% for category in categories %}
             {%if categoryId != null and category.idCategoriesHash == categoryId%}
-                <a class="list-group-item active" href="{{app.request.getBaseUrl}}?categoryId={{category.idCategoriesHash}}">{{category.name}}</a>
+                <a class="list-group-item active" href="javascript:click('{{category.idCategoriesHash}}');">{{category.name}}</a>
             {%else%}
-                <a class="list-group-item" href="{{app.request.getBaseUrl}}?categoryId={{category.idCategoriesHash}}">{{category.name}}</a>
+                <a class="list-group-item" href="javascript:click('{{category.idCategoriesHash}}');">{{category.name}}</a>
             {%endif%}
         {% endfor %}        
     </div>

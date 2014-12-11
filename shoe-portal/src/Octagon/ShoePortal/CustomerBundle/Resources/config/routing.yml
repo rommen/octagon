@@ -42,3 +42,7 @@ _edit:
     path: /users/edit
     defaults: { _controller: CustomerBundle:Users:edit}
     
+_block:
+    path: /users/block
+    defaults: { _controller: CustomerBundle:Users:block}
+    

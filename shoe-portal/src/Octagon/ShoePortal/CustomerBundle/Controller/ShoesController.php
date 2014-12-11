@@ -4,11 +4,39 @@ namespace Octagon\ShoePortal\CustomerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Octagon\ShoePortal\CustomerBundle\Entity\Shoe;
 
 class ShoesController extends SecureController {
 
     public function listAction(Request $request) {
-        return $this->render('CustomerBundle:Shoes:shoes.html.twig');
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder()
+                ->select('s')
+                ->from('CustomerBundle:Shoe', 's');
+
+        //WHERE: category
+        $category = $request->get('categoryId');
+        if ($category != null) {
+            $category = base64_decode($category);
+            $qb->where('s.idCategories = :category')
+                ->setParameter('category', $category);
+        }
+        
+        $user = $request->get('userId');
+        if ($user != null){
+            $user = base64_decode($user);
+            $qb->andWhere('s.idOwner = :owner')
+                    ->setParameter('owner', $user);
+        }
+        
+        $qb->orderBy('s.idShoe', 'DESC');
+
+        $shoes = $qb->getQuery()->getResult();
+
+        return $this->render('CustomerBundle:Shoes:shoes.html.twig', array('shoes' => $shoes));
     }
 
     public function viewAction(Request $request) {
@@ -46,4 +74,5 @@ class ShoesController extends SecureController {
             throw new AccessDeniedException('Cannot perform delete operation');
         }
     }
+
 }

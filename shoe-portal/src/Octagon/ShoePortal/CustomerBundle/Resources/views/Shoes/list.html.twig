@@ -1,1 +1,60 @@
-<div>List of shoes</div>
+<style>
+    *, *:before, *:after {box-sizing:  border-box !important;}
+
+
+    .row {
+        -moz-column-width: 18em;
+        -webkit-column-width: 18em;
+        -moz-column-gap: 1em;
+        -webkit-column-gap:1em; 
+
+    }
+
+    .item {
+        display: inline-block;
+        padding:  .25rem;
+        width:  100%; 
+    }
+
+    .well {
+        position:relative;
+        display: block;
+    }
+
+    #shoes{
+        width: 80%;
+        margin-left: 50px;
+    }
+    .shoeName{
+        color: #428bca;
+    }
+    .shoeYear{
+        color:grey;
+    }
+    .shoePrice{
+        color: darkred;
+    }
+</style>
+<div id="shoes">
+    <div class="row">
+        {% for shoe in shoes %}
+            <a href="/shoes/view?id={{shoe.idShoeHash}}">
+                <div class="item">
+                    <div class="well">
+                        <img src="{{ asset('images/uploads/')}}{{shoe.fullFileName}}" alt="No shoe image"/><br/>
+                        <br/>
+                        <div class="tileText">
+                            <p class="tileTextFirstRow">
+                                <span class="shoeName">{{shoe.name}}</span>
+                                <span class="shoeYear">{{shoe.year}}</span>
+                            </p>
+                            <div class="tileTextSecondRow">
+                                <span class="shoePrice">{{shoe.price}} €</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            </a>
+        {% endfor %}        
+    </div>
+</div>
