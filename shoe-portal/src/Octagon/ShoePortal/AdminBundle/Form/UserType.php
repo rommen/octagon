@@ -22,6 +22,7 @@ class UserType extends AbstractType
             ->add('avatar')
             ->add('admin')
             ->add('blocked', null, array('label'=>'Blocked until'))
+            ->add('file')
         ;
     }
     

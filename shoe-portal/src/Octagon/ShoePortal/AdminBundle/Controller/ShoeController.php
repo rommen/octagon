@@ -15,8 +15,7 @@ use Octagon\ShoePortal\AdminBundle\Form\ShoeType;
  *
  * @Route("/admin_shoe")
  */
-class ShoeController extends Controller
-{
+class ShoeController extends Controller {
 
     /**
      * Lists all Shoe entities.
@@ -25,8 +24,7 @@ class ShoeController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CustomerBundle:Shoe')->findAll();
@@ -35,6 +33,7 @@ class ShoeController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Shoe entity.
      *
@@ -42,23 +41,26 @@ class ShoeController extends Controller
      * @Method("POST")
      * @Template("AdminBundle:Shoe:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Shoe();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if ($entity->getFile() != null) {
+                $entity->updateExtensionFromFile();
+            }
             $em->persist($entity);
             $em->flush();
+            $entity->upload();
 
             return $this->redirect($this->generateUrl('admin_shoe_show', array('id' => $entity->getIdShoe())));
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -69,8 +71,7 @@ class ShoeController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Shoe $entity)
-    {
+    private function createCreateForm(Shoe $entity) {
         $form = $this->createForm(new ShoeType(), $entity, array(
             'action' => $this->generateUrl('admin_shoe_create'),
             'method' => 'POST',
@@ -88,14 +89,13 @@ class ShoeController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Shoe();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -106,8 +106,7 @@ class ShoeController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CustomerBundle:Shoe')->find($id);
@@ -119,7 +118,7 @@ class ShoeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -131,8 +130,7 @@ class ShoeController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CustomerBundle:Shoe')->find($id);
@@ -145,21 +143,20 @@ class ShoeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Shoe entity.
-    *
-    * @param Shoe $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Shoe $entity)
-    {
+     * Creates a form to edit a Shoe entity.
+     *
+     * @param Shoe $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Shoe $entity) {
         $form = $this->createForm(new ShoeType(), $entity, array(
             'action' => $this->generateUrl('admin_shoe_update', array('id' => $entity->getIdShoe())),
             'method' => 'PUT',
@@ -169,6 +166,7 @@ class ShoeController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Shoe entity.
      *
@@ -176,8 +174,7 @@ class ShoeController extends Controller
      * @Method("PUT")
      * @Template("AdminBundle:Shoe:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CustomerBundle:Shoe')->find($id);
@@ -191,25 +188,26 @@ class ShoeController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->upload();
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_shoe_edit', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Shoe entity.
      *
      * @Route("/{id}", name="admin_shoe_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -235,13 +233,13 @@ class ShoeController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_shoe_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('admin_shoe_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

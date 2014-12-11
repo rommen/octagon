@@ -11,8 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="Shoe", indexes={@ORM\Index(name="fk_Shoe_Categories_idx", columns={"idCategories"}), @ORM\Index(name="fk_Shoe_User1_idx", columns={"idOwner"})})
  * @ORM\Entity
  */
-class Shoe
-{
+class Shoe extends UploadableEntity{
     /**
      * @var string
      *
@@ -58,7 +57,7 @@ class Shoe
 
     /**
      * @Assert\Range(
-     *      min = 1,
+     *      min = 0,
      *      max = 999,
      *      minMessage = "You must enter least {{ limit }}",
      *      maxMessage = "You cannot enter more than {{ limit }}"
@@ -416,5 +415,28 @@ class Shoe
     public function getIdCategories()
     {
         return $this->idCategories;
+    }
+    
+     /**
+     * Get full image name, for example, User_1 or Shoe_2
+     * @return string
+     */
+    public function getImageName(){
+        return 'Shoe_' . $this->idShoe;
+    }
+
+    /**
+     * Return image file extension, for example, jpeg, png or jpg
+     * @return string
+     */
+    public function getFileExtension(){
+        return $this->extension;
+    }
+    
+    /**
+     * Set file extension of the image
+     */
+    public function setFileExtension($extension){
+        $this->setExtension($extension);
     }
 }

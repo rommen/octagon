@@ -154,6 +154,7 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->upload();
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));

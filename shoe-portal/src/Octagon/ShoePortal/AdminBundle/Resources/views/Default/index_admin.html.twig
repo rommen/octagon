@@ -1,13 +1,16 @@
 {% extends "index.html.twig" %}
 {% block title %}Administration{% endblock%}
 {% block navigation_items %}
+    <li id="nav_home" class="active">
+        <a href="{{path('default_admin_page')}}">Administration</a>
+    </li>
     <li id="nav_categories" class="list-group-item"><a href="{{path('admin_categories')}}">Categories</a></li>
     <li id="nav_shoes" class="list-group-item"><a href="{{path('admin_shoe')}}">Shoes</a></li>
     <li id="nav_users" class="list-group-item"><a href="{{path('admin_user')}}">Users</a></li>
-   {# <li id="nav_comments" class="list-group-item"><a href="{{path('admin_comments')}}">Comments</a></li>
-    <li id="nav_raitings" class="list-group-item"><a href="{{path('admin_raiting')}}">Raitings</a></li>
-    <li id="nav_mailbox" class="list-group-item"><a href="{{path('admin_mailbox')}}">Mailbox</a></li>
-    <li id="nav_newsfeeds" class="list-group-item"><a href="{{path('admin_newsfeed')}}">News feeds</a></li>
-    <li id="nav_statistics" class="list-group-item"><a href="{{path('admin_statistics')}}">Statistics</a></li>
-#}
+    {# <li id="nav_comments" class="list-group-item"><a href="{{path('admin_comments')}}">Comments</a></li>
+     <li id="nav_raitings" class="list-group-item"><a href="{{path('admin_raiting')}}">Raitings</a></li>
+     <li id="nav_mailbox" class="list-group-item"><a href="{{path('admin_mailbox')}}">Mailbox</a></li>
+     <li id="nav_newsfeeds" class="list-group-item"><a href="{{path('admin_newsfeed')}}">News feeds</a></li>
+     <li id="nav_statistics" class="list-group-item"><a href="{{path('admin_statistics')}}">Statistics</a></li>
+ #}
 {% endblock %}

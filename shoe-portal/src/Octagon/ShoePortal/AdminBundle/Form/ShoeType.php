@@ -24,9 +24,10 @@ class ShoeType extends AbstractType
             ->add('sportstar')
             ->add('year')
             ->add('edition')
-            ->add('extension')
+//            ->add('extension')
             ->add('idOwner', null, array('label'=>'Owner'))
             ->add('idCategories', null, array('label'=>'Categories'))
+            ->add('file')
         ;
     }
     
