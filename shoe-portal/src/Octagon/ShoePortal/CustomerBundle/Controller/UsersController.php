@@ -122,29 +122,29 @@ class UsersController extends SecureController {
 
     public function blockAction(Request $request) {
         $this->checkIfUserLoggedIn();
-//        if (!$this->isUserAdmin()) {
-//            throw $this->createAccessDeniedException('User block function is denied');
-//        } else {
-        $id = $request->get('id');
-        if ($id != null) {
-            $id = base64_decode($id);
-            $em = $this->getDoctrine()->getEntityManager();
-            $user = $em->getRepository('CustomerBundle:User')->find($id);
-    
-            $date = \DateTime::createFromFormat('Y-m-d', $request->get('blocked'));// ex, 2014-12-01, 
-            if ($date != null) {
-                $user->setBlocked($date);
-                $em->persist($user);
-                $em->flush();
-            }else{
-                throw $this->createNotFoundException('Validate block date not found:'.$request->get('blocked'));
-            }
-
-            return $this->redirect($this->generateUrl('_user', array('id' => $request->get('id'))));
+        if (!$this->isUserAdmin()) {
+            throw $this->createAccessDeniedException('User block function is denied');
         } else {
-            throw $this->createNotFoundException('User id not found');
+            $id = $request->get('id');
+            if ($id != null) {
+                $id = base64_decode($id);
+                $em = $this->getDoctrine()->getEntityManager();
+                $user = $em->getRepository('CustomerBundle:User')->find($id);
+
+                $date = \DateTime::createFromFormat('Y-m-d', $request->get('blocked')); // ex, 2014-12-01, 
+                if ($date != null) {
+                    $user->setBlocked($date);
+                    $em->persist($user);
+                    $em->flush();
+                } else {
+                    throw $this->createNotFoundException('Validate block date not found:' . $request->get('blocked'));
+                }
+
+                return $this->redirect($this->generateUrl('_user', array('id' => $request->get('id'))));
+            } else {
+                throw $this->createNotFoundException('User id not found');
+            }
         }
-//        }
     }
 
 }
