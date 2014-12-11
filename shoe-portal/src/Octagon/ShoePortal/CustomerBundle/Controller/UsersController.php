@@ -2,6 +2,7 @@
 
 namespace Octagon\ShoePortal\CustomerBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Octagon\ShoePortal\CustomerBundle\Entity\User;
 /**
  * Description of UserController
  *
@@ -47,7 +48,7 @@ class UsersController extends SecureController{
             $em->persist($user);
             $em->flush();
 
-            return new \Symfony\Component\HttpFoundation\RedirectResponse('_login');
+            return $this->redirect($this->generateUrl('_login'));
         }
         return $this->render('CustomerBundle:Users:register.html.twig');
     }
