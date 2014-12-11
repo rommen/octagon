@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User extends UploadableEntity implements AdvancedUserInterface{
+class User extends UploadableEntity implements AdvancedUserInterface {
 
     /**
      * @var string
@@ -72,12 +72,11 @@ class User extends UploadableEntity implements AdvancedUserInterface{
      */
     private $idUser;
 
-   
-    
-    public function __construct($username=null, $password=null, $salt=null, array $roles=null){
+    public function __construct($username = null, $password = null, $salt = null, array $roles = null) {
         $this->username = $username;
         $this->password = $password;
     }
+
     /**
      * Set username
      *
@@ -244,6 +243,7 @@ class User extends UploadableEntity implements AdvancedUserInterface{
     }
 
     public function eraseCredentials() {
+        
     }
 
     public function getRoles() {
@@ -253,8 +253,8 @@ class User extends UploadableEntity implements AdvancedUserInterface{
             } else {
                 return array('ROLE_USER');
             }
-        }else{
-            return array();//User has no rights, maybe need to show some notification
+        } else {
+            return array(); //User has no rights, maybe need to show some notification
         }
     }
 
@@ -277,6 +277,7 @@ class User extends UploadableEntity implements AdvancedUserInterface{
     public function isEnabled() {
         return true;
     }
+
     public function __toString() {
         return $this->username;
     }
