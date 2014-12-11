@@ -4,8 +4,8 @@
     <script>
         navigation('nav_shoes');
     </script> 
-
-
-  
-    {% endblock %}  
-
+    <div class="page_container">
+        {% render "/categories/list?categoryId=" ~ app.request.get('categoryId')%}
+        {% include "CustomerBundle:Shoes:list.html.twig" %}       
+    </div>
+{% endblock %}  
