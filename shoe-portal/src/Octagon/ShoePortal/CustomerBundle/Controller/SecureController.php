@@ -34,7 +34,7 @@ class SecureController extends Controller {
      * @return integer
      */
     public function getAuthUserId() {
-        return $this->getUser()->getId();
+        return $this->getUser()->getIdUser();
     }
 
     /**

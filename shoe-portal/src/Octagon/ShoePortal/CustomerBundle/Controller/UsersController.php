@@ -1,34 +1,37 @@
 <?php
 
 namespace Octagon\ShoePortal\CustomerBundle\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Octagon\ShoePortal\CustomerBundle\Entity\User;
+
 /**
  * Description of UserController
  *
  * @author rommen
  */
-class UsersController extends SecureController{
-    public function viewAction(Request $request){
-        $this->checkIfUserLoggedIn();//check if logged in
+class UsersController extends SecureController {
+
+    public function viewAction(Request $request) {
+        $this->checkIfUserLoggedIn(); //check if logged in
         //get id
         $id = $request->get('id');
-        if($id != null){
+        if ($id != null) {
             $id = base64_decode($id);
             $user = $this->getDoctrine()
-                   ->getRepository('CustomerBundle:User')->find($id);            
-        }else{
+                            ->getRepository('CustomerBundle:User')->find($id);
+        } else {
             $user = null;
         }
-        
+
         //select user shoes
         $shoes = array();
-        
-        
-        return $this->render('CustomerBundle:Users:user.html.twig', 
-                array('user' => $user, 'shoes'=>$shoes));
+
+
+        return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user, 'shoes' => $shoes));
     }
-     public function registerAction(Request $request) {
+
+    public function registerAction(Request $request) {
 
         if ($request->getMethod() == 'POST') {
             $username = $request->get('username');
@@ -52,38 +55,54 @@ class UsersController extends SecureController{
         }
         return $this->render('CustomerBundle:Users:register.html.twig');
     }
-     public function editAction($id)
-    {
-    $request = $this->get('request');
 
-    $em = $this->getDoctrine()->getEntityManager();
-    $user = $em->getRepository('CustomerBundle:User')->find($id);
-    $form = $this->createFormBuilder($user)
-             ->add('username')
-//            ->add('password', 'password', array())
-            ->add('address')
-            ->add('email', 'email')
-            ->add('avatar')
-            ->getForm();
-    $request = $this->get('request');
-    if ($request->getMethod() == 'POST') {
-        $form->bindRequest($request);
-
-        echo $user->getName();
-
-        if ($form->isValid()) {
-            // perform some action, such as save the object to the database
-            //$testimonial = $form->getData();
-            echo 'user: ';          
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('MyBundle_list_testimonials'));
+    public function editAction(Request $request) {
+        $this->checkIfUserLoggedIn();
+        //get id
+        $id = $request->get('id');
+        if ($id != null) {
+            $id = base64_decode($id);
+            if (!$this->isUserAdmin() && $id != $this->getAuthUserId()) {
+                throw new AccessDeniedException('Cannot perform edit operation');
+            }
+        } else {
+            //deny access if id is not provided
+            if ($request->getMethod() != 'POST') {
+                throw $this->createAccessDeniedException('Cannot perform operation without an id');
+            }
+            $user = null;
         }
+
+        //retrive user fromdb
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $em->getRepository('CustomerBundle:User')->find($id);
+
+        //create user form
+        $form = $this->createFormBuilder($user)
+                ->add('username')
+//                ->add('password', 'password', array())
+                ->add('address')
+                ->add('email', 'email')
+                ->add('file', 'file', array('label' => 'Avatar'))
+                ->add('submit', 'submit', array('label' => 'Update'))
+                ->getForm();
+
+        //Handle submited form data
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);//map request to form
+
+            if ($form->isValid()) {//validate form
+                $em->persist($user);//update user
+                $user->upload();//upload file
+                $em->flush();//commit
+
+                return $this->redirect('/users/view?id=' . $user->getIdUserHash());
+            }
+        }
+
+        return $this->render('CustomerBundle:Users:edit.html.twig', array(
+                    'form' => $form->createView()
+        ));
     }
 
-    return $this->render('CustomerBundle:Users:edit.html.twig', array(
-        'form' => $form->createView()
-    ));
-}
 }

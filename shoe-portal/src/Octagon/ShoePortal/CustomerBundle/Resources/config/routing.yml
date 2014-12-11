@@ -38,10 +38,7 @@ _register:
 _user:
     path:     /users/view
     defaults: { _controller: CustomerBundle:Users:view}
-<<<<<<< HEAD
 _edit:
     path: /users/edit
     defaults: { _controller: CustomerBundle:Users:edit}
-=======
->>>>>>> 3d9b4ec4ef8d0d22f0bd612b049c14fde47fe20a
     
