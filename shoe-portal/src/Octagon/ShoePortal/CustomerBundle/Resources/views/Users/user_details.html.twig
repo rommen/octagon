@@ -1,20 +1,40 @@
 <div>User details</div>
 <br/>
-<div>
-    {%if user != null %}
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Username</th>
-                    <td> {{user.username}}</td>
-                </tr>
-                <tr>
-                    <th>E-mail</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-            </tbody>
-        </table>
-       {{ user.idUserHash }}
+<div class="container">
+    <div class="row">
+        {%if user != null %}
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Username</th>
+                        <td> {{user.username}}</td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>address</th>
+                        <td>{{ user.address }}</td>
+                    </tr> 
+                    <tr>
+                        <th>Avatar</th>
+                        <td>{{ user.avatar }}</td>
+                    </tr>  
+                     <tr>
+                        <th>Status of the Account</th>
+                        <td>{{ user.blocked }}</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <br/>
+            <div class="row">
+                    
+                   <a href="/users/edit?id={{ user.idUserHash }}">
+                       <br/> <button type="button" class="btn btn-primary">Edit</button>
+                </a>
+            </div>
+        </div>
     {%else%}
         <span class="alert alert-danger" role="alert">Error</span>
     {%endif%}
