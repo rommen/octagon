@@ -33,24 +33,10 @@
 {% block content_container %}
     <div id="content-container-home">
         <div id="content-home">&nbsp;
-
-            <h1>Home page</h1>
-            {% include "CustomerBundle:Shoes:list.html.twig" %}
             <div>
-                <table>
-                    <!--Doctrine Test -->
-                    {# {% for shoe in shoes %}
-                         <tr>
-                             <td>Name:{{shoe.name}};</td>
-                             <td>Categ:{{shoe.idCategories.name}} ;</td>
-                             <td>Username:{{shoe.idOwner.username}}; </td>
-                         </tr>
-                     {% endfor %}#}
-
-                </table>
-
+                {% include "CustomerBundle:Shoes:list.html.twig" with shoes %}
+                <style>#shoes{width:95%;}</style>
             </div>
-
             <div class="clear"></div>
         </div>
     </div>

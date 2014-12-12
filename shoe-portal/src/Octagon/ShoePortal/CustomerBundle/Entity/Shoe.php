@@ -370,6 +370,15 @@ class Shoe extends UploadableEntity{
     {
         return $this->idShoe;
     }
+    /**
+     * Get BASE64 of idShoe
+     *
+     * @return string 
+     */
+    public function getIdShoeHash()
+    {
+        return base64_encode($this->idShoe);
+    }
 
     /**
      * Set idOwner

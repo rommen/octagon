@@ -12,6 +12,9 @@ _shoe:
 _shoe_edit:
     path:     /shoes/edit
     defaults: { _controller: CustomerBundle:Shoes:edit }
+_shoe_delete:
+    path:     /shoes/delete
+    defaults: { _controller: CustomerBundle:Shoes:delete } 
 #Categories
 
 _categories:
@@ -35,4 +38,11 @@ _register:
 _user:
     path:     /users/view
     defaults: { _controller: CustomerBundle:Users:view}
+_edit:
+    path: /users/edit
+    defaults: { _controller: CustomerBundle:Users:edit}
+    
+_block:
+    path: /users/block
+    defaults: { _controller: CustomerBundle:Users:block}
     
