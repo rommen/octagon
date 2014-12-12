@@ -1,4 +1,10 @@
 <div class="container">
+    <style>
+        div.controls_row div{
+            float:left;
+            height: 30px;
+        }
+    </style>
     <div id="user_details">
         {%if user != null %}
             <div>
@@ -35,16 +41,28 @@
             <br/>
             <div class="controls_row">
                 {%if app.user.idUser == user.idUser or true == app.user.admin %}
-                    <a href="/users/edit?id={{ user.idUserHash }}">
-                        <br/> <button type="button" class="btn btn-primary">Edit</button>
-                    </a>
+                    <div>
+                        <a href="/users/edit?id={{ user.idUserHash }}">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                    </div>
                 {%endif%}
+                {%if app.user != null %}
+                    <div>
+                        <a href="/shoes/add">
+                            <button type="button" class="btn btn-primary">Add shoe</button>
+                        </a>
+                    </div>
+                {%endif%}
+                &nbsp;
                 {%if true == app.user.admin %}
-                    <form action="{{path('_block')}}" style="float:left;" method="POST">
-                        <input type="hidden" name="id" value="{{user.idUserHash}}"/>
-                        <button type="submit"class="btn btn-primary" >Block User Until</button>
-                        <input type="date" name="blocked" value="{{user.blocked|date("Y-m-d")}}" style="margin-bottom:0px"/>
-                    </form>
+                    <div>
+                        <form action="{{path('_block')}}" method="POST">
+                            <input type="hidden" name="id" value="{{user.idUserHash}}"/>
+                            <button type="submit"class="btn btn-primary" >Block User Until</button>
+                            <input type="date" name="blocked" value="{{user.blocked|date("Y-m-d")}}" style="margin-bottom:0px"/>
+                        </form>
+                    </div>
                 {%endif%}
             </div>
         </div>
