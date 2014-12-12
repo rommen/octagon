@@ -1,13 +1,44 @@
 {% extends "index.html.twig" %}
-{% block title %}user edit{% endblock%}
+{% block title %}User edit{% endblock%}
 {% block content %}
     <script>
         navigation('nav_users');
     </script> 
     <div>
+        {%if app.user.avatar != null and app.user.fullFileName != null%}
+            <img style="height: 100px;" src="{{ asset('images/uploads/')}}{{app.user.fullFileName}}"/>
+        {%else%}
+            <img style="height: 100px;" src="{{ asset('images/avatar.jpg')}}"/>
+        {%endif%}
+    </div><br/><br/>
+    <div>
         {{form_start(form)}}
         {{form_widget(form)}}
         {{form_end(form)}}
     </div>
+    <div id="pwdError" class="alert alert-danger" role="alert" style="display:none;">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        Passwords should match.
+    </div>
+    <script>
+        $('form').on('submit', function () {
+            var pwd = $('#password').val();
+            var pwd2 = $('#confirmPassword').val();
+
+            if (((pwd != null || pwd.length > 0) && (pwd2 != null || pwd2.length > 0))
+                    && pwd != pwd2.val()) {
+                $('#passwordDiv').attr('class', 'form-group has-error');
+                $('#confirmPasswordDiv').attr('class', 'form-group has-error');
+                $('#pwdError').attr('style', 'margin-top: 10px;margin-bottom: 0px;');
+                return false;
+            }
+
+            $('#password').attr('class', 'form-control');
+            $('#confirmPassword').attr('class', 'form-control');
+            $('#pwdError').attr('style', 'display:none;');
+            return true;
+        });
+    </script>
 {% endblock %}  
 

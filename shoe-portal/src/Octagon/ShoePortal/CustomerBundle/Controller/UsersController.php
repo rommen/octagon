@@ -64,12 +64,24 @@ class UsersController extends SecureController {
             $user->setPassword($password);
 
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($user);
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('_login'));
+            $qb = $em->createQueryBuilder()
+                    ->select('u')
+                    ->from('CustomerBundle:User', 'u')
+                    ->where('u.username = :username')
+                    ->orWhere('u.email = :email')
+                    ->setParameter('username', $username)
+                    ->setParameter('email', $email);
+            $u = $qb->getQuery()->getOneOrNullResult();
+            if ($u == null) {
+                $em->persist($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('_login'));
+            } else {
+                return $this->render('CustomerBundle:Users:register.html.twig', array('error' => 'Dublicate value (username or email)'));
+            }
         }
-        return $this->render('CustomerBundle:Users:register.html.twig');
+        return $this->render('CustomerBundle:Users:register.html.twig', array('error' => null));
     }
 
     public function editAction(Request $request) {
@@ -96,17 +108,28 @@ class UsersController extends SecureController {
 
         //create user form
         $form = $this->createFormBuilder($user)
-                        ->add('username')
-//                ->add('password', 'password', array())->add('address')
+                        ->add('address')
                         ->add('email', 'email')
-                        ->add('file', 'file', array('label' => 'Avatar'))
+                        ->add('password', 'password', array('required' => false))
+                        ->add('confirmPassword', 'text', array('required' => false, 'mapped' => false))
+                        ->add('file', 'file', array('label' => 'Avatar file', 'required' => false))
                         ->add('submit', 'submit', array('label' => 'Update'))->getForm();
 
         //Handle submited form data
         if ($request->getMethod() == 'POST') {
+            $pwd = $user->getPassword();
+
             $form->handleRequest($request); //map request to form
 
+            $p = $form->get('confirmPassword')->getData();
+
             if ($form->isValid()) {//validate form
+                if ($p != null && !empty($p)) {                   
+                    $pwd = $this->container->get('security.password_encoder')->encodePassword($user, $p);
+                    $user->setPassword($pwd);
+                }else{
+                    $user->setPassword($pwd);
+                }
                 $em->persist($user); //update user
                 $user->upload(); //upload file
                 $em->flush(); //commit
