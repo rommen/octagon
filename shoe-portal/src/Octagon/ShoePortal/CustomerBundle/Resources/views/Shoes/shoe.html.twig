@@ -5,5 +5,64 @@
         navigation('nav_shoes');
     </script> 
 
-                           
+    <div class="container-fluid">        
+        <div class="col-lg-12">
+           
+                <div class="col-lg-4">
+                    {%if shoe != null %}
+                        <img src="{{ asset('images/uploads/')}}{{shoe.fullFileName}}"  onerror="imgError(this);" alt="No shoe image"/>                                
+
+                    {%else%}
+                        <a>image cannot be loaded</a>
+                    {%endif%}
+                </div>
+                <div class="col-lg-4">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{shoe.name}} </td>
+                            </tr>
+                            <tr>
+                                <th>Color</th>
+                                <td>{{shoe.color}}</td>
+                            </tr>
+                            <tr>
+                                <th>Size</th>
+                                <td>{{shoe.size}}</td>
+                            </tr>  
+                            <tr>
+                                <th>Description</th>
+                                <td>{{shoe.text}}</td>
+                            </tr>
+                            <tr>
+                                <th>Brand</th>
+                                <td>{{shoe.brand}}</td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>{{shoe.price}}</td>
+                            </tr>
+                            <tr>
+                                <th>Sport star</th>
+                                <td>{{shoe.sportstar}}</td>
+                            </tr>
+                            <tr>
+                                <th>year</th>
+                                <td>{{shoe.year}}</td>
+                            </tr>
+                            <tr>
+                                <th>Edition</th>
+                                <td>{{shoe.edition}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <br/>
+              
+            </div>
+        </div>
+    </div>
+{% endblock %}  
+
 
