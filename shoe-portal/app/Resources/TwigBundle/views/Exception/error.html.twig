@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Oops, a porblem occured</title>
+        <style>
+            #container{
+                margin-top:150px;
+                font-size:12pt;
+                text-align:center;
+            }
+
+            #title{
+                font-weight:bold;
+            }
+
+            #message{
+
+            }
+
+            #text{
+
+            }
+            #subcontainer{
+                width:400px;
+                border: 1px solid grey;
+                margin:auto;
+                padding:30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="subcontainer">
+                <img src="{{asset('images/broken_shoe.jpg')}}"/>
+                <div id="text">
+                    <span id="title">Oops, a porblem occurred!</span><br/>
+                    <span id="message">[{{ exception.code }}] : "{{ exception.message }}"</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
