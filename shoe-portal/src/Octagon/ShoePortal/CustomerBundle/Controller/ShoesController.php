@@ -40,7 +40,13 @@ class ShoesController extends SecureController {
     }
 
     public function viewAction(Request $request) {
-        return $this->render('CustomerBundle:Shoes:shoe.html.twig');
+         /*$this->checkIfUserLoggedIn(); //check if logged in
+        //get id
+        */$id = $request->get('id');
+          $id = base64_decode($id);
+           $shoe = $this->getDoctrine()
+                            ->getRepository('CustomerBundle:Shoe')->find($id);
+               return $this->render('CustomerBundle:Shoes:shoe.html.twig', array('shoe' => $shoe));
     }
 
     public function deleteAction(Request $request) {
