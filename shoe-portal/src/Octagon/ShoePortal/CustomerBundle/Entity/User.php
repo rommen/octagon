@@ -3,21 +3,24 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-//use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
  *
  * @ORM\Table(name="User", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class User extends UploadableEntity implements AdvancedUserInterface {
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=45, nullable=false)
+     * 
+     * @ORM\Column(name="username", type="string", length=45, nullable=false, unique=true)
      */
     private $username;
 
@@ -38,7 +41,8 @@ class User extends UploadableEntity implements AdvancedUserInterface {
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=45, nullable=false)
+     * @ORM\Column(name="email", type="string", length=45, nullable=false, unique=true)
+     *  @Assert\Email()
      */
     private $email;
 
