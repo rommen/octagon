@@ -4,7 +4,7 @@
     <script>
         navigation('nav_categories');
     </script> 
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
         <a href="{{ path('admin_categories_new') }}">
             Create a new entry
         </a>
@@ -26,10 +26,10 @@
                     <td>{{ entity.level }}</td>
                     <td>
                         <div class="btn-group" role="group" style="color:white">
-                            <button type="button" class="btn btn-primary"> 
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
                                 <a href="{{ path('admin_categories_show', { 'id': entity.idCategories }) }}">show</a>
                             </button>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
                                 <a href="{{ path('admin_categories_edit', { 'id': entity.idCategories }) }}">edit</a>
                             </button>
                         </div>

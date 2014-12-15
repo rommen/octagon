@@ -4,7 +4,7 @@
     <script>
         navigation('nav_users');
     </script> 
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
         <a href="{{ path('_register') }}">
             Create a new entry
         </a>
@@ -34,10 +34,10 @@
                     <td>{% if entity.blocked %}{{ entity.blocked|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
                         <div class="btn-group" role="group" style="color:white">
-                            <button type="button" class="btn btn-primary"> 
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
                                 <a href="{{ path('admin_user_show', { 'id': entity.idUser }) }}">show</a>
                             </button>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
                                 <a href="{{ path('admin_user_edit', { 'id': entity.idUser }) }}">edit</a>
                             </button>
                         </div>

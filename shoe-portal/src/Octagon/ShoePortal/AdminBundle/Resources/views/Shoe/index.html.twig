@@ -4,7 +4,7 @@
     <script>
         navigation('nav_shoes');
     </script> 
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
         <a href="{{ path('admin_shoe_new') }}">
             Create a new entry
         </a>
@@ -42,10 +42,10 @@
 {#                    <td>{{ entity.extension }}</td>#}
                     <td>
                         <div class="btn-group" role="group" style="color:white">
-                            <button type="button" class="btn btn-primary"> 
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
                                 <a href="{{ path('admin_shoe_show', { 'id': entity.idShoe }) }}">show</a>
                             </button>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
                                 <a href="{{ path('admin_shoe_edit', { 'id': entity.idShoe }) }}">edit</a>
                             </button>
                         </div>
