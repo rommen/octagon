@@ -1,8 +1,8 @@
 {% extends "index.html.twig" %}
 {% block title %}User edit{% endblock%}
 {% block content %}
-    <script>
-        navigation('nav_users');
+<script>
+    navigation('nav_users');
     </script> 
     <div>
         {%if app.user.avatar != null and app.user.fullFileName != null%}
@@ -10,35 +10,48 @@
         {%else%}
             <img style="height: 100px;" src="{{ asset('images/avatar.jpg')}}"/>
         {%endif%}
-    </div><br/><br/>
-    <div>
+        </div><br/><br/>
+        <div>
         {{form_start(form)}}
         {{form_widget(form)}}
         {{form_end(form)}}
-    </div>
-    <div id="pwdError" class="alert alert-danger" role="alert" style="display:none;">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        Passwords should match.
-    </div>
-    <script>
-        $('form').on('submit', function () {
-            var pwd = $('#password').val();
-            var pwd2 = $('#confirmPassword').val();
+            </div>
+            <div id="pwdError" class="alert alert-danger" role="alert" style="display:none;">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Passwords should match.
+            </div>
+            <div id="pwdLengthError" class="alert alert-danger col-sm-10" role="alert" style="display:none;">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Password length should not be less than 6 characters.
+            </div>
+            <script>
+                $('form').on('submit', function () {
+                    var pwd = $('#form_password').val();
+                    var pwd2 = $('#form_confirmPassword').val();
+                    
+                    $('#form_password').attr('class', 'form-control');
+                    $('#form_confirmPassword').attr('class', 'form-control');
+                    $('#pwdError').attr('style', 'display:none;');
+                    $('#pwdLengthError').attr('style', 'display:none;');
 
-            if (((pwd != null || pwd.length > 0) && (pwd2 != null || pwd2.length > 0))
-                    && pwd != pwd2.val()) {
-                $('#passwordDiv').attr('class', 'form-group has-error');
-                $('#confirmPasswordDiv').attr('class', 'form-group has-error');
-                $('#pwdError').attr('style', 'margin-top: 10px;margin-bottom: 0px;');
-                return false;
-            }
+                    if ((pwd.length > 0 || pwd2.length > 0) && pwd != pwd2) {
+                        $('#passwordDiv').attr('class', 'form-group has-error');
+                        $('#confirmPasswordDiv').attr('class', 'form-group has-error');
+                        $('#pwdError').attr('style', 'margin-top: 10px;margin-bottom: 0px;');
+                        return false;
+                    }
 
-            $('#password').attr('class', 'form-control');
-            $('#confirmPassword').attr('class', 'form-control');
-            $('#pwdError').attr('style', 'display:none;');
-            return true;
-        });
-    </script>
+                    //pwdLengthError
+                    if ((pwd.length > 0 || pwd2.length > 0) && pwd.length < 6){
+                        $('#passwordDiv').attr('class', 'form-group has-error');
+                        $('#pwdLengthError').attr('style', 'margin-top: 10px;margin-bottom: 0px;');
+                        return false;
+                    }
+                        
+                    return true;
+                });
+                </script>
 {% endblock %}  
 

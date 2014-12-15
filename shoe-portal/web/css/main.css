@@ -34,7 +34,7 @@ body{
 .page_container{
 
 }
-.page_container div{
+.page_container div.left{
     float:left;    
 }
 .clear{

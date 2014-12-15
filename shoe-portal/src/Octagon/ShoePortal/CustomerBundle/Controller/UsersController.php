@@ -111,7 +111,7 @@ class UsersController extends SecureController {
                         ->add('address')
                         ->add('email', 'email')
                         ->add('password', 'password', array('required' => false))
-                        ->add('confirmPassword', 'text', array('required' => false, 'mapped' => false))
+                        ->add('confirmPassword', 'password', array('required' => false, 'mapped' => false))
                         ->add('file', 'file', array('label' => 'Avatar file', 'required' => false))
                         ->add('submit', 'submit', array('label' => 'Update'))->getForm();
 
