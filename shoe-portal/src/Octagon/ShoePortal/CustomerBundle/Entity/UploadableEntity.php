@@ -57,7 +57,7 @@ abstract class UploadableEntity {
     abstract public function setFileExtension($extension);
 
     /**
-     * Retur full name of the image, for example, User_1.png or Shoe_2.jpeg
+     * Returns full name of the image, for example, User_1.png or Shoe_2.jpeg
      * @return string
      */
     public function getFullFileName() {
@@ -91,6 +91,16 @@ abstract class UploadableEntity {
 
         // clean up the file property as you won't need it anymore
         $this->file = null;
+    }
+    
+    /**
+     * Tries to delete file from disk ( {uploadPath}/{fullFileName} ).
+     */
+    public function deleteFileFromDisk(){
+        $filePath = $this->getUploadPath() . $this->getFullFileName();
+        if(file_exists($filePath)){
+            unlink($filePath);
+        }
     }
 
 }

@@ -185,6 +185,7 @@ class UserController extends Controller
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
 
+            $entity->deleteFileFromDisk();
             $em->remove($entity);
             $em->flush();
         }

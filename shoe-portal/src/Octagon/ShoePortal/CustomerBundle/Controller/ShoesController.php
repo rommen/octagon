@@ -22,16 +22,16 @@ class ShoesController extends SecureController {
         if ($category != null) {
             $category = base64_decode($category);
             $qb->where('s.idCategories = :category')
-                ->setParameter('category', $category);
+                    ->setParameter('category', $category);
         }
-        
+
         $user = $request->get('userId');
-        if ($user != null){
+        if ($user != null) {
             $user = base64_decode($user);
             $qb->andWhere('s.idOwner = :owner')
                     ->setParameter('owner', $user);
         }
-        
+
         $qb->orderBy('s.idShoe', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
@@ -40,13 +40,15 @@ class ShoesController extends SecureController {
     }
 
     public function viewAction(Request $request) {
-         /*$this->checkIfUserLoggedIn(); //check if logged in
-        //get id
-        */$id = $request->get('id');
-          $id = base64_decode($id);
-           $shoe = $this->getDoctrine()
+        $id = $request->get('id');
+        if ($id != null) {
+            $id = base64_decode($id);
+            $shoe = $this->getDoctrine()
                             ->getRepository('CustomerBundle:Shoe')->find($id);
-               return $this->render('CustomerBundle:Shoes:shoe.html.twig', array('shoe' => $shoe));
+            return $this->render('CustomerBundle:Shoes:shoe.html.twig', array('shoe' => $shoe));
+        } else {
+            throw $this->createNotFoundException('Shoe not found');
+        }
     }
 
     public function deleteAction(Request $request) {
@@ -72,7 +74,8 @@ class ShoesController extends SecureController {
         }
 
         //Check if user can delete the shoe
-        if ($this->isUserAdmin() || $this->getAuthUserId() == $shoe->idOwner->idUser) {
+        if ($this->isUserAdmin() || $this->getAuthUserId() == $shoe->getIdOwner()->getIdUser()) {
+            $shoe->deleteFileFromDisk();
             $em->remove($shoe);
             $em->flush();
             return $this->redirect($this->generateUrl('_shoes'));

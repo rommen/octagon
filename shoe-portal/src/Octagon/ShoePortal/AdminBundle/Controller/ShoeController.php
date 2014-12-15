@@ -219,6 +219,7 @@ class ShoeController extends Controller {
                 throw $this->createNotFoundException('Unable to find Shoe entity.');
             }
 
+            $entity->deleteFileFromDisk();
             $em->remove($entity);
             $em->flush();
         }
