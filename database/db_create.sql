@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Categories` (
   CONSTRAINT `fk_Categories_Categories1`
     FOREIGN KEY (`idParent`)
     REFERENCES `octagon`.`Categories` (`idCategories`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -73,12 +73,12 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Shoe` (
   CONSTRAINT `fk_Shoe_Categories`
     FOREIGN KEY (`idCategories`)
     REFERENCES `octagon`.`Categories` (`idCategories`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Shoe_User1`
     FOREIGN KEY (`idOwner`)
     REFERENCES `octagon`.`User` (`idUser`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -100,17 +100,17 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Comments` (
   CONSTRAINT `fk_Comments_User1`
     FOREIGN KEY (`idOwner`)
     REFERENCES `octagon`.`User` (`idUser`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comments_User2`
     FOREIGN KEY (`idSeller`)
     REFERENCES `octagon`.`User` (`idUser`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comments_Shoe1`
     FOREIGN KEY (`idShoe`)
     REFERENCES `octagon`.`Shoe` (`idShoe`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -131,12 +131,12 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Newsfeed` (
   CONSTRAINT `fk_Newsfeed_Categories1`
     FOREIGN KEY (`idCategories`)
     REFERENCES `octagon`.`Categories` (`idCategories`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Newsfeed_User1`
     FOREIGN KEY (`idOwner`)
     REFERENCES `octagon`.`User` (`idUser`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -186,17 +186,17 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Rating` (
   CONSTRAINT `fk_Rating_Shoe1`
     FOREIGN KEY (`idShoe`)
     REFERENCES `octagon`.`Shoe` (`idShoe`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Rating_User1`
     FOREIGN KEY (`idSeller`)
     REFERENCES `octagon`.`User` (`idUser`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Rating_User2`
     FOREIGN KEY (`idOwner`)
     REFERENCES `octagon`.`User` (`idUser`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `octagon`.`Statistics` (
   CONSTRAINT `fk_Statistics_Categories1`
     FOREIGN KEY (`idCategories`)
     REFERENCES `octagon`.`Categories` (`idCategories`)
-    ON DELETE NO ACTION
+    ON DELETE NO CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
