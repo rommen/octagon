@@ -12,6 +12,9 @@ _shoe:
 _shoe_edit:
     path:     /shoes/edit
     defaults: { _controller: CustomerBundle:Shoes:edit }
+_shoe_add:
+    path:     /shoes/add
+    defaults: { _controller: CustomerBundle:Shoes:add }
 _shoe_delete:
     path:     /shoes/delete
     defaults: { _controller: CustomerBundle:Shoes:delete } 

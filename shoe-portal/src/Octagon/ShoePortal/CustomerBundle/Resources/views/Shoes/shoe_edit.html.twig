@@ -1,20 +1,22 @@
-<div>Shoe edit page</div>
-   
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Shoe edit</h1>
-
-    
-{{ form_start(edit_form) }}
-{{ form_widget(edit_form) }}
-{{ form_end(edit_form) }} 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_shoe') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+{% extends "index.html.twig" %}
+{% block title %}Edit shoe{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_shoes');
+    </script> 
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"> 
+            <a href="{{ path('_shoes') }}">
+                Back
+            </a>
+        </button>           
+        
+    </div>
+    {{ form(edit_form) }}
+    <div>
+        <span>Image</span><br/>
+        {%if entity.extension!=null and entity.fullFileName != null%}
+            <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+        {%endif%}
+    </div>
 {% endblock %}
