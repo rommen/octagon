@@ -49,3 +49,31 @@ _block:
     path: /users/block
     defaults: { _controller: CustomerBundle:Users:block}
     
+#Newsfeeds
+_newsfeeds:
+    path:     /newsfeed/list
+    defaults: { _controller: CustomerBundle:Newsfeed:list }
+_newsfeed_edit:
+    path:     /newsfeed/edit
+    defaults: { _controller: CustomerBundle:Newsfeed:edit }
+_newsfeed_add:
+    path:     /newsfeed/add
+    defaults: { _controller: CustomerBundle:Newsfeed:add }
+_newsfeed_delete:
+    path:     /newsfeed/delete
+    defaults: { _controller: CustomerBundle:Newsfeed:delete } 
+#Statistics
+_statistics:
+    path:     /statistics/list
+    defaults: { _controller: CustomerBundle:Statistics:list }
+#Mailbox
+_inbox:
+    path:     /mails/inbox/list
+    defaults: { _controller: CustomerBundle:Statistics:inboxList }
+_outbox:
+    path:   /mails/outbox/list
+    defaults: { _controller: CustomerBundle:Statistics:outboxList }
+_send_mail:
+    path:   /mails/send
+    defaults: { _controller: CustomerBundle:Statistics:send }
+    

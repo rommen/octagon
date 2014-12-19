@@ -1,0 +1,11 @@
+{% extends "index.html.twig" %}
+{% block title %}News Feeds{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_newsfeeds');
+    </script> 
+    <div class="page_container">
+        {{render(controller('CustomerBundle:Categories:list', {'categoryId' : app.request.get('categoryId')})) }}
+        {% include "CustomerBundle:Newsfeed:list.html.twig" with newsfeeds%}       
+    </div>
+{% endblock %}  

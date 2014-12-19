@@ -11,7 +11,7 @@
     <field name="tile" type="string" column="tile" length="145" nullable="false"/>
     <field name="text" type="text" column="text" nullable="true"/>
     <field name="date" type="date" column="date" nullable="false"/>
-    <many-to-one field="idowner" target-entity="User">
+    <many-to-one field="idOwner" target-entity="User">
       <join-columns>
         <join-column name="idOwner" referenced-column-name="idUser"/>
       </join-columns>

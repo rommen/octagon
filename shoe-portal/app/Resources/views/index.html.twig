@@ -21,6 +21,12 @@
                                 <li id="nav_shoes">
                                     <a href="{{path('_shoes')}}">Shoes</a>
                                 </li>
+                                <li id="nav_newsfeeds">
+                                    <a href="{{path('_newsfeeds')}}">News Feeds</a>
+                                </li>
+                                <li id="nav_statistics">
+                                    <a href="{{path('_statistics')}}">Statistics</a>
+                                </li>
                             {% endblock %}
                         </ul>            
                         <ul class="nav pull-right">
@@ -41,7 +47,19 @@
                                         </a>
                                     </li>
                                 {%endif%}
-                                <li><a href="{{path('_user')}}?id={{app.user.idUserHash}}">Hello, {{app.user.username}}!</a></li>
+                                <style>
+                                    li#user_account a{
+                                       padding: 0px;
+                                    }
+                                    li#user_account{
+                                        padding-left: 15px;
+                                        padding-top:5px;
+                                    }
+                                </style>
+                                <li id="user_account">
+                                    <a class="user_account_name" href="{{path('_user')}}?id={{app.user.idUserHash}}">Hello, {{app.user.username}}!</a>
+                                    <a class="user_account_name" href="{{path('_inbox')}}?userId={{app.user.idUserHash}}"><span class="glyphicon glyphicon-envelope"></span> Mailbox</a>
+                                </li>
                                 <li><a href="{{path('_logout')}}">Logout</a></li>
                                 {% endif %}
                         </ul>
