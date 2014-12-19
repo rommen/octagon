@@ -7,8 +7,8 @@
     {{ form(form) }}
     <div>
         <span>Image</span><br/>
-        {%if entity.extension!=null and entity.fullFileName != null%}
-            <img src="{{ asset('images/uploads/')}}{{entity.fullFileName}}"/>
+        {%if shoe.extension!=null and shoe.fullFileName != null%}
+            <img src="{{ asset('images/uploads/')}}{{shoe.fullFileName}}"/>
         {%endif%}
     </div>
 {% endblock %}

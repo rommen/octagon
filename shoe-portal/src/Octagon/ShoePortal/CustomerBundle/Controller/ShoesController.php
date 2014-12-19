@@ -84,45 +84,46 @@ class ShoesController extends SecureController {
 
     public function editAction(Request $request) {
         $this->checkIfUserLoggedIn();
+        //get id
 
         $id = $request->get('id');
-        if (($id != null && strtoupper($request->getMethod() === 'GET')) || strtoupper($request->getMethod() === 'POST')) {
-            if (strtoupper($request->getMethod()) === 'GET') {
-                $id = base64_decode($id);
-                $shoe = $this->getDoctrine()
-                                ->getRepository('CustomerBundle:Shoe')->find($id);
-            } else {
-                $shoe = new Shoe();
-                $shoe->setIdOwner($this->getUser());
-            }
-
-            $form = $this->createShoeForm($shoe);
-            $form->setAction($this->generateUrl('_shoe_edit'));
-            $form->add('submit', 'submit', array('label' => 'Update'));
-            $form->setMethod('POST');
-            $form = $form->getForm();
-
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                if ($shoe->getFile() != null) {
-                    $shoe->updateExtensionFromFile();
-                }
-
-                $em->persist($shoe);
-                $em->flush();
-                $shoe->upload();
-
-                return $this->redirect($this->generateUrl('_shoes'));
-            }
-
-            return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig', array(
-                        'entity' => $shoe,
-                        'form' => $form->createView(),
-            ));
+        if ($id != null) {
+            $id = base64_decode($id);
         } else {
-            throw $this->createNotFoundException('Cannot perform edit operation, shoe id not found');
+            //deny access if id is not provided
+            if ($request->getMethod() != 'POST') {
+                throw $this->createAccessDeniedException('Cannot perform operation without an id');
+            }
+            $shoe = null;
         }
+
+        //retrive user fromdb
+        $em = $this->getDoctrine()->getEntityManager();
+        $shoe = $em->getRepository('CustomerBundle:Shoe')->find($id);
+        if (!$this->isUserAdmin() && $shoe->getIdOwner()->getIdUser() != $this->getAuthUserId()) {
+            throw new AccessDeniedException('Cannot perform shoe edit operation');
+        }
+
+        //create user form
+        $form = $this->createShoeForm($shoe)
+                ->add('submit', 'submit', array('label' => 'Update'))
+                ->getForm();
+
+        //Handle submited form data
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request); //map request to form
+
+            if ($form->isValid()) {//validate form
+                $shoe->upload(); //upload file
+                $em->persist($shoe); //update user
+                $em->flush(); //commit
+
+                return $this->redirect('/shoes/view?id=' . $shoe->getIdShoeHash());
+            }
+        }
+
+        return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig', array(
+                    'form' => $form->createView(), 'shoe' => $shoe));
     }
 
     public function addAction(Request $request) {
@@ -135,7 +136,6 @@ class ShoesController extends SecureController {
         $form = $this->createShoeForm($shoe);
         $form->setAction($this->generateUrl('_shoe_add'));
         $form->add('submit', 'submit', array('label' => 'Add'));
-        $form->setMethod('POST');
         $form = $form->getForm();
 
         $form->handleRequest($request);
@@ -149,13 +149,10 @@ class ShoesController extends SecureController {
             $em->flush();
             $shoe->upload();
 
-            return $this->redirect($this->generateUrl('_shoes'));
+            return $this->redirect('/shoes/view?id=' . $shoe->getIdShoeHash());
         }
 
-        return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig', array(
-                    'entity' => $shoe,
-                    'form' => $form->createView(),
-        ));
+        return $this->render('CustomerBundle:Shoes:shoe_add.html.twig', array('form' => $form->createView()));
     }
 
     private function createShoeForm(Shoe $shoe) {
