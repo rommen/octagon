@@ -55,6 +55,10 @@
                             <th>Edition</th>
                             <td>{{shoe.edition}}</td>
                         </tr>
+                        <tr>
+                            <th>Owner</th>
+                            <td><a href="/users/view?id={{shoe.idOwner.idUserHash}}">{{shoe.idOwner.username}}</a></td>
+                        </tr>
 
                     </tbody>
                 </table>
@@ -75,7 +79,11 @@
             {%endif %}
             <a href="/shoes/add">
                 <button type="button" class="btn btn-primary">
-                    Add
+                    {%if shoe.idOwner.idUser == app.user.idUser %}
+                        Add more
+                    {%else%}
+                        Add own shoe
+                    {%endif%}
                 </button>
             </a>
             {%if shoe.idOwner.idUser == app.user.idUser %}

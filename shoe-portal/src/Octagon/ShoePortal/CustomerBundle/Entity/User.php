@@ -236,6 +236,18 @@ class User extends UploadableEntity implements AdvancedUserInterface {
     public function getIdUser() {
         return $this->idUser;
     }
+    
+    /**
+     * Set idUser
+     *
+     * @param integer $idUser
+     * @return User
+     */
+    public function setIdUser($idUser) {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
 
     /**
      * Get idUser as Base64 representation

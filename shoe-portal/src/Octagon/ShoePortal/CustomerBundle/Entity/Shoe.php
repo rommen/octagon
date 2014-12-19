@@ -370,6 +370,19 @@ class Shoe extends UploadableEntity{
     {
         return $this->idShoe;
     }
+    
+     /**
+     * Set idShoe
+     *
+     * @param integer $idShoe
+     * @return Shoe
+     */
+    public function setIdShoe($idShoe)
+    {
+        $this->idShoe = $idShoe;
+
+        return $this;
+    }
     /**
      * Get BASE64 of idShoe
      *
@@ -386,7 +399,7 @@ class Shoe extends UploadableEntity{
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner
      * @return Shoe
      */
-    public function setIdowner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
+    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
     {
         $this->idOwner = $idOwner;
 

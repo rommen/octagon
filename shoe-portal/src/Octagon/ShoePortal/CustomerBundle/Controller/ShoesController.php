@@ -5,7 +5,7 @@ namespace Octagon\ShoePortal\CustomerBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Octagon\ShoePortal\CustomerBundle\Entity\Shoe;
-use Octagon\ShoePortal\AdminBundle\Form\ShoeType;
+use Octagon\ShoePortal\CustomerBundle\Entity\User;
 
 class ShoesController extends SecureController {
 
@@ -82,126 +82,97 @@ class ShoesController extends SecureController {
         }
     }
 
-    public function editAction($id) {
-        //retrieve the id of the shoe in question after checking user login statujs
-//        $this->checkIfUserLoggedIn();
-//        $id = $request->get('id');
-//        if ($id != null) {
-//            $id = base64_decode($id);
-//        } else {
-//            throw $this->createNotFoundException(
-//                    'No id found '
-//            );
-//        }
-//        //fetch the shoe in question
-//
-//        $em = $this->getDoctrine()->getManager();
-//        $shoe = $em->getRepository('CustomerBundle:Shoe')->find($id);
-//        if (!$shoe) {//$shoe==null
-//            throw $this->createNotFoundException(
-//                    'No shoe found for id '
-//            );
-//        }
-//        //check if the user can edit the shoe
-//        //Check if user can delete the shoe
-//        if ($this->isUserAdmin() || $this->getAuthUserId() == $shoe->getIdOwner()->getIdUser()) {
-//
-//            //   $product->setName('New product name!');
-//            $editForm = $this->createUpdateForm($shoe);
-//            return array(
-//                'shoe' => $shoe,
-//                'edit_form' => $editForm->createView(),
-//            );
-//        } else {
-//            throw new AccessDeniedException('Cannot perform edit operation');
-//        }
-//        return array();
-        $em = $this->getDoctrine()->getManager();
+    public function editAction(Request $request) {
+        $this->checkIfUserLoggedIn();
 
-        $entity = $em->getRepository('CustomerBundle:Shoe')->find($id);
+        $id = $request->get('id');
+        if (($id != null && strtoupper($request->getMethod() === 'GET')) || strtoupper($request->getMethod() === 'POST')) {
+            if (strtoupper($request->getMethod()) === 'GET') {
+                $id = base64_decode($id);
+                $shoe = $this->getDoctrine()
+                                ->getRepository('CustomerBundle:Shoe')->find($id);
+            } else {
+                $shoe = new Shoe();
+                $shoe->setIdOwner($this->getUser());
+            }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Shoe entity.');
+            $form = $this->createShoeForm($shoe);
+            $form->setAction($this->generateUrl('_shoe_edit'));
+            $form->add('submit', 'submit', array('label' => 'Update'));
+            $form->setMethod('POST');
+            $form = $form->getForm();
+
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                if ($shoe->getFile() != null) {
+                    $shoe->updateExtensionFromFile();
+                }
+
+                $em->persist($shoe);
+                $em->flush();
+                $shoe->upload();
+
+                return $this->redirect($this->generateUrl('_shoes'));
+            }
+
+            return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig', array(
+                        'entity' => $shoe,
+                        'form' => $form->createView(),
+            ));
+        } else {
+            throw $this->createNotFoundException('Cannot perform edit operation, shoe id not found');
         }
-
-        $editForm = $this->shoeEditForm($entity);
-          return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            
-        );
     }
 
     public function addAction(Request $request) {
         $this->checkIfUserLoggedIn();
-        $entity = new Shoe();
-        $form = $this->newShoeForm($entity);
-        
+
+        //Shoe
+        $shoe = new Shoe();
+        $shoe->setIdOwner($this->getUser());
+
+        $form = $this->createShoeForm($shoe);
+        $form->setAction($this->generateUrl('_shoe_add'));
+        $form->add('submit', 'submit', array('label' => 'Add'));
+        $form->setMethod('POST');
+        $form = $form->getForm();
+
         $form->handleRequest($request);
-         if ($form->isValid()) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if ($entity->getFile() != null) {
-                $entity->updateExtensionFromFile();
+            if ($shoe->getFile() != null) {
+                $shoe->updateExtensionFromFile();
             }
-            $em->persist($entity);
+
+            $em->persist($shoe);
             $em->flush();
-            $entity->upload();
- $session = $this->getRequest()->getSession();
-        $session->getFlashBag()->add('message', 'shoe saved!');
-   
-            return $this->redirect($this->generateUrl('_shoe_add', array('id' => $entity->getIdShoe())));
+            $shoe->upload();
+
+            return $this->redirect($this->generateUrl('_shoes'));
         }
- 
-        return $this->render('CustomerBundle:Shoes:newshoe.html.twig', array(
-                    'entity' => $entity,
+
+        return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig', array(
+                    'entity' => $shoe,
                     'form' => $form->createView(),
         ));
     }
 
-    private function newShoeForm(Shoe $entity) {
-        $form = $this->createForm(new ShoeType(), $entity, array(
-            'action' => $this->generateUrl('_shoe_add'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Add'));
-        //////////////////////
-
-    //////////////
-    return $form;
-    }
-private function shoeEditForm(Shoe $entity){
-     $form = $this->createForm(new ShoeType(), $entity, array(
-            'action' => $this->generateUrl('_shoe_edit', array('id' => $entity->getIdShoe())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    
-    
-}
-//    private function editForm(Shoe $entity) {
-//         $form = $this->createForm(new ShoeType(), $entity, array(
-//            'action' => $this->generateUrl('admin_shoe_update', array('id' => $entity->getIdShoe())),
-//            'method' => 'PUT',
-//        ));
-//
-//        $form->add('submit', 'submit', array('label' => 'Update'));
-//
-//        return $form;
-//    }
-
-    private function createShoeForm(Shoe $entity) {
-        $form = $this->createForm(new ShoeType(), $entity, array(
-            'action' => $this->generateUrl('_shoe_add', array('id' => $entity->getIdShoe())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
+    private function createShoeForm(Shoe $shoe) {
+        return $this->createFormBuilder($shoe)
+                        ->add('idShoe', 'hidden')
+                        ->add('name')
+                        ->add('color')
+                        ->add('size', 'number', array('precision' => '1'))
+                        ->add('text')
+                        ->add('brand')
+                        ->add('price', 'money', array('label' => 'Price', 'required' => 'false'))
+                        ->add('sportstar')
+                        ->add('year')
+                        ->add('edition')
+                        ->add('idCategories', null, array('label' => 'Categories'))
+                        ->add('file')
+                        ->setMethod('POST');
     }
 
 }

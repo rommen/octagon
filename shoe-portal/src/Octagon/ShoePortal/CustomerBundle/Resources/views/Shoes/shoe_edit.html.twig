@@ -4,15 +4,7 @@
     <script>
         navigation('nav_shoes');
     </script> 
-    <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary"> 
-            <a href="{{ path('_shoes') }}">
-                Back
-            </a>
-        </button>           
-        
-    </div>
-    {{ form(edit_form) }}
+    {{ form(form) }}
     <div>
         <span>Image</span><br/>
         {%if entity.extension!=null and entity.fullFileName != null%}
