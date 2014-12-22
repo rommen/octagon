@@ -41,11 +41,11 @@
         image.src = "{{ asset('images/')}}shoe.jpg";
         image.width = 150;
         return true;
-    }
+   }
 </script>
 <div id="shoes" class="left">
-    <div class="row">
-        {% for nf in newsfeeds %}
+    <div class="row">        
+       {% for nf in newsfeeds %}
             <div>{{nf.text}}</div>    
         {% endfor %}        
     </div>

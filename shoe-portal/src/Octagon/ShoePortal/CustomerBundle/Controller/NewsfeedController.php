@@ -36,7 +36,6 @@ class NewsfeedController extends SecureController {
 
         return $this->render('CustomerBundle:Newsfeed:newsfeeds.html.twig', array('newsfeeds' => $news));
     }
-
     public function deleteAction(Request $request) {
 //        $this->checkIfUserLoggedIn();
 //
