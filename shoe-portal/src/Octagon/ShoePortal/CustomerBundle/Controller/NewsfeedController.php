@@ -131,7 +131,7 @@ class NewsfeedController extends SecureController {
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $newsfeed->setDate(new \DateTime());
-            
+
             $em->persist($newsfeed);
             $em->flush();
 
