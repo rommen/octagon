@@ -1,0 +1,16 @@
+{% extends "index.html.twig" %}
+{% block title %}Mailbox{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_mails');
+    </script> 
+    <div class="page_container">
+        {% include "CustomerBundle:MailBox:menu.html.twig" %}
+
+        {%if app.request.attributes.get('_route') == '_inbox'%}
+            {% include "CustomerBundle:Mailbox:list_inbox.html.twig" with mails%}       
+        {%else%}
+            {% include "CustomerBundle:Mailbox:list_oubox.html.twig" with mails%}       
+        {%endif%}
+    </div>
+{% endblock %}  

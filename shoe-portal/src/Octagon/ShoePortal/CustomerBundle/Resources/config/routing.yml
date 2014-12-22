@@ -69,11 +69,17 @@ _statistics:
 #Mailbox
 _inbox:
     path:     /mails/inbox/list
-    defaults: { _controller: CustomerBundle:Statistics:inboxList }
+    defaults: { _controller: CustomerBundle:Mailbox:inboxList }
 _outbox:
     path:   /mails/outbox/list
-    defaults: { _controller: CustomerBundle:Statistics:outboxList }
+    defaults: { _controller: CustomerBundle:Mailbox:outboxList }
 _send_mail:
     path:   /mails/send
-    defaults: { _controller: CustomerBundle:Statistics:send }
+    defaults: { _controller: CustomerBundle:Mailbox:send }
+_delete_mail:
+    path:   /mails/delete
+    defaults: { _controller: CustomerBundle:Mailbox:delete }
+_read_mail:
+    path:   /mails/read
+    defaults: { _controller: CustomerBundle:Mailbox:read }
     
