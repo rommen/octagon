@@ -129,10 +129,11 @@ class NewsfeedController extends SecureController {
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $newsfeed->setDate(new \DateTime());
             $em->persist($newsfeed);
             $em->flush();
 
-            return $this->redirect('/newsfeeds/view?id=' . $newsfeed->getIdNewsfeedHash());
+            return $this->redirect('/newsfeed/list?id=' . $newsfeed->getIdNewsfeedHash());
  
     }
         return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
