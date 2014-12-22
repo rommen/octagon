@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Mailbox", indexes={@ORM\Index(name="fk_Mailbox_User1_idx", columns={"idSender"}), @ORM\Index(name="fk_Mailbox_User2_idx", columns={"idReceiver"})})
  * @ORM\Entity
  */
-class Mailbox
-{
+class Mailbox {
+
     /**
      * @var string
      *
@@ -36,7 +36,7 @@ class Mailbox
     /**
      * @var boolean
      *
-     * @ORM\Column(name="read", type="boolean", nullable=true)
+     * @ORM\Column(name="'read'", type="boolean", nullable=true)
      */
     private $read;
 
@@ -83,16 +83,13 @@ class Mailbox
      */
     private $idSender;
 
-
-
     /**
      * Set title
      *
      * @param string $title
      * @return Mailbox
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -103,8 +100,7 @@ class Mailbox
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -114,8 +110,7 @@ class Mailbox
      * @param string $text
      * @return Mailbox
      */
-    public function setText($text)
-    {
+    public function setText($text) {
         $this->text = $text;
 
         return $this;
@@ -126,8 +121,7 @@ class Mailbox
      *
      * @return string 
      */
-    public function getText()
-    {
+    public function getText() {
         return $this->text;
     }
 
@@ -137,8 +131,7 @@ class Mailbox
      * @param \DateTime $date
      * @return Mailbox
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -149,8 +142,7 @@ class Mailbox
      *
      * @return \DateTime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -160,8 +152,7 @@ class Mailbox
      * @param boolean $read
      * @return Mailbox
      */
-    public function setRead($read)
-    {
+    public function setRead($read) {
         $this->read = $read;
 
         return $this;
@@ -172,8 +163,7 @@ class Mailbox
      *
      * @return boolean 
      */
-    public function getRead()
-    {
+    public function getRead() {
         return $this->read;
     }
 
@@ -183,8 +173,7 @@ class Mailbox
      * @param boolean $deleteBySender
      * @return Mailbox
      */
-    public function setDeleteBySender($deleteBySender)
-    {
+    public function setDeleteBySender($deleteBySender) {
         $this->deleteBySender = $deleteBySender;
 
         return $this;
@@ -195,8 +184,7 @@ class Mailbox
      *
      * @return boolean 
      */
-    public function getDeleteBySender()
-    {
+    public function getDeleteBySender() {
         return $this->deleteBySender;
     }
 
@@ -206,8 +194,7 @@ class Mailbox
      * @param boolean $deleteByReceiver
      * @return Mailbox
      */
-    public function setDeleteyreceiver($deleteByReceiver)
-    {
+    public function setDeleteyreceiver($deleteByReceiver) {
         $this->deleteByReceiver = $deleteByReceiver;
 
         return $this;
@@ -218,8 +205,7 @@ class Mailbox
      *
      * @return boolean 
      */
-    public function getDeleteByReceiver()
-    {
+    public function getDeleteByReceiver() {
         return $this->deleteByReceiver;
     }
 
@@ -228,9 +214,17 @@ class Mailbox
      *
      * @return integer 
      */
-    public function getIdMailbox()
-    {
+    public function getIdMailbox() {
         return $this->idMailbox;
+    }
+
+    /**
+     * Get base64 of idMailbox
+     *
+     * @return string 
+     */
+    public function getIdMailboxHash() {
+        return base64_encode($this->idMailbox);
     }
 
     /**
@@ -239,8 +233,7 @@ class Mailbox
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idReceiver
      * @return Mailbox
      */
-    public function setIdreceiver(\Octagon\ShoePortal\CustomerBundle\Entity\User $idReceiver = null)
-    {
+    public function setIdreceiver(\Octagon\ShoePortal\CustomerBundle\Entity\User $idReceiver = null) {
         $this->idReceiver = $idReceiver;
 
         return $this;
@@ -251,8 +244,7 @@ class Mailbox
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdReceiver()
-    {
+    public function getIdReceiver() {
         return $this->idReceiver;
     }
 
@@ -262,8 +254,7 @@ class Mailbox
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idSender
      * @return Mailbox
      */
-    public function setIdsender(\Octagon\ShoePortal\CustomerBundle\Entity\User $idSender = null)
-    {
+    public function setIdsender(\Octagon\ShoePortal\CustomerBundle\Entity\User $idSender = null) {
         $this->idSender = $idSender;
 
         return $this;
@@ -274,8 +265,8 @@ class Mailbox
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdsender()
-    {
+    public function getIdsender() {
         return $this->idSender;
     }
+
 }
