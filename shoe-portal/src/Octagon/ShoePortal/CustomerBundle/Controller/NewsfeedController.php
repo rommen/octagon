@@ -36,6 +36,7 @@ class NewsfeedController extends SecureController {
 
         return $this->render('CustomerBundle:Newsfeed:newsfeeds.html.twig', array('newsfeeds' => $news));
     }
+
     public function deleteAction(Request $request) {
 //        $this->checkIfUserLoggedIn();
 //
@@ -70,47 +71,48 @@ class NewsfeedController extends SecureController {
     }
 
     public function editAction(Request $request) {
-//        $this->checkIfUserLoggedIn();
+        $this->checkIfUserLoggedIn();
 //        //get id
-//
-//        $id = $request->get('id');
-//        if ($id != null) {
-//            $id = base64_decode($id);
-//        } else {
-//            //deny access if id is not provided
-//            if ($request->getMethod() != 'POST') {
-//                throw $this->createAccessDeniedException('Cannot perform operation without an id');
-//            }
-//            $shoe = null;
-//        }
-//
-//        //retrive user fromdb
-//        $em = $this->getDoctrine()->getEntityManager();
-//        $shoe = $em->getRepository('CustomerBundle:Shoe')->find($id);
-//        if (!$this->isUserAdmin() && $shoe->getIdOwner()->getIdUser() != $this->getAuthUserId()) {
-//            throw new AccessDeniedException('Cannot perform shoe edit operation');
-//        }
-//
-//        //create user form
-//        $form = $this->createShoeForm($shoe)
-//                ->add('submit', 'submit', array('label' => 'Update'))
-//                ->getForm();
-//
-//        //Handle submited form data
-//        if ($request->getMethod() == 'POST') {
-//            $form->handleRequest($request); //map request to form
-//
-//            if ($form->isValid()) {//validate form
-//                $shoe->upload(); //upload file
-//                $em->persist($shoe); //update user
-//                $em->flush(); //commit
-//
-//                return $this->redirect('/shoes/view?id=' . $shoe->getIdShoeHash());
-//            }
-//        }
-//
-//        return $this->render('CustomerBundle:Shoes:shoe_edit.html.twig', array(
-//                    'form' => $form->createView(), 'shoe' => $shoe));
+
+        $id = $request->get('id');
+        if ($id != null) {
+            $id = base64_decode($id);
+        } else {
+            //deny access if id is not provided
+            if ($request->getMethod() != 'POST') {
+                throw $this->createAccessDeniedException('Cannot perform operation without an id');
+            }
+            $newsfeed = null;
+        }
+
+        //retrive user fromdb
+        $em = $this->getDoctrine()->getEntityManager();
+        $newsfeed = $em->getRepository('CustomerBundle:Newsfeed')->find($id);
+        if (!$this->isUserAdmin() && $newsfeed->getIdOwner()->getIdUser() != $this->getAuthUserId()) {
+            throw new AccessDeniedException('Cannot perform feed edit operation');
+        }
+
+        //create user form
+        $form = $this->createNewsfeedForm($newsfeed)
+                ->add('submit', 'submit', array('label' => 'Update'))
+                ->getForm();
+
+        //Handle submited form data
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request); //map request to form
+
+            if ($form->isValid()) {//validate form
+                
+                $newsfeed->setDate(new \DateTime());
+                $em->persist($newsfeed); //update user
+                $em->flush(); //commit
+
+                return $this->redirect('/newsfeed/list');
+            }
+        }
+
+        return $this->render('CustomerBundle:Newsfeed:edit.html.twig', array(
+                    'form' => $form->createView(), 'newsfeed' => $newsfeed));
     }
 
     public function addAction(Request $request) {
@@ -128,12 +130,13 @@ class NewsfeedController extends SecureController {
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $newsfeed->setDate(new \DateTime());
+            
             $em->persist($newsfeed);
             $em->flush();
 
-            return $this->redirect('/newsfeeds/view?id=' . $newsfeed->getIdNewsfeedHash());
- 
-    }
+            return $this->redirect('/newsfeed/list?id=' . $newsfeed->getIdNewsfeedHash());
+        }
         return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
     }
 

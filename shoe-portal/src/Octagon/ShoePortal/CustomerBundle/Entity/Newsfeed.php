@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Newsfeed", indexes={@ORM\Index(name="fk_Newsfeed_Categories1_idx", columns={"idCategories"}), @ORM\Index(name="fk_Newsfeed_User1_idx", columns={"idOwner"})})
  * @ORM\Entity
  */
-class Newsfeed
-{
+class Newsfeed {
+
     /**
      * @var string
      *
@@ -62,16 +62,13 @@ class Newsfeed
      */
     private $idCategories;
 
-
-
     /**
      * Set tile
      *
      * @param string $tile
      * @return Newsfeed
      */
-    public function setTile($tile)
-    {
+    public function setTile($tile) {
         $this->tile = $tile;
 
         return $this;
@@ -82,8 +79,7 @@ class Newsfeed
      *
      * @return string 
      */
-    public function getTile()
-    {
+    public function getTile() {
         return $this->tile;
     }
 
@@ -93,8 +89,7 @@ class Newsfeed
      * @param string $text
      * @return Newsfeed
      */
-    public function setText($text)
-    {
+    public function setText($text) {
         $this->text = $text;
 
         return $this;
@@ -105,8 +100,7 @@ class Newsfeed
      *
      * @return string 
      */
-    public function getText()
-    {
+    public function getText() {
         return $this->text;
     }
 
@@ -116,8 +110,7 @@ class Newsfeed
      * @param \DateTime $date
      * @return Newsfeed
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -128,8 +121,7 @@ class Newsfeed
      *
      * @return \DateTime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -138,9 +130,18 @@ class Newsfeed
      *
      * @return integer 
      */
-    public function getIdNewsfeed()
-    {
+    public function getIdNewsfeed() {
         return $this->idNewsfeed;
+    }
+
+    /**
+     * Set idNewsfeed
+     *
+     * @return Newsfeed 
+     */
+    public function setIdNewsfeed($idNewsfeed) {
+        $this->idNewsfeed = $idNewsfeed;
+        return $this;
     }
 
     /**
@@ -149,8 +150,7 @@ class Newsfeed
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner
      * @return Newsfeed
      */
-    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
-    {
+    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null) {
         $this->idOwner = $idOwner;
 
         return $this;
@@ -161,8 +161,7 @@ class Newsfeed
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdOwner()
-    {
+    public function getIdOwner() {
         return $this->idOwner;
     }
 
@@ -172,8 +171,7 @@ class Newsfeed
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories
      * @return Newsfeed
      */
-    public function setIdcategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories = null)
-    {
+    public function setIdcategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories = null) {
         $this->idCategories = $idCategories;
 
         return $this;
@@ -184,17 +182,17 @@ class Newsfeed
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Categories 
      */
-    public function getIdCategories()
-    {
+    public function getIdCategories() {
         return $this->idCategories;
     }
-        /**
+
+    /**
      * Get BASE64 of idNewsfeed
      *
      * @return string 
      */
-    public function getIdNewsfeedHash()
-    {
+    public function getIdNewsfeedHash() {
         return base64_encode($this->idNewsfeed);
     }
+
 }

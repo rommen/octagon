@@ -41,12 +41,18 @@
         image.src = "{{ asset('images/')}}shoe.jpg";
         image.width = 150;
         return true;
-   }
+    }
 </script>
 <div id="shoes" class="left">
-    <div class="row">        
-       {% for nf in newsfeeds %}
-            <div>{{nf.text}}</div>    
+    <div >        
+        {% for nf in newsfeeds %}
+            <div class="panel panel-default">
+                <div class>{{nf.idNewsfeedHash}}</div>    
+                <div class>{{nf.idOwner.username}}</div>    
+                <div class>{{nf.date|date('d.m.Y')}}</div>    
+                <div class>{{nf.tile}}</div>  
+                <div class>{{nf.text}}</div>  
+            </div>
         {% endfor %}        
     </div>
 </div>
