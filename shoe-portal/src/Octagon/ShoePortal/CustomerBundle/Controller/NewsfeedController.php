@@ -115,49 +115,42 @@ class NewsfeedController extends SecureController {
     }
 
     public function addAction(Request $request) {
-//        $this->checkIfUserLoggedIn();
-//
-//        //Shoe
-//        $shoe = new Shoe();
-//        $shoe->setIdOwner($this->getUser());
-//
-//        $form = $this->createShoeForm($shoe);
-//        $form->setAction($this->generateUrl('_shoe_add'));
-//        $form->add('submit', 'submit', array('label' => 'Add'));
-//        $form = $form->getForm();
-//
-//        $form->handleRequest($request);
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            if ($shoe->getFile() != null) {
-//                $shoe->updateExtensionFromFile();
-//            }
-//
-//            $em->persist($shoe);
-//            $em->flush();
-//            $shoe->upload();
-//
-//            return $this->redirect('/shoes/view?id=' . $shoe->getIdShoeHash());
-//        }
-//
-//        return $this->render('CustomerBundle:Shoes:shoe_add.html.twig', array('form' => $form->createView()));
+        $this->checkIfUserLoggedIn();
+
+        //Shoe
+        $newsfeed = new Newsfeed();
+        $newsfeed->setIdOwner($this->getUser());
+
+        $form = $this->createNewsfeedForm($newsfeed);
+        $form->setAction($this->generateUrl('_newsfeed_add'));
+        $form->add('submit', 'submit', array('label' => 'Add'));
+        $form = $form->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            if ($newsfeed->getFile() != null) {
+                $newsfeed->updateExtensionFromFile();
+            }
+
+            $em->persist($newsfeed);
+            $em->flush();
+            $newsfeed->upload();
+
+            return $this->redirect('/newsfeeds/view?id=' . $newsfeed->getIdNewsfeedHash());
+        }
+
+        return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
     }
 
-    private function createShoeForm(Shoe $shoe) {
-//        return $this->createFormBuilder($shoe)
-//                        ->add('idShoe', 'hidden')
-//                        ->add('name')
-//                        ->add('color')
-//                        ->add('size', 'number', array('precision' => '1'))
-//                        ->add('text')
-//                        ->add('brand')
-//                        ->add('price', 'money', array('label' => 'Price', 'required' => 'false'))
-//                        ->add('sportstar')
-//                        ->add('year')
-//                        ->add('edition')
-//                        ->add('idCategories', null, array('label' => 'Categories'))
-//                        ->add('file')
-//                        ->setMethod('POST');
+    private function createNewsfeedForm(Newsfeed $newsfeed) {
+        return $this->createFormBuilder($newsfeed)
+                        ->add('idNewsfeed', 'hidden')
+                        ->add('tile')
+                        ->add('text')
+                        ->add('date')
+                        ->add('idCategories', null, array('label' => 'Categories'))
+                        ->setMethod('POST');
     }
 
 }
