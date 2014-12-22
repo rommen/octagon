@@ -128,17 +128,12 @@ class NewsfeedController extends SecureController {
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if ($newsfeed->getFile() != null) {
-                $newsfeed->updateExtensionFromFile();
-            }
-
             $em->persist($newsfeed);
             $em->flush();
-            $newsfeed->upload();
 
             return $this->redirect('/newsfeeds/view?id=' . $newsfeed->getIdNewsfeedHash());
-        }
-
+ 
+    }
         return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
     }
 
@@ -147,7 +142,6 @@ class NewsfeedController extends SecureController {
                         ->add('idNewsfeed', 'hidden')
                         ->add('tile')
                         ->add('text')
-                        ->add('date')
                         ->add('idCategories', null, array('label' => 'Categories'))
                         ->setMethod('POST');
     }

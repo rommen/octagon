@@ -188,4 +188,13 @@ class Newsfeed
     {
         return $this->idCategories;
     }
+        /**
+     * Get BASE64 of idNewsfeed
+     *
+     * @return string 
+     */
+    public function getIdNewsfeedHash()
+    {
+        return base64_encode($this->idNewsfeed);
+    }
 }
