@@ -58,7 +58,10 @@
                                 </style>
                                 <li id="user_account">
                                     <a class="user_account_name" href="{{path('_user')}}?id={{app.user.idUserHash}}">Hello, {{app.user.username}}!</a>
-                                    <a class="user_account_name" href="{{path('_inbox')}}?userId={{app.user.idUserHash}}"><span class="glyphicon glyphicon-envelope"></span> Mailbox</a>
+                                    <a class="user_account_mail" href="{{path('_inbox')}}?item=inbox">
+                                        <span class="glyphicon glyphicon-envelope"></span> 
+                                        Mailbox {{ render(controller('CustomerBundle:Mailbox:unreadCountByUser', {'userId': app.user.idUserHash})) }}
+                                    </a>
                                 </li>
                                 <li><a href="{{path('_logout')}}">Logout</a></li>
                                 {% endif %}

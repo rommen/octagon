@@ -71,12 +71,20 @@ class NewsfeedController extends SecureController {
     }
 
     public function editAction(Request $request) {
+<<<<<<< HEAD
        $this->checkIfUserLoggedIn();
 //        //get id
 
        $id = $request->get('id');
        if ($id != null) 
            {
+=======
+        $this->checkIfUserLoggedIn();
+//        //get id
+
+        $id = $request->get('id');
+        if ($id != null) {
+>>>>>>> c78da0abbf2da682d2154591e9dba08fbeda845e
             $id = base64_decode($id);
         } else {
             //deny access if id is not provided
@@ -103,10 +111,19 @@ class NewsfeedController extends SecureController {
             $form->handleRequest($request); //map request to form
 
             if ($form->isValid()) {//validate form
+<<<<<<< HEAD
                 $em->persist($newsfeed); //update user
                 $em->flush(); //commit
 
                 return $this->redirect('newsfeed/list' . $newsfeed->getIdNewsfeedHash());
+=======
+                
+                $newsfeed->setDate(new \DateTime());
+                $em->persist($newsfeed); //update user
+                $em->flush(); //commit
+
+                return $this->redirect('/newsfeed/list');
+>>>>>>> c78da0abbf2da682d2154591e9dba08fbeda845e
             }
         }
 
@@ -115,32 +132,28 @@ class NewsfeedController extends SecureController {
     }
 
     public function addAction(Request $request) {
-//        $this->checkIfUserLoggedIn();
-//
-//        //Shoe
-//        $shoe = new Shoe();
-//        $shoe->setIdOwner($this->getUser());
-//
-//        $form = $this->createShoeForm($shoe);
-//        $form->setAction($this->generateUrl('_shoe_add'));
-//        $form->add('submit', 'submit', array('label' => 'Add'));
-//        $form = $form->getForm();
-//
-//        $form->handleRequest($request);
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            if ($shoe->getFile() != null) {
-//                $shoe->updateExtensionFromFile();
-//            }
-//
-//            $em->persist($shoe);
-//            $em->flush();
-//            $shoe->upload();
-//
-//            return $this->redirect('/shoes/view?id=' . $shoe->getIdShoeHash());
-//        }
-//
-//        return $this->render('CustomerBundle:Shoes:shoe_add.html.twig', array('form' => $form->createView()));
+        $this->checkIfUserLoggedIn();
+
+        //Shoe
+        $newsfeed = new Newsfeed();
+        $newsfeed->setIdOwner($this->getUser());
+
+        $form = $this->createNewsfeedForm($newsfeed);
+        $form->setAction($this->generateUrl('_newsfeed_add'));
+        $form->add('submit', 'submit', array('label' => 'Add'));
+        $form = $form->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $newsfeed->setDate(new \DateTime());
+
+            $em->persist($newsfeed);
+            $em->flush();
+
+            return $this->redirect('/newsfeed/list?id=' . $newsfeed->getIdNewsfeedHash());
+        }
+        return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
     }
 
     private function createNewsfeedForm(Newsfeed $newsfeed) {
