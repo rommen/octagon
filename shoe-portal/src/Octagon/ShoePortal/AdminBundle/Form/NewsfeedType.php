@@ -16,10 +16,10 @@ class NewsfeedType extends AbstractType
     {
         $builder
             ->add('tile')
-            ->add('text')
-            ->add('date')
-            ->add('idowner')
-            ->add('idCategories')
+            ->add('text', null, array('attr'=>array('style'=>'height:120px')))
+//            ->add('date', null,  array('attr'=>array('style'=>'display:none')))
+//            ->add('idOwner', null,  array('attr'=>array('style'=>'display:none')))
+            ->add('idCategories', null, array('label'=>'Category'))
         ;
     }
     

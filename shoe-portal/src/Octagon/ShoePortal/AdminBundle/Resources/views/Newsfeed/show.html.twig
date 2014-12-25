@@ -1,10 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}News feed{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_newsfeeds');
+    </script> 
 
-{% block body -%}
-    <h1>Newsfeed</h1>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_newsfeed') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+            <a href="{{ path('admin_newsfeed_edit', { 'id': entity.idNewsfeed }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idNewsfeed }}</td>
+            </tr>
             <tr>
                 <th>Tile</th>
                 <td>{{ entity.tile }}</td>
@@ -15,26 +37,8 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Idnewsfeed</th>
-                <td>{{ entity.idNewsfeed }}</td>
+                <td>{{ entity.date|date('d.m.Y') }}</td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_newsfeed') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_newsfeed_edit', { 'id': entity.idNewsfeed }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}
