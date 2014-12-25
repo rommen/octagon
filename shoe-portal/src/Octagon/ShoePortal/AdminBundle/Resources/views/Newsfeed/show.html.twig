@@ -39,6 +39,10 @@
                 <th>Date</th>
                 <td>{{ entity.date|date('d.m.Y') }}</td>
             </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ entity.idCategories.name }}</td>
+            </tr>
         </tbody>
     </table>
 {% endblock %}

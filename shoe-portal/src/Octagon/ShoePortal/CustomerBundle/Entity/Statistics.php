@@ -3,10 +3,11 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Statistics
- *
+ * 
  * @ORM\Table(name="Statistics", indexes={@ORM\Index(name="fk_Statistics_Categories1_idx", columns={"idCategories"})})
  * @ORM\Entity
  */
@@ -37,7 +38,7 @@ class Statistics
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\Categories")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")

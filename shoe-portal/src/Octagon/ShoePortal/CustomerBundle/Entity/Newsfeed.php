@@ -1,6 +1,7 @@
 <?php
 
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,7 +45,7 @@ class Newsfeed {
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idOwner", referencedColumnName="idUser")
@@ -54,7 +55,7 @@ class Newsfeed {
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Categories
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\Categories")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idCategories", referencedColumnName="idCategories")

@@ -1,16 +1,16 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Statistics edit</h1>
-
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Edit statistics{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_statistics');
+    </script> 
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_statistics') }}">
+                Back to the list
+            </a>
+        </button>           
+        <div>{{ form(delete_form) }}</div>
+    </div>
     {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_statistics') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}
