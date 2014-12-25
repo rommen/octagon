@@ -1,10 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Shoe{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_mailbox');
+    </script> 
 
-{% block body -%}
-    <h1>Mailbox</h1>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_mailbox') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+            <a href="{{ path('admin_mailbox_edit', { 'id': entity.idMailbox }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
 
-    <table class="record_properties">
-        <tbody>
+    <table class="table">
+        <tbody>            
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idMailbox }}</td>
+            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ entity.title }}</td>
@@ -15,38 +37,54 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.date|date('d.m.Y') }}</td>
             </tr>
             <tr>
                 <th>Read</th>
-                <td>{{ entity.read }}</td>
+                <td>
+                    {%if entity.read == 1%}
+                        Read
+                    {%else%}
+                        Unread
+                    {%endif%}
+                </td>
             </tr>
             <tr>
-                <th>Deletebysender</th>
-                <td>{{ entity.deleteBySender }}</td>
+                <th>Deleted by Sender</th>
+                <td>
+                    {%if entity.deleteBySender == 1%}
+                        Yes
+                    {%else%}
+                        No
+                    {%endif%}
+                </td>
             </tr>
             <tr>
-                <th>Deletebyreceiver</th>
-                <td>{{ entity.deleteByReceiver }}</td>
+                <th>Deleted by Receiver</th>
+                <td>
+                    {%if entity.deleteByReceiver == 1%}
+                        Yes
+                    {%else%}
+                        No
+                    {%endif%}
+                </td>
             </tr>
             <tr>
-                <th>Idmailbox</th>
-                <td>{{ entity.idMailbox }}</td>
+                <th>Receiver</th>
+                <td>
+                    <a href="{{path('_user')}}?id={{entity.idReceiver.idUserHash}}">
+                        {{entity.idReceiver.username}}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Sender</th>
+                <td>
+                    <a href="{{path('_user')}}?id={{entity.idSender.idUserHash}}">
+                        {{entity.idSender.username}}
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_mailbox') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_mailbox_edit', { 'id': entity.idMailbox }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

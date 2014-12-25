@@ -11,7 +11,7 @@
     <field name="title" type="string" column="title" length="145" nullable="false"/>
     <field name="text" type="text" column="text" nullable="false"/>
     <field name="date" type="date" column="date" nullable="false"/>
-    <field name="read" type="boolean" column="read" nullable="true"/>
+    <field name="read" type="boolean" column="`read`" nullable="true"/>
     <field name="deleteBySender" type="boolean" column="deleteBySender" nullable="true"/>
     <field name="deleteByReceiver" type="boolean" column="deleteyReceiver" nullable="true"/>
     <many-to-one field="idReceiver" target-entity="User">
