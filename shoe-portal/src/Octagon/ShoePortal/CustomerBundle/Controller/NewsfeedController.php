@@ -38,36 +38,36 @@ class NewsfeedController extends SecureController {
     }
 
     public function deleteAction(Request $request) {
-//        $this->checkIfUserLoggedIn();
-//
-//        //Retrieve id of the shoe from the request
-//        $id = $request->get('id');
-//        if ($id != null) {
-//            $id = base64_decode($id);
-//        } else {
-//            throw $this->createNotFoundException(
-//                    'No id found '
-//            );
-//        }
-//
-//        //Retrieve shoe from the db
-//        $em = $this->getDoctrine()->getManager();
-//        $shoe = $em->getRepository('CustomerBundle:Shoe')->find($id);
-//        if (!$shoe) {//$shoe==null
-//            throw $this->createNotFoundException(
-//                    'No shoe found for id '
-//            );
-//        }
-//
-//        //Check if user can delete the shoe
-//        if ($this->isUserAdmin() || $this->getAuthUserId() == $shoe->getIdOwner()->getIdUser()) {
-//            $shoe->deleteFileFromDisk();
-//            $em->remove($shoe);
-//            $em->flush();
-//            return $this->redirect($this->generateUrl('_shoes'));
-//        } else {
-//            throw new AccessDeniedException('Cannot perform delete operation');
-//        }
+        $this->checkIfUserLoggedIn();
+
+        //Retrieve id of the newsfeed from the request
+        $id = $request->get('id');
+        if ($id != null) {
+            $id = base64_decode($id);
+        } else {
+            throw $this->createNotFoundException(
+                    'No id found '
+       );
+     }
+
+        //Retrieve newsfeed from the db
+        $em = $this->getDoctrine()->getManager();
+        $newsfeed = $em->getRepository('CustomerBundle:Newsfeed')->find($id);
+        if (!$newsfeed) {
+            throw $this->createNotFoundException(
+                    'No news feed found for id '
+            );
+        }
+
+        //Check if user can delete the shoe
+        if ($this->isUserAdmin() || $this->getAuthUserId() == $newsfeed->getIdOwner()->getIdUser()) {
+            $newsfeed->deleteFileFromDisk();
+            $em->remove($newsfeed);
+            $em->flush();
+            return $this->redirect('/newsfeed/list');
+        } else {
+            throw new AccessDeniedException('Cannot perform delete operation');
+        }
     }
 
     public function editAction(Request $request) {

@@ -15,27 +15,40 @@
         padding:  .25rem;
         width:  100%; 
     }
+    #panelheder{
+    background-color:blue;
+            background-clip: content-box;
 
-    .well {
-        position:relative;
-        display: block;
-    }
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+    #panelbody{
+    background-color:white;
+            background-clip: content-box;
 
-    #shoes{
+    color:black;
+    clear:both;
+    text-align:left;
+    padding:5px; 
+}
+#panelfooter{
+    background-color:white;
+            background-clip: content-box;
+
+    color:black;
+    clear:both;
+    text-align:left;
+    padding:5px; 
+
+}
+    #newsfeeds{
         width: 80%;
         margin-left: 50px;
     }
-    .shoeName{
-        color: #428bca;
-    }
-    .shoeYear{
-        color:grey;
-    }
-    .shoePrice{
-        color: darkred;
-    }
 </style>
-<div id="shoes" class="left">
+<div id="newsfeeds" class="left">
     <div >        
 
         {% for nf in newsfeeds %}
@@ -45,28 +58,26 @@
                 </a>
             {%endif%} 
             <div class="panel panel-default">
-                <div class="panel-heading">{{nf.tile}}</div>
-                <div class="panel-body">
-                    <div class>{{nf.idNewsfeedHash}}</div>    
-                    <div class>{{nf.text}}</div> 
+                <div class="panel-heading" id="panelheder">{{nf.tile}}</div>
+                <div class="panel-body" id="panelbody">
+                    {{nf.text}}
                 </div>
-                <div class="panel-footer">
-                   
-                    <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
-                    <div>{{nf.date|date('d.m.Y')}}</div>
-                    <div>
-                        {%if nf.idOwner.idUser == app.user.idUser %}
-                            <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
-                                <button type="button" class="btn btn-primary">Edit</button>
-                            </a>
-                            <a href="/newsfeed/delete?id={{ nf.idNewsfeedHash }}">
-                                <button type="button" class="btn btn-primary">Delete</button>
-                            </a>
-                        {%endif%}
-                    </div>
+                <div class="panel-footer" id="panelfooter">
+                        <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
+                        <div>{{nf.date|date('d.m.Y')}}</div>
+                        <div>
+                            {%if nf.idOwner.idUser == app.user.idUser %}
+                                <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
+                                    <button type="button" class="btn btn-primary">Edit</button>
+                                </a>
+                                <a href="/newsfeed/delete?id={{ nf.idNewsfeedHash }}">
+                                    <button type="button" class="btn btn-primary">Delete</button>
+                                </a>
+                            {%endif%}
+                        </div>
 
+                    </div>
+                </div>
+                {% endfor %}        
                 </div>
             </div>
-        {% endfor %}        
-    </div>
-</div>
