@@ -71,20 +71,19 @@ class NewsfeedController extends SecureController {
     }
 
     public function editAction(Request $request) {
-<<<<<<< HEAD
+
        $this->checkIfUserLoggedIn();
 //        //get id
 
        $id = $request->get('id');
        if ($id != null) 
            {
-=======
         $this->checkIfUserLoggedIn();
 //        //get id
 
         $id = $request->get('id');
         if ($id != null) {
->>>>>>> c78da0abbf2da682d2154591e9dba08fbeda845e
+        }
             $id = base64_decode($id);
         } else {
             //deny access if id is not provided
@@ -111,19 +110,18 @@ class NewsfeedController extends SecureController {
             $form->handleRequest($request); //map request to form
 
             if ($form->isValid()) {//validate form
-<<<<<<< HEAD
+
                 $em->persist($newsfeed); //update user
                 $em->flush(); //commit
 
                 return $this->redirect('newsfeed/list' . $newsfeed->getIdNewsfeedHash());
-=======
-                
+               
                 $newsfeed->setDate(new \DateTime());
                 $em->persist($newsfeed); //update user
                 $em->flush(); //commit
 
                 return $this->redirect('/newsfeed/list');
->>>>>>> c78da0abbf2da682d2154591e9dba08fbeda845e
+
             }
         }
 
