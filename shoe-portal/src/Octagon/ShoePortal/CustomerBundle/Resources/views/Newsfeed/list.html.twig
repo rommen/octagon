@@ -16,11 +16,8 @@
         width:  100%; 
     }
     #panelheder{
-<<<<<<< HEAD
         background-color:blue;
-=======
         background-color:grey;
->>>>>>> 7fb9173bc8a9f3d9015249b04089c50b09d51252
         background-clip: content-box;
 
         color:white;
@@ -69,21 +66,6 @@
                     {{nf.text}}
                 </div>
                 <div class="panel-footer" id="panelfooter">
-<<<<<<< HEAD
-                    <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
-                    <div>{{nf.date|date('d.m.Y')}}</div>
-                    <div>
-                        {%if nf.idOwner.idUser == app.user.idUser %}
-                            <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
-                                <button type="button" class="btn btn-primary">Edit</button>
-                            </a>
-                            <a href="/newsfeed/delete?id={{ nf.idNewsfeedHash }}">
-                                <button type="button" class="btn btn-primary">Delete</button>
-                            </a>
-                        {%endif%}
-                    </div>
-
-=======
                     <div style="float:left;">
                         <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
                         <span>on {{nf.date|date('d.m.Y')}}</span>
@@ -99,7 +81,6 @@
                         {%endif%}
                     </div>
                     <div class="clear">&nbsp;</div>
->>>>>>> 7fb9173bc8a9f3d9015249b04089c50b09d51252
                 </div>
             </div>
         {% endfor %}        
