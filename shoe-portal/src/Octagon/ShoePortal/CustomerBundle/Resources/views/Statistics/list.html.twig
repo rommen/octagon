@@ -15,32 +15,48 @@
         padding:  .25rem;
         width:  100%; 
     }
+    #panelheder{
+        background-color:grey;
+        background-clip: content-box;
 
-    .well {
-        position:relative;
-        display: block;
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px; 
     }
+    #panelbody{
+        background-color:white;
+        background-clip: content-box;
 
-    #statistics{
+        color:black;
+        clear:both;
+        text-align:left;
+        padding:5px; 
+    }
+    #panelfooter{
+        background-color:white;
+        background-clip: content-box;
+
+        color:black;
+        clear:both;
+        text-align:left;
+        padding:5px; 
+
+    }
+    #newsfeeds{
         width: 80%;
         margin-left: 50px;
     }
-    #panel{
-        background-clip: content-box;
-        background-color: lightgray;
-        color:black;
-        clear:both;
-        text-axlign:left;
-        padding:5px;   
-    }
 </style>
-
-<div id="statistics" class="center">
-    <div class="row">
+<div id="newsfeeds" class="left">
+    <div >       
         {% for s in statistics %}
-            <div class="panel panel-default" id="panel">
-                {{s.text}}
-            </div>    
+            <div class="panel panel-default">
+                <div class="panel-heading" id="panelheder" style="padding:0px;">{{s.tile}}</div>
+                <div class="panel-body" id="panelbody">
+                    {{s.text}}
+                </div>
+            </div>
         {% endfor %}        
     </div>
 </div>
