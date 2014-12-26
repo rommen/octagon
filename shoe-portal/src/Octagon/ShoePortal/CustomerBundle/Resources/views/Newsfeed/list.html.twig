@@ -16,33 +16,33 @@
         width:  100%; 
     }
     #panelheder{
-    background-color:blue;
-            background-clip: content-box;
+        background-color:grey;
+        background-clip: content-box;
 
-    color:white;
-    clear:both;
-    text-align:center;
-    padding:5px; 
-}
+        color:white;
+        clear:both;
+        text-align:center;
+        padding:5px; 
+    }
     #panelbody{
-    background-color:white;
-            background-clip: content-box;
+        background-color:white;
+        background-clip: content-box;
 
-    color:black;
-    clear:both;
-    text-align:left;
-    padding:5px; 
-}
-#panelfooter{
-    background-color:white;
-            background-clip: content-box;
+        color:black;
+        clear:both;
+        text-align:left;
+        padding:5px; 
+    }
+    #panelfooter{
+        background-color:white;
+        background-clip: content-box;
 
-    color:black;
-    clear:both;
-    text-align:left;
-    padding:5px; 
+        color:black;
+        clear:both;
+        text-align:left;
+        padding:5px; 
 
-}
+    }
     #newsfeeds{
         width: 80%;
         margin-left: 50px;
@@ -51,33 +51,35 @@
 <div id="newsfeeds" class="left">
     <div >        
 
-        {% for nf in newsfeeds %}
-            {%if app.user != null %}
-                <a href="/newsfeed/add?id={{ nf.idNewsfeedHash }}">
+        {%if app.user != null %}
+            <div id="addNewsfeed" style="text-align:right;">
+                <a href="/newsfeed/add">
                     <button type="button" class="btn btn-primary">Add</button>
                 </a>
-            {%endif%} 
+            </div>
+        {%endif%} 
+        {% for nf in newsfeeds %}
             <div class="panel panel-default">
-                <div class="panel-heading" id="panelheder">{{nf.tile}}</div>
+                <div class="panel-heading" id="panelheder" style="padding:0px;">{{nf.tile}}</div>
                 <div class="panel-body" id="panelbody">
                     {{nf.text}}
                 </div>
                 <div class="panel-footer" id="panelfooter">
-                        <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
-                        <div>{{nf.date|date('d.m.Y')}}</div>
-                        <div>
-                            {%if nf.idOwner.idUser == app.user.idUser %}
-                                <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                </a>
-                                <a href="/newsfeed/delete?id={{ nf.idNewsfeedHash }}">
-                                    <button type="button" class="btn btn-primary">Delete</button>
-                                </a>
-                            {%endif%}
-                        </div>
-
+                    <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
+                    <div>{{nf.date|date('d.m.Y')}}</div>
+                    <div>
+                        {%if nf.idOwner.idUser == app.user.idUser %}
+                            <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
+                                <button type="button" class="btn btn-primary">Edit</button>
+                            </a>
+                            <a href="/newsfeed/delete?id={{ nf.idNewsfeedHash }}">
+                                <button type="button" class="btn btn-primary">Delete</button>
+                            </a>
+                        {%endif%}
                     </div>
-                </div>
-                {% endfor %}        
+
                 </div>
             </div>
+        {% endfor %}        
+    </div>
+</div>

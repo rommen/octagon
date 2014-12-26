@@ -1,50 +1,73 @@
 {% extends "index.html.twig" %}
 {% block title %}Welcome{% endblock%}
 {% block header %} <!-- Carousel -->
-    
-  
-  <div class="new_html_code">
-    <div id="myCarousel1" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="{{asset('images/carusel/4.jpg')}}" alt="" height="200px">
+
+
+    <div class="new_html_code">
+        <div id="myCarousel1" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{{asset('images/carusel/4.jpg')}}" alt="" height="200px">
+                </div>
+                <div class="item">
+                    <img src="{{asset('images/carusel/2.jpg')}}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{asset('images/carusel/3.jpg')}}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{asset('images/carusel/1.jpg')}}" alt="">
+                </div>
             </div>
-            <div class="item">
-                <img src="{{asset('images/carusel/2.jpg')}}" alt="">
-            </div>
-            <div class="item">
-                <img src="{{asset('images/carusel/3.jpg')}}" alt="">
-            </div>
-            <div class="item">
-                <img src="{{asset('images/carusel/1.jpg')}}" alt="">
+
+            <a class="left carousel-control" href="#myCarousel1" data-slide="prev" style="background-image:none" height="300px" width="600">‹</a>
+            <a class="right carousel-control" href="#myCarousel1" data-slide="next" style="background-image:none" height="300px" width="600">›</a>
+        </div>
+        <script>
+            !function ($) {
+                $(function () {
+                    $('#myCarousel1').carousel();
+                    $('#nav_home').carousel();
+                });
+                navigation('nav_home');
+            }(window.jQuery);
+
+        </script> <!-- /.carousel -->
+    {% endblock %}
+
+    {% block content_container %}
+        <div id="content-container-home">
+            <div id="content-home">&nbsp;
+                <div>
+                    <div id="col1" class="col-md-6">
+                        {% include "CustomerBundle:Shoes:list.html.twig" with shoes %}
+                    </div>
+                    <div id="col2" class="col-md-3">
+                        {% include "CustomerBundle:Newsfeed:list.html.twig" with newsfeeds %}
+                    </div>
+                    <div class="col-md-3">
+                        {% include "CustomerBundle:Statistics:list.html.twig" with statistics %}
+                    </div>
+                    <style>
+                        #shoes, #newsfeeds, #statistics{
+                            width: 100%;
+                            margin:0px;
+                        }
+                        #col1, #col2>div{
+                            border-right: 1px solid darkgrey;
+                        }
+                        
+                        #col2>div{
+                            padding-right:10px;
+                        }
+                        #addNewsfeed{
+                            display:none;
+                        }
+                    </style>
+                </div>
+                <div class="clear"></div>
             </div>
         </div>
-    
-        <a class="left carousel-control" href="#myCarousel1" data-slide="prev" style="background-image:none" height="300px" width="600">‹</a>
-        <a class="right carousel-control" href="#myCarousel1" data-slide="next" style="background-image:none" height="300px" width="600">›</a>
-    </div>
-    <script>
-        !function ($) {
-            $(function () {
-                $('#myCarousel1').carousel();
-                $('#nav_home').carousel();
-            });
-            navigation('nav_home');
-        }(window.jQuery);
-
-    </script> <!-- /.carousel -->
-{% endblock %}
-
-{% block content_container %}
-    <div id="content-container-home">
-        <div id="content-home">&nbsp;
-            <div>
-                {% include "CustomerBundle:Shoes:list.html.twig" with shoes %}
-                <style>#shoes{width:95%;}</style>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-{% endblock %}
+    {% endblock %}
 
 
