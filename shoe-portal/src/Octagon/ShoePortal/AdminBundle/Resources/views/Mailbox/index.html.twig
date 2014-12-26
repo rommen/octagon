@@ -1,51 +1,61 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Mailbox list</h1>
-
-    <table class="records_list">
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Mailbox{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_mailbox');
+    </script> 
+    <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+        <a href="{{ path('admin_mailbox_new') }}">
+            Create a new entry
+        </a>
+    </button>
+    <table class="table records_list">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Text</th>
                 <th>Date</th>
                 <th>Read</th>
-                <th>Deletebysender</th>
-                <th>Deletebyreceiver</th>
-                <th>Idmailbox</th>
+                <th>Deleted by Sender</th>
+                <th>Deleted by Receiver</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('admin_mailbox_show', { 'id': entity.idMailbox }) }}">{{ entity.title }}</a></td>
-                <td>{{ entity.text }}</td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.read }}</td>
-                <td>{{ entity.deleteBySender }}</td>
-                <td>{{ entity.deleteByReceiver }}</td>
-                <td>{{ entity.idMailbox }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_mailbox_show', { 'id': entity.idMailbox }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_mailbox_edit', { 'id': entity.idMailbox }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_mailbox_show', { 'id': entity.idMailbox }) }}">{{ entity.idMailbox }}</a></td>
+                    <td>{{ entity.title }}</td>
+                    <td>{{ entity.text }}</td>
+                    <td>{% if entity.date %}{{ entity.date|date('d.m.Y') }}{% endif %}</td>
+                    <td>{{ entity.read }}</td>
+                    <td>
+                        {%if entity.deleteBySender == 1%}
+                            Yes
+                        {%else%}
+                            No
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if entity.deleteByReceiver == 1%}
+                            Yes
+                        {%else%}
+                            No
+                        {%endif%}
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group" style="color:white">
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+                                <a href="{{ path('admin_mailbox_show', { 'id': entity.idMailbox }) }}">show</a>
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+                                <a href="{{ path('admin_mailbox_edit', { 'id': entity.idMailbox }) }}">edit</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('admin_mailbox_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% endblock %}

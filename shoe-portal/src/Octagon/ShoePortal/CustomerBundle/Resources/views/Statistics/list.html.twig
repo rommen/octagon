@@ -21,32 +21,26 @@
         display: block;
     }
 
-    #shoes{
+    #statistics{
         width: 80%;
         margin-left: 50px;
     }
-    .shoeName{
-        color: #428bca;
-    }
-    .shoeYear{
-        color:grey;
-    }
-    .shoePrice{
-        color: darkred;
+    #panel{
+        background-clip: content-box;
+        background-color: lightgray;
+        color:black;
+        clear:both;
+        text-axlign:left;
+        padding:5px;   
     }
 </style>
-<script>
-    function imgError(image) {
-        image.onerror = "";
-        image.src = "{{ asset('images/')}}shoe.jpg";
-        image.width = 150;
-        return true;
-    }
-</script>
-<div id="statistics" class="left">
+
+<div id="statistics" class="center">
     <div class="row">
         {% for s in statistics %}
-            <div>{{s.text}}</div>    
+            <div class="panel panel-default" id="panel">
+                {{s.text}}
+            </div>    
         {% endfor %}        
     </div>
 </div>

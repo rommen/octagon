@@ -1,15 +1,16 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Newsfeed creation</h1>
-
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}New News Feed{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_newsfeeds');
+    </script> 
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_newsfeed') }}">
+                Back to the list
+            </a>
+        </button>
+    </div>
+    <br/><br/>
     {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_newsfeed') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 {% endblock %}

@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\Statistics;
-use Octagon\ShoePortal\CustomerBundle\Form\StatisticsType;
+use Octagon\ShoePortal\AdminBundle\Form\StatisticsType;
 
 /**
  * Statistics controller.
@@ -53,7 +53,7 @@ class StatisticsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_statistics_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_statistics_show', array('id' => $entity->getIdStatistics())));
         }
 
         return array(
@@ -161,7 +161,7 @@ class StatisticsController extends Controller
     private function createEditForm(Statistics $entity)
     {
         $form = $this->createForm(new StatisticsType(), $entity, array(
-            'action' => $this->generateUrl('admin_statistics_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_statistics_update', array('id' => $entity->getIdStatistics())),
             'method' => 'PUT',
         ));
 

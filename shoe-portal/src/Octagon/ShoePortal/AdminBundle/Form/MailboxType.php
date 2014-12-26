@@ -17,12 +17,12 @@ class MailboxType extends AbstractType
         $builder
             ->add('title')
             ->add('text')
-            ->add('date')
+//            ->add('date')
             ->add('read')
             ->add('deleteBySender')
             ->add('deleteByReceiver')
-            ->add('idReceiver')
-            ->add('idSender')
+            ->add('idReceiver', null, array('label'=>'Receiver'))
+            ->add('idSender', null, array('label'=>'Sender'))
         ;
     }
     

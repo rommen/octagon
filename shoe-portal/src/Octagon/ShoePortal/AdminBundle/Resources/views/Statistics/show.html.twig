@@ -1,10 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Statistics{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_statistics');
+    </script> 
 
-{% block body -%}
-    <h1>Statistics</h1>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_statistics') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+            <a href="{{ path('admin_statistics_edit', { 'id': entity.idStatistics }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idStatistics }}</td>
+            </tr>
             <tr>
                 <th>Tile</th>
                 <td>{{ entity.tile }}</td>
@@ -14,23 +36,9 @@
                 <td>{{ entity.text }}</td>
             </tr>
             <tr>
-                <th>Idstatistics</th>
-                <td>{{ entity.idStatistics }}</td>
+                <th>Category</th>
+                <td>{{ entity.idCategories.name }}</td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_statistics') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_statistics_edit', { 'id': entity.idStatistics }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

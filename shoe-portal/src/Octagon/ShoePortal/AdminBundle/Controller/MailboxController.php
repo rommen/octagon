@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\Mailbox;
-use Octagon\ShoePortal\CustomerBundle\Form\MailboxType;
+use Octagon\ShoePortal\AdminBundle\Form\MailboxType;
 
 /**
  * Mailbox controller.
@@ -45,6 +45,7 @@ class MailboxController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Mailbox();
+        $entity->setDate(new \DateTime());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +54,7 @@ class MailboxController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_mailbox_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_mailbox_show', array('id' => $entity->getIdMailbox())));
         }
 
         return array(
@@ -91,6 +92,7 @@ class MailboxController extends Controller
     public function newAction()
     {
         $entity = new Mailbox();
+        $entity->setDate(new \DateTime());
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -161,7 +163,7 @@ class MailboxController extends Controller
     private function createEditForm(Mailbox $entity)
     {
         $form = $this->createForm(new MailboxType(), $entity, array(
-            'action' => $this->generateUrl('admin_mailbox_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_mailbox_update', array('id' => $entity->getIdMailbox())),
             'method' => 'PUT',
         ));
 

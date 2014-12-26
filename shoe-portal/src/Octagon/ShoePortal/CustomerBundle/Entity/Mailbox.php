@@ -3,6 +3,7 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mailbox
@@ -65,7 +66,7 @@ class Mailbox {
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idReceiver", referencedColumnName="idUser")
@@ -75,7 +76,7 @@ class Mailbox {
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
-     *
+     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Octagon\ShoePortal\CustomerBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idSender", referencedColumnName="idUser")
@@ -194,7 +195,7 @@ class Mailbox {
      * @param boolean $deleteByReceiver
      * @return Mailbox
      */
-    public function setDeleteyreceiver($deleteByReceiver) {
+    public function setDeleteByReceiver($deleteByReceiver) {
         $this->deleteByReceiver = $deleteByReceiver;
 
         return $this;
