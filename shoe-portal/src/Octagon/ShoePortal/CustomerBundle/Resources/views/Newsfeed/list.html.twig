@@ -70,7 +70,7 @@
                         <span>on {{nf.date|date('d.m.Y')}}</span>
                     </div>
                     <div style="float:right;">
-                        {%if nf.idOwner.idUser == app.user.idUser %}
+                        {%if app.user != null and nf.idOwner.idUser == app.user.idUser %}
                             <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
                                 <button type="button" class="btn btn-primary">Edit</button>
                             </a>
