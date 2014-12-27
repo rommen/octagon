@@ -31,7 +31,7 @@ class UsersController extends SecureController {
                 ->from('CustomerBundle:Shoe', 's')
                 ->where('s.idOwner = :owner')
                 ->setParameter('owner', $user->getIdUser());
-
+        
         //WHERE: category
         $category = $request->get('categoryId');
         if ($category != null) {
@@ -42,9 +42,27 @@ class UsersController extends SecureController {
         $qb->orderBy('s.idShoe', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder()
+                ->select('nf')
+                ->from('CustomerBundle:Newsfeed', 'nf')
+                ->where('nf.idOwner = :owner')
+                ->setParameter('owner', $user->getIdUser());
+         $category = $request->get('categoryId');
+        if ($category != null) {
+            $category = base64_decode($category);
+            $qb->andWhere('nf.idCategories = :category')
+                    ->setParameter('category', $category);
+        }
+       
+                
+        $qb->orderBy('nf.idNewsfeed', 'DESC');
+
+        $newsfeeds = $qb->getQuery()->getResult();
+              
 
 
-        return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user, 'shoes' => $shoes));
+        return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user, 'shoes' => $shoes, 'newsfeeds' => $newsfeeds));
     }
 
     public function registerAction(Request $request) {

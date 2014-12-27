@@ -13,7 +13,14 @@
         {% include 'CustomerBundle:Shoes:list.html.twig' with shoes %} 
         </div>
 {# array('idOwner'=>app.user.idHashUser) #}
+       
+        
+        <div class="page_container">
+        {% include 'CustomerBundle:Newsfeed:list.html.twig' with newsfeeds %} 
+        </div>
+{# array('idOwner'=>app.user.idHashUser) #}
 
     </div>
+
 {% endblock %}  
     
