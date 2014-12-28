@@ -61,7 +61,6 @@ class NewsfeedController extends SecureController {
 
         //Check if user can delete the shoe
         if ($this->isUserAdmin() || $this->getAuthUserId() == $newsfeed->getIdOwner()->getIdUser()) {
-            $newsfeed->deleteFileFromDisk();
             $em->remove($newsfeed);
             $em->flush();
             return $this->redirect('/newsfeed/list');
