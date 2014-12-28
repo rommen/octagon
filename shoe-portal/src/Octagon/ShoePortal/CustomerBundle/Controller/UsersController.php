@@ -31,7 +31,7 @@ class UsersController extends SecureController {
                 ->from('CustomerBundle:Shoe', 's')
                 ->where('s.idOwner = :owner')
                 ->setParameter('owner', $user->getIdUser());
-        
+
         //WHERE: category
         $category = $request->get('categoryId');
         if ($category != null) {
@@ -42,24 +42,26 @@ class UsersController extends SecureController {
         $qb->orderBy('s.idShoe', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
+
+        //Select user newsfeeds
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder()
                 ->select('nf')
                 ->from('CustomerBundle:Newsfeed', 'nf')
                 ->where('nf.idOwner = :owner')
                 ->setParameter('owner', $user->getIdUser());
-         $category = $request->get('categoryId');
+        $category = $request->get('categoryId');
         if ($category != null) {
             $category = base64_decode($category);
             $qb->andWhere('nf.idCategories = :category')
                     ->setParameter('category', $category);
         }
-       
-                
+
+
         $qb->orderBy('nf.idNewsfeed', 'DESC');
 
         $newsfeeds = $qb->getQuery()->getResult();
-              
+
 
 
         return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user, 'shoes' => $shoes, 'newsfeeds' => $newsfeeds));
@@ -142,10 +144,10 @@ class UsersController extends SecureController {
             $p = $form->get('confirmPassword')->getData();
 
             if ($form->isValid()) {//validate form
-                if ($p != null && !empty($p)) {                   
+                if ($p != null && !empty($p)) {
                     $pwd = $this->container->get('security.password_encoder')->encodePassword($user, $p);
                     $user->setPassword($pwd);
-                }else{
+                } else {
                     $user->setPassword($pwd);
                 }
                 $em->persist($user); //update user
