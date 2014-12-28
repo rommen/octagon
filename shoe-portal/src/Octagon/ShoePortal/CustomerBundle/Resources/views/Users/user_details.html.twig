@@ -54,6 +54,13 @@
                         </a>
                     </div>
                 {%endif%}
+                {%if app.user != null %}
+                    <div>
+                        <a href="/newsfeed/add">
+                            <button type="button" class="btn btn-primary">Add newsfeed</button>
+                        </a>
+                    </div>
+                {%endif%}
                 &nbsp;
                 {%if true == app.user.admin %}
                     <div>

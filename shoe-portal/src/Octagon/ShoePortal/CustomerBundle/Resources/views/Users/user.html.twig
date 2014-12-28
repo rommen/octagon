@@ -6,14 +6,39 @@
     </script> 
     <div>
         {% include "CustomerBundle:Users:user_details.html.twig" %} 
-        
-        <br/><br/>
-        <div class="page_container">
-        {{render(controller('CustomerBundle:Categories:list', {'categoryId' : app.request.get('categoryId')})) }}
-        {% include 'CustomerBundle:Shoes:list.html.twig' with shoes %} 
-        </div>
-{# array('idOwner'=>app.user.idHashUser) #}
 
+        <br/><br/>
+
+        <div id="lists">&nbsp;
+            <div>
+                <div id="col1" class="col-md-1">
+                    {{render(controller('CustomerBundle:Categories:list', {'categoryId' : app.request.get('categoryId')})) }}
+                </div>
+                <div id="col2" class="col-md-6">
+                    {% include 'CustomerBundle:Shoes:list.html.twig' with shoes %} 
+                </div>
+                <div class="col-md-3">
+                    {% include 'CustomerBundle:Newsfeed:list.html.twig' with newsfeeds %}   </div>
+                <style>
+                    #shoes, #newsfeeds, #statistics{
+                        width: 100%;
+                        margin:0px;
+                    }
+                    #col1, #col2>div{
+                        border-right: 1px solid darkgrey;
+                    }
+
+                    #col2>div{
+                        padding-right:10px;
+                    }
+                    #addNewsfeed{
+                        display:none;
+                    }
+                </style>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
+
 {% endblock %}  
-    
+

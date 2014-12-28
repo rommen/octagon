@@ -54,7 +54,7 @@
 
         {%if app.user != null %}
             <div id="addNewsfeed" style="text-align:right;">
-                <a href="/newsfeed/add">
+                <a href="{{path('_newsfeed_add')}}">
                     <button type="button" class="btn btn-primary">Add</button>
                 </a>
             </div>
@@ -68,14 +68,15 @@
                 <div class="panel-footer" id="panelfooter">
                     <div style="float:left;">
                         <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
-                        <span>on {{nf.date|date('d.m.Y')}}</span>
+                        <span>on {{nf.date|date('d.m.Y')}}</span><br/>
+                        In <a href="{{path('_newsfeeds')}}?categoryId={{nf.idCategories.idCategoriesHash}}">{{nf.idCategories.name}}</a>
                     </div>
                     <div style="float:right;">
                         {%if app.user != null and nf.idOwner.idUser == app.user.idUser %}
-                            <a href="/newsfeed/edit?id={{ nf.idNewsfeedHash }}">
+                            <a href="{{path('_newsfeed_edit')}}?id={{ nf.idNewsfeedHash }}">
                                 <button type="button" class="btn btn-primary">Edit</button>
                             </a>
-                            <a href="/newsfeed/delete?id={{ nf.idNewsfeedHash }}">
+                            <a href="{{path('_newsfeed_delete')}}?id={{ nf.idNewsfeedHash }}">
                                 <button type="button" class="btn btn-primary">Delete</button>
                             </a>
                         {%endif%}

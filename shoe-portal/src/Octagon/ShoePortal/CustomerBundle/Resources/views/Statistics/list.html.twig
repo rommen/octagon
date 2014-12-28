@@ -54,7 +54,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading" id="panelheder" style="padding:0px;">{{s.tile}}</div>
                 <div class="panel-body" id="panelbody">
-                    {{s.text}}
+                    {{s.text}}<br/>
+                    In <a href="{{path('_statistics')}}?categoryId={{s.idCategories.idCategoriesHash}}">{{s.idCategories.name}}</a>
                 </div>
             </div>
         {% endfor %}        
