@@ -9,7 +9,7 @@
         {%if user != null %}
             <div>
                 {%if app.user.avatar != null and app.user.fullFileName != null%}
-                    <img style="height: 100px;" src="{{ asset('images/uploads/')}}{{app.user.fullFileName}}"/>
+                    <img style="height: 100px;" src="{{ asset('images/uploads/')}}{{user.fullFileName}}"/>
                 {%else%}
                     <img style="height: 100px;" src="{{ asset('images/avatar.jpg')}}"/>
                 {%endif%}
@@ -47,14 +47,14 @@
                         </a>
                     </div>
                 {%endif%}
-                {%if app.user != null %}
+                {%if app.user != null and app.user.idUser == user.idUser %}
                     <div>
                         <a href="/shoes/add">
                             <button type="button" class="btn btn-primary">Add shoe</button>
                         </a>
                     </div>
                 {%endif%}
-                {%if app.user != null %}
+                {%if app.user != null and app.user.idUser == user.idUser%}
                     <div>
                         <a href="/newsfeed/add">
                             <button type="button" class="btn btn-primary">Add newsfeed</button>
