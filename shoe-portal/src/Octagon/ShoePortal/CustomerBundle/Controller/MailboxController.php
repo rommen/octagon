@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Octagon\ShoePortal\CustomerBundle\Entity\Mailbox;
-use Octagon\ShoePortal\CustomerBundle\Entity\User;
+
 class MailboxController extends SecureController {
 
     public function inboxListAction(Request $request) {
@@ -15,7 +15,7 @@ class MailboxController extends SecureController {
                 ->select('i')
                 ->from('CustomerBundle:Mailbox', 'i')
                 ->where('i.idReceiver = :user')
-                ->andWhere('i.deleteByReceiver = 0')
+                ->andWhere('COALESCE(i.deleteByReceiver, 0) = 0')
                 ->setParameter('user', $this->getAuthUserId());
 
         $qb->orderBy('i.date', 'DESC');
@@ -53,7 +53,7 @@ class MailboxController extends SecureController {
                 ->select('i')
                 ->from('CustomerBundle:Mailbox', 'i')
                 ->where('i.idSender = :user')
-                ->andWhere('i.deleteBySender = 0')
+                ->andWhere('COALESCE(i.deleteBySender, 0) = 0')
                 ->setParameter('user', $this->getAuthUserId());
 
         $qb->orderBy('i.date', 'DESC');
@@ -132,7 +132,7 @@ class MailboxController extends SecureController {
         //route along _send_mail
         $sendMailForm->setAction($this->generateUrl('_send_mail'));
         //general form actions
-       $sendMailForm->add('submit', 'submit', array('label' => 'Send'));
+        $sendMailForm->add('submit', 'submit', array('label' => 'Send'));
         $form = $sendMailForm->getForm();
 
         $form->handleRequest($request);
@@ -146,17 +146,15 @@ class MailboxController extends SecureController {
             return $this->redirect('/mails/inbox/list?id=' . $email->getIdMailbox());
         }
         return $this->render('CustomerBundle:Mailbox:sendMail.html.twig', array('form' => $form->createView()));
-       // return new Response('Send mail view');
     }
-    
+
     private function createSendEmailForm(Mailbox $email) {
         return $this->createFormBuilder($email)
                         ->add('idMailbox', 'hidden')
-                        ->add('idReceiver')
+                        ->add('idReceiver', null, array('label'=> 'Receiver'))
                         ->add('title')
                         ->add('text')
                         ->setMethod('POST');
     }
-
 
 }
