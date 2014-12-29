@@ -64,6 +64,13 @@ class Comments
      * })
      */
     private $shoe;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="reported", type="boolean", nullable=false)
+     */
+    private $reported;
 
 
 
@@ -190,5 +197,27 @@ class Comments
     public function getShoe()
     {
         return $this->shoe;
+    }
+    
+    
+    /**
+     * Set reported
+     *
+     * @param boolean $reported
+     * @return Mailbox
+     */
+    public function setReported($reported) {
+        $this->reported = $reported;
+
+        return $this;
+    }
+
+    /**
+     * Get reported
+     *
+     * @return boolean 
+     */
+    public function getReported() {
+        return $this->reported;
     }
 }
