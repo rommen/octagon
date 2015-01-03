@@ -3,6 +3,7 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comments

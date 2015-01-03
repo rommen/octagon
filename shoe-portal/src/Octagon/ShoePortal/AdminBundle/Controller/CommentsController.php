@@ -8,15 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\Comments;
-use Octagon\ShoePortal\CustomerBundle\Form\CommentsType;
+use Octagon\ShoePortal\AdminBundle\Form\CommentsType;
 
 /**
  * Comments controller.
  *
  * @Route("/admin_comments")
  */
-class CommentsController extends Controller
-{
+class CommentsController extends Controller {
 
     /**
      * Lists all Comments entities.
@@ -25,8 +24,7 @@ class CommentsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CustomerBundle:Comments')->findAll();
@@ -35,6 +33,7 @@ class CommentsController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Comments entity.
      *
@@ -42,23 +41,27 @@ class CommentsController extends Controller
      * @Method("POST")
      * @Template("CustomerBundle:Comments:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Comments();
+        $entity->setDate(new \DateTime());
+        $entity->setIdOwner($this->getUser());
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setDate(new \DateTime());
+            $entity->setIdOwner($this->getUser());
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_comments_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_comments_show', array('id' => $entity->getIdComments())));
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -69,8 +72,7 @@ class CommentsController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Comments $entity)
-    {
+    private function createCreateForm(Comments $entity) {
         $form = $this->createForm(new CommentsType(), $entity, array(
             'action' => $this->generateUrl('admin_comments_create'),
             'method' => 'POST',
@@ -88,14 +90,15 @@ class CommentsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Comments();
-        $form   = $this->createCreateForm($entity);
+        $entity->setDate(new \DateTime());
+        $entity->setIdOwner($this->getUser());
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -106,8 +109,7 @@ class CommentsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CustomerBundle:Comments')->find($id);
@@ -119,7 +121,7 @@ class CommentsController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -131,8 +133,7 @@ class CommentsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CustomerBundle:Comments')->find($id);
@@ -145,23 +146,22 @@ class CommentsController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Comments entity.
-    *
-    * @param Comments $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Comments $entity)
-    {
+     * Creates a form to edit a Comments entity.
+     *
+     * @param Comments $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Comments $entity) {
         $form = $this->createForm(new CommentsType(), $entity, array(
-            'action' => $this->generateUrl('admin_comments_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_comments_update', array('id' => $entity->getIdComments())),
             'method' => 'PUT',
         ));
 
@@ -169,6 +169,7 @@ class CommentsController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Comments entity.
      *
@@ -176,8 +177,7 @@ class CommentsController extends Controller
      * @Method("PUT")
      * @Template("CustomerBundle:Comments:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CustomerBundle:Comments')->find($id);
@@ -191,25 +191,27 @@ class CommentsController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setDate(new \DateTime());
+            $entity->setIdOwner($this->getUser());
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_comments_edit', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Comments entity.
      *
      * @Route("/{id}", name="admin_comments_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -235,13 +237,13 @@ class CommentsController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_comments_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('admin_comments_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

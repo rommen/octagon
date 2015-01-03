@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="Shoe", indexes={@ORM\Index(name="fk_Shoe_Categories_idx", columns={"idCategories"}), @ORM\Index(name="fk_Shoe_User1_idx", columns={"idOwner"})})
  * @ORM\Entity
  */
-class Shoe extends UploadableEntity{
+class Shoe extends UploadableEntity {
+
     /**
      * @var string
      *
@@ -65,7 +66,7 @@ class Shoe extends UploadableEntity{
      * @var decimal
      * @ORM\Column(name="prize", type="decimal", precision=5, scale=2, nullable=true)
      */
-    private $price  = 0;
+    private $price = 0;
 
     /**
      * @var string
@@ -129,16 +130,13 @@ class Shoe extends UploadableEntity{
      */
     private $idCategories;
 
-
-
     /**
      * Set name
      *
      * @param string $name
      * @return Shoe
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -149,8 +147,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -160,8 +157,7 @@ class Shoe extends UploadableEntity{
      * @param string $color
      * @return Shoe
      */
-    public function setColor($color)
-    {
+    public function setColor($color) {
         $this->color = $color;
 
         return $this;
@@ -172,8 +168,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getColor()
-    {
+    public function getColor() {
         return $this->color;
     }
 
@@ -183,8 +178,7 @@ class Shoe extends UploadableEntity{
      * @param string $size
      * @return Shoe
      */
-    public function setSize($size)
-    {
+    public function setSize($size) {
         $this->size = $size;
 
         return $this;
@@ -195,8 +189,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getSize()
-    {
+    public function getSize() {
         return $this->size;
     }
 
@@ -206,8 +199,7 @@ class Shoe extends UploadableEntity{
      * @param string $text
      * @return Shoe
      */
-    public function setText($text)
-    {
+    public function setText($text) {
         $this->text = $text;
 
         return $this;
@@ -218,8 +210,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getText()
-    {
+    public function getText() {
         return $this->text;
     }
 
@@ -229,8 +220,7 @@ class Shoe extends UploadableEntity{
      * @param string $brand
      * @return Shoe
      */
-    public function setBrand($brand)
-    {
+    public function setBrand($brand) {
         $this->brand = $brand;
 
         return $this;
@@ -241,8 +231,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getBrand()
-    {
+    public function getBrand() {
         return $this->brand;
     }
 
@@ -252,8 +241,7 @@ class Shoe extends UploadableEntity{
      * @param string price
      * @return Shoe
      */
-    public function setPrice($price)
-    {
+    public function setPrice($price) {
         $this->price = $price;
 
         return $this;
@@ -264,8 +252,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getPrice()
-    {
+    public function getPrice() {
         return $this->price;
     }
 
@@ -275,8 +262,7 @@ class Shoe extends UploadableEntity{
      * @param string $sportstar
      * @return Shoe
      */
-    public function setSportstar($sportstar)
-    {
+    public function setSportstar($sportstar) {
         $this->sportstar = $sportstar;
 
         return $this;
@@ -287,8 +273,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getSportstar()
-    {
+    public function getSportstar() {
         return $this->sportstar;
     }
 
@@ -298,8 +283,7 @@ class Shoe extends UploadableEntity{
      * @param \DateTime $year
      * @return Shoe
      */
-    public function setYear($year)
-    {
+    public function setYear($year) {
         $this->year = $year;
 
         return $this;
@@ -310,8 +294,7 @@ class Shoe extends UploadableEntity{
      *
      * @return \DateTime 
      */
-    public function getYear()
-    {
+    public function getYear() {
         return $this->year;
     }
 
@@ -321,8 +304,7 @@ class Shoe extends UploadableEntity{
      * @param string $edition
      * @return Shoe
      */
-    public function setEdition($edition)
-    {
+    public function setEdition($edition) {
         $this->edition = $edition;
 
         return $this;
@@ -333,8 +315,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getEdition()
-    {
+    public function getEdition() {
         return $this->edition;
     }
 
@@ -344,8 +325,7 @@ class Shoe extends UploadableEntity{
      * @param string $extension
      * @return Shoe
      */
-    public function setExtension($extension)
-    {
+    public function setExtension($extension) {
         $this->extension = $extension;
 
         return $this;
@@ -356,8 +336,7 @@ class Shoe extends UploadableEntity{
      *
      * @return string 
      */
-    public function getExtension()
-    {
+    public function getExtension() {
         return $this->extension;
     }
 
@@ -366,30 +345,28 @@ class Shoe extends UploadableEntity{
      *
      * @return integer 
      */
-    public function getIdShoe()
-    {
+    public function getIdShoe() {
         return $this->idShoe;
     }
-    
-     /**
+
+    /**
      * Set idShoe
      *
      * @param integer $idShoe
      * @return Shoe
      */
-    public function setIdShoe($idShoe)
-    {
+    public function setIdShoe($idShoe) {
         $this->idShoe = $idShoe;
 
         return $this;
     }
+
     /**
      * Get BASE64 of idShoe
      *
      * @return string 
      */
-    public function getIdShoeHash()
-    {
+    public function getIdShoeHash() {
         return base64_encode($this->idShoe);
     }
 
@@ -399,8 +376,7 @@ class Shoe extends UploadableEntity{
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner
      * @return Shoe
      */
-    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
-    {
+    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null) {
         $this->idOwner = $idOwner;
 
         return $this;
@@ -411,8 +387,7 @@ class Shoe extends UploadableEntity{
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdOwner()
-    {
+    public function getIdOwner() {
         return $this->idOwner;
     }
 
@@ -422,8 +397,7 @@ class Shoe extends UploadableEntity{
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories
      * @return Shoe
      */
-    public function setIdCategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories = null)
-    {
+    public function setIdCategories(\Octagon\ShoePortal\CustomerBundle\Entity\Categories $idCategories = null) {
         $this->idCategories = $idCategories;
 
         return $this;
@@ -434,16 +408,15 @@ class Shoe extends UploadableEntity{
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Categories 
      */
-    public function getIdCategories()
-    {
+    public function getIdCategories() {
         return $this->idCategories;
     }
-    
-     /**
+
+    /**
      * Get full image name, for example, User_1 or Shoe_2
      * @return string
      */
-    public function getImageName(){
+    public function getImageName() {
         return 'Shoe_' . $this->idShoe;
     }
 
@@ -451,14 +424,19 @@ class Shoe extends UploadableEntity{
      * Return image file extension, for example, jpeg, png or jpg
      * @return string
      */
-    public function getFileExtension(){
+    public function getFileExtension() {
         return $this->extension;
     }
-    
+
     /**
      * Set file extension of the image
      */
-    public function setFileExtension($extension){
+    public function setFileExtension($extension) {
         $this->setExtension($extension);
     }
+
+    public function __toString() {
+        return $this->name == null ? "" : $this->name;
+    }
+
 }

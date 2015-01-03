@@ -109,11 +109,6 @@ class NewsfeedController extends SecureController {
             $form->handleRequest($request); //map request to form
 
             if ($form->isValid()) {//validate form
-                $em->persist($newsfeed); //update user
-                $em->flush(); //commit
-
-                return $this->redirect('newsfeed/list' . $newsfeed->getIdNewsfeedHash());
-
                 $newsfeed->setDate(new \DateTime());
                 $em->persist($newsfeed); //update user
                 $em->flush(); //commit
@@ -146,7 +141,7 @@ class NewsfeedController extends SecureController {
             $em->persist($newsfeed);
             $em->flush();
 
-            return $this->redirect('/newsfeed/list?id=' . $newsfeed->getIdNewsfeedHash());
+            return $this->redirect('/newsfeed/list');
         }
         return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
     }

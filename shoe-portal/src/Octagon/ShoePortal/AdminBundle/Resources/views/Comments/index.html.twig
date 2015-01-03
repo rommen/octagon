@@ -4,43 +4,44 @@
     <script>
         navigation('nav_comments');
     </script> 
-    <h1>Comments list</h1>
-
-    <table class="records_list">
+    <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+        <a href="{{ path('admin_comments_new') }}">
+            Create a new entry
+        </a>
+    </button>
+    <table class="table records_list">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Text</th>
+                <th>Reported</th>
                 <th>Date</th>
-                <th>Idcomments</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">{{ entity.text }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.idComments }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_comments_edit', { 'id': entity.idComments }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">{{ entity.idComments }}</a></td>
+                    <td>{{ entity.text }}</td>
+                    {%if entity.reported == 1%}
+                        <td>Yes</td>
+                    {%else%}
+                        <td>No</td>
+                    {%endif%}
+                    <td>{% if entity.date %}{{ entity.date|date('d.m.Y') }}{% endif %}</td>
+                    <td>
+                        <div class="btn-group" role="group" style="color:white">
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+                                <a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">show</a>
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+                                <a href="{{ path('admin_comments_edit', { 'id': entity.idComments }) }}">edit</a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('admin_comments_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
 {% endblock %}
