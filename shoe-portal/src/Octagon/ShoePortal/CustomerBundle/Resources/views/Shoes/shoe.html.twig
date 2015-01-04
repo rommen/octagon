@@ -15,6 +15,8 @@
                 {%else%}
                     <a>image cannot be loaded</a>
                 {%endif%}
+                <br/><br/><br/>
+                {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
             </div>
             <div class="col-lg-8">
                 <table class="table">
