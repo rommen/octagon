@@ -51,6 +51,7 @@
 <div id="newsfeeds" class="left">
     <div >       
         {% for s in statistics %}
+            {{s.idStatisticsHash}}
             <div class="panel panel-default">
                 <div class="panel-heading" id="panelheder" style="padding:0px;">{{s.tile}}</div>
                 <div class="panel-body" id="panelbody">

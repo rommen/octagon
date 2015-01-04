@@ -103,6 +103,15 @@ class Statistics
     {
         return $this->idStatistics;
     }
+    /**
+     * Get BASE 64 of idStatistics
+     *
+     * @return string  
+     */
+    public function getIdStatisticsHash()
+    {
+        return base64_encode($this->idStatistics);
+    }
 
     /**
      * Set idCategories
