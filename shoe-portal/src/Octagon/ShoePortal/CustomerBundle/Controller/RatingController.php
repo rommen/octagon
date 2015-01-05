@@ -23,8 +23,15 @@ class RatingController extends SecureController {
      */
     public function addAction(Request $request) {
         $this->checkIfUserLoggedIn();
+        
+        /*Request
+            value = {1-5}
+            sellerId or shoeId - which is not null is right one
+         */
 
         $rating = new Rating();
+        //set data from request
+        
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($rating);
         $em->flush();
