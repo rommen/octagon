@@ -59,11 +59,20 @@
                             <th>Owner</th>
                             <td><a href="/users/view?id={{shoe.idOwner.idUserHash}}">{{shoe.idOwner.username}}</a></td>
                         </tr>
+                        <tr>
+                            <th>ADD Comments</th>
+                            <td>
+                                <div id="addNewsfeed" style="text-align:right;">
+                                    <a href="{{path('_comments_add')}}">
+                                        <button type="button" class="btn btn-primary">Add</button>
+                                    </a>
+                                </div>
+                            </td>    
+                        </tr>
 
                     </tbody>
                 </table>
                 <br/>
-
             </div>
         </div>
     </div>

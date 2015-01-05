@@ -6,7 +6,6 @@
     </script> 
     <div>
         {% include "CustomerBundle:Users:user_details.html.twig" %} 
-
         <br/><br/>
 
         <div id="lists">&nbsp;
@@ -38,6 +37,7 @@
             </div>
             <div class="clear"></div>
         </div>
+        {% include "CustomerBundle:Comments:list.html.twig" with comments%} 
     </div>
 
 {% endblock %}  

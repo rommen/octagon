@@ -87,9 +87,6 @@ _read_mail:
 _comments_add:
     path:   /comments/add
     defaults: { _controller: CustomerBundle:Comments:add }
-_comments_list:
-    path:   /comments/list
-    defaults: { _controller: CustomerBundle:Comments:list }
 _comments_report:
     path:   /comments/report
     defaults: { _controller: CustomerBundle:Comments:report }
