@@ -2,20 +2,21 @@
 {% block title %}Administration{% endblock%}
 {% block navigation_items %}
     <script>
-        function pushButtonInnerHref(button){
-            $(button).children('a')[0].click();            
+        navigation('nav_admin_page');
+        function pushButtonInnerHref(button) {
+            $(button).children('a')[0].click();
         }
     </script>
-    <li id="nav_home" class="active">
+    <li id="nav_admin_page" class="active">
         <a href="{{path('default_admin_page')}}">Administration</a>
     </li>
     <li id="nav_categories" class="list-group-item"><a href="{{path('admin_categories')}}">Categories</a></li>
     <li id="nav_shoes" class="list-group-item"><a href="{{path('admin_shoe')}}">Shoes</a></li>
     <li id="nav_users" class="list-group-item"><a href="{{path('admin_user')}}">Users</a></li>
-     <li id="nav_newsfeeds" class="list-group-item"><a href="{{path('admin_newsfeed')}}">News Feeds</a></li>
-     <li id="nav_statistics" class="list-group-item"><a href="{{path('admin_statistics')}}">Statistics</a></li>
-     <li id="nav_mailbox" class="list-group-item"><a href="{{path('admin_mailbox')}}">Mailbox</a></li>
-     <li id="nav_comments" class="list-group-item"><a href="{{path('admin_comments')}}">Comments</a></li>
-     <li id="nav_ratings" class="list-group-item"><a href="{{path('admin_rating')}}">Raitings</a></li>
- 
+    <li id="nav_newsfeeds" class="list-group-item"><a href="{{path('admin_newsfeed')}}">News Feeds</a></li>
+    <li id="nav_statistics" class="list-group-item"><a href="{{path('admin_statistics')}}">Statistics</a></li>
+    <li id="nav_mailbox" class="list-group-item"><a href="{{path('admin_mailbox')}}">Mailbox</a></li>
+    <li id="nav_comments" class="list-group-item"><a href="{{path('admin_comments')}}">Comments</a></li>
+    <li id="nav_ratings" class="list-group-item"><a href="{{path('admin_rating')}}">Raitings</a></li>
+
 {% endblock %}
