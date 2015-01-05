@@ -9,7 +9,7 @@
     <id name="idRating" type="integer" column="idRating">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="value" type="boolean" column="value" nullable="false"/>
+    <field name="value" type="integer" column="value" nullable="false"/>
     <many-to-one field="idOwner" target-entity="User">
       <join-columns>
         <join-column name="idOwner" referenced-column-name="idUser"/>

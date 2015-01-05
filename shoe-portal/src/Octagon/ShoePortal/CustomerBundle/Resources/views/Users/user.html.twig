@@ -1,13 +1,22 @@
 {% extends "index.html.twig" %}
 {% block title %}user profile{% endblock%}
+{% block javascripts %}
+    <script src="{{ asset('js/star-rating.min.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('css/star-rating.min.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
 {% block content %}
     <script>
         navigation('nav_users');
     </script> 
     <div>
         {% include "CustomerBundle:Users:user_details.html.twig" %} 
-        <br/><br/>
-
+        {%if app.user != null and user.idUser != app.user.idUser %}
+                <script>$("#input-id").rating();
+                </script>
+                <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs">
+        {%endif%}
         <div id="lists">&nbsp;
             <div>
                 <div id="col1" class="col-md-1">
@@ -37,7 +46,6 @@
             </div>
             <div class="clear"></div>
         </div>
-        {% include "CustomerBundle:Comments:list.html.twig" with comments%} 
     </div>
 
 {% endblock %}  

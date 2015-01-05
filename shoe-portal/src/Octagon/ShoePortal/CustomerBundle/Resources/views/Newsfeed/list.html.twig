@@ -17,8 +17,8 @@
     }
     
     #panelheder{
-        background-color:blue;
         background-color:grey;
+        background-color:black;
         background-clip: content-box;
 
         color:white;
@@ -27,8 +27,8 @@
         padding:5px; 
     }
     #panelbody{
-        background-color:white;
-        background-clip: content-box;
+        background-color:White;
+        //background-clip: content-box;
 
         color:black;
         clear:both;
@@ -72,6 +72,8 @@
                         <a href="/users/view?id={{nf.idOwner.idUserHash}}">{{nf.idOwner.username}}</a>
                         <span>on {{nf.date|date('d.m.Y')}}</span><br/>
                         In <a href="{{path('_newsfeeds')}}?categoryId={{nf.idCategories.idCategoriesHash}}">{{nf.idCategories.name}}</a>
+                        <br/><br/>
+                        {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'url': app.request.uri~'?id='~nf.idNewsfeedHash}%}
                     </div>
                     <div style="float:right;">
                         {%if app.user != null and nf.idOwner.idUser == app.user.idUser %}
@@ -81,7 +83,7 @@
                             <a href="{{path('_newsfeed_delete')}}?id={{ nf.idNewsfeedHash }}">
                                 <button type="button" class="btn btn-primary">Delete</button>
                             </a>
-                        {%endif%}
+                        {%endif%}                        
                     </div>
                     <div class="clear">&nbsp;</div>
                 </div>

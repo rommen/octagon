@@ -35,7 +35,8 @@ body {
 }
 /* Navbar links: increase padding for taller navbar */
 .navbar .nav > li > a {
-    padding: 15px 20px;
+    /*    padding: 15px 20px;*/
+    padding-top: 13px;
 }
 /* Offset the responsive button for proper vertical alignment */
 .navbar .btn-navbar {
@@ -196,7 +197,7 @@ body {
         font-size: 18px;
         line-height: 1.5;
     }
-    
+
     div#myCarousel1 a.carousel-control{ background-image: none;}
 }
 button a{

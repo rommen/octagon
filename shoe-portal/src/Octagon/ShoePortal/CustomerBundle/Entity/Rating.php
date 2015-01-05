@@ -3,6 +3,7 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Rating
@@ -13,9 +14,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Rating
 {
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="value", type="boolean", nullable=false)
+     * @var integer
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "You must enter at least {{ limit }}",
+     *      maxMessage = "You cannot enter more than {{ limit }}"
+     * )
+     * @ORM\Column(name="value", type="integer", nullable=false)
      */
     private $value;
 

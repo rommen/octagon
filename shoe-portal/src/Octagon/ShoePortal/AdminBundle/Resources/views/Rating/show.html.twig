@@ -1,32 +1,46 @@
-{% extends '::base.html.twig' %}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Rating{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_ratings');
+    </script> 
 
-{% block body -%}
-    <h1>Rating</h1>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_rating') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+            <a href="{{ path('admin_rating_edit', { 'id': entity.idRating }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idRating }}</td>
+            </tr>
             <tr>
                 <th>Value</th>
                 <td>{{ entity.value }}</td>
             </tr>
             <tr>
-                <th>Idrating</th>
-                <td>{{ entity.idRating }}</td>
+                <th>Target</th>
+                {%if entity.idSeller != null %}
+                    <td><a href="{{path('_user')}}?id={{entity.idSeller.idUserHash}}">{{ entity.idSeller.username }}</a></td>
+                {%elseif entity.idShoe != null%}
+                    <td><a href="{{path('_shoe')}}?id={{entity.idShoe.idShoeHash}}">{{ entity.idShoe.name }}</a></td>
+                {%else%}
+                    <td>no datф</td>
+                {%endif%}
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_rating') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_rating_edit', { 'id': entity.idRating }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

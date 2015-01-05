@@ -15,21 +15,29 @@ class NewsfeedController extends SecureController {
                 ->select('n')
                 ->from('CustomerBundle:Newsfeed', 'n');
 
-        //WHERE: category
-        $category = $request->get('categoryId');
-        if ($category != null) {
-            $category = base64_decode($category);
-            $qb->where('n.idCategories = :category')
-                    ->setParameter('category', $category);
-        }
+        //WHERE: id
+        $id = $request->get('id');
+        if ($id != null) {
+            $id = base64_decode($id);
+            $qb->where('n.idNewsfeed = :id')
+                    ->setParameter('id', $id);
+        } else {
+            //WHERE: category
+            $category = $request->get('categoryId');
+            if ($category != null) {
+                $category = base64_decode($category);
+                $qb->where('n.idCategories = :category')
+                        ->setParameter('category', $category);
+            }
 
-        $user = $request->get('userId');
-        if ($user != null) {
-            $user = base64_decode($user);
-            $qb->andWhere('n.idOwner = :owner')
-                    ->setParameter('owner', $user);
+            //WHERE: owner
+            $user = $request->get('userId');
+            if ($user != null) {
+                $user = base64_decode($user);
+                $qb->andWhere('n.idOwner = :owner')
+                        ->setParameter('owner', $user);
+            }
         }
-
         $qb->orderBy('n.idNewsfeed', 'DESC');
 
         $news = $qb->getQuery()->getResult();
