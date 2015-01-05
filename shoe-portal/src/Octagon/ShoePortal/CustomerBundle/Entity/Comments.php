@@ -3,6 +3,7 @@
 namespace Octagon\ShoePortal\CustomerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comments
@@ -43,7 +44,7 @@ class Comments
      *   @ORM\JoinColumn(name="idSeller", referencedColumnName="idUser")
      * })
      */
-    private $seller;
+    private $idSeller;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\User
@@ -53,7 +54,7 @@ class Comments
      *   @ORM\JoinColumn(name="idOwner", referencedColumnName="idUser")
      * })
      */
-    private $owner;
+    private $idOwner;
 
     /**
      * @var \Octagon\ShoePortal\CustomerBundle\Entity\Shoe
@@ -63,7 +64,14 @@ class Comments
      *   @ORM\JoinColumn(name="idShoe", referencedColumnName="idShoe")
      * })
      */
-    private $shoe;
+    private $idShoe;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="reported", type="boolean", nullable=false)
+     */
+    private $reported;
 
 
 
@@ -129,9 +137,9 @@ class Comments
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $seller
      * @return Comments
      */
-    public function setSeller(\Octagon\ShoePortal\CustomerBundle\Entity\User $seller = null)
+    public function setIdSeller(\Octagon\ShoePortal\CustomerBundle\Entity\User $idSeller = null)
     {
-        $this->seller = $seller;
+        $this->idSeller = $idSeller;
 
         return $this;
     }
@@ -141,9 +149,9 @@ class Comments
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getSeller()
+    public function getIdSeller()
     {
-        return $this->seller;
+        return $this->idSeller;
     }
 
     /**
@@ -152,9 +160,9 @@ class Comments
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $owner
      * @return Comments
      */
-    public function setOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $owner = null)
+    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
     {
-        $this->owner = $owner;
+        $this->idOwner = $idOwner;
 
         return $this;
     }
@@ -164,20 +172,20 @@ class Comments
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getOwner()
+    public function getIdOwner()
     {
-        return $this->owner;
+        return $this->idOwner;
     }
 
     /**
      * Set shoe
      *
-     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Shoe $shoe
+     * @param \Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idShoe
      * @return Comments
      */
-    public function setShoe(\Octagon\ShoePortal\CustomerBundle\Entity\Shoe $shoe = null)
+    public function setIdShoe(\Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idShoe = null)
     {
-        $this->shoe = $shoe;
+        $this->idShoe = $idShoe;
 
         return $this;
     }
@@ -187,8 +195,30 @@ class Comments
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Shoe 
      */
-    public function getShoe()
+    public function getIdShoe()
     {
-        return $this->shoe;
+        return $this->idShoe;
+    }
+    
+    
+    /**
+     * Set reported
+     *
+     * @param boolean $reported
+     * @return Mailbox
+     */
+    public function setReported($reported) {
+        $this->reported = $reported;
+
+        return $this;
+    }
+
+    /**
+     * Get reported
+     *
+     * @return boolean 
+     */
+    public function getReported() {
+        return $this->reported;
     }
 }

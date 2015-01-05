@@ -56,6 +56,8 @@
                 <div class="panel-body" id="panelbody">
                     {{s.text}}<br/>
                     In <a href="{{path('_statistics')}}?categoryId={{s.idCategories.idCategoriesHash}}">{{s.idCategories.name}}</a>
+                    <br/><br/>
+                    {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'url': app.request.uri~'?id='~s.idStatisticsHash}%}
                 </div>
             </div>
         {% endfor %}        

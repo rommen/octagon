@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Octagon\ShoePortal\CustomerBundle\Entity\Rating;
-use Octagon\ShoePortal\CustomerBundle\Form\RatingType;
+use Octagon\ShoePortal\AdminBundle\Form\RatingType;
 
 /**
  * Rating controller.
@@ -45,15 +45,17 @@ class RatingController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Rating();
+        $entity->setIdOwner($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setIdOwner($this->getUser());
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_rating_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_rating_show', array('id' => $entity->getIdRating())));
         }
 
         return array(
@@ -91,6 +93,7 @@ class RatingController extends Controller
     public function newAction()
     {
         $entity = new Rating();
+        $entity->setIdOwner($this->getUser());
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -161,7 +164,7 @@ class RatingController extends Controller
     private function createEditForm(Rating $entity)
     {
         $form = $this->createForm(new RatingType(), $entity, array(
-            'action' => $this->generateUrl('admin_rating_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_rating_update', array('id' => $entity->getIdRating())),
             'method' => 'PUT',
         ));
 
@@ -191,6 +194,7 @@ class RatingController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setIdOwner($this->getUser());
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_rating_edit', array('id' => $id)));

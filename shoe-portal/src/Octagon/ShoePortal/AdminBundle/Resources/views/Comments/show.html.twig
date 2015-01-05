@@ -1,36 +1,48 @@
-{% extends '::base.html.twig' %}
+{% extends "AdminBundle:Default:index_admin.html.twig" %}
+{% block title %}Comment{% endblock%}
+{% block content %}
+    <script>
+        navigation('nav_comments');
+    </script> 
 
-{% block body -%}
-    <h1>Comments</h1>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);"> 
+            <a href="{{ path('admin_comments') }}">
+                Back to the list
+            </a>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="pushButtonInnerHref(this);">
+            <a href="{{ path('admin_comments_edit', { 'id': entity.idComments }) }}">
+                Edit
+            </a>
+        </button>
+        <div>
+            {{ form(delete_form) }}
+        </div>
+    </div>
 
-    <table class="record_properties">
+    <table class="table record_properties">
         <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.idComments }}</td>
+            </tr>
             <tr>
                 <th>Text</th>
                 <td>{{ entity.text }}</td>
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.date|date('d.m.Y') }}</td>
             </tr>
             <tr>
-                <th>Idcomments</th>
-                <td>{{ entity.idComments }}</td>
+                <th>Reported</th>
+                {%if entity.reported == 1%}
+                    <td>Yes</td>
+                {%else%}
+                    <td>No</td>
+                {%endif%}
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_comments') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_comments_edit', { 'id': entity.idComments }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

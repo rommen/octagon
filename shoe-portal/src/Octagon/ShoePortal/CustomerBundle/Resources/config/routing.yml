@@ -83,3 +83,23 @@ _read_mail:
     path:   /mails/read
     defaults: { _controller: CustomerBundle:Mailbox:read }
     
+#Comments
+_comments_add:
+    path:   /comments/add
+    defaults: { _controller: CustomerBundle:Comments:add }
+_comments_list:
+    path:   /comments/list
+    defaults: { _controller: CustomerBundle:Comments:list }
+_comments_report:
+    path:   /comments/report
+    defaults: { _controller: CustomerBundle:Comments:report }
+#Rating
+_rating_add:
+    path:   /rating/add
+    defaults: { _controller: CustomerBundle:Rating:add }
+_rating_list:
+    path:   /rating/list
+    defaults: { _controller: CustomerBundle:Rating:list }
+    
+#Share
+#no special routings required

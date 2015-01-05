@@ -16,10 +16,11 @@ class CommentsType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('date')
-            ->add('idseller')
-            ->add('idOwner')
-            ->add('idShoe')
+            ->add('idSeller', null, array('label'=> 'Seller'))
+            ->add('idShoe', null, array('label'=> 'Shoe'))
+            ->add('reported', null, array('label'=> 'Reported', 'required' => false))
+//            ->add('date', 'hidden')
+//            ->add('idOwner', 'hidden')
         ;
     }
     

@@ -11,7 +11,8 @@
     </id>
     <field name="text" type="text" column="text" nullable="false"/>
     <field name="date" type="date" column="date" nullable="false"/>
-    <many-to-one field="idseller" target-entity="User">
+    <field name="reported" type="boolean" column="reported" nullable="false"/>
+    <many-to-one field="idSeller" target-entity="User">
       <join-columns>
         <join-column name="idSeller" referenced-column-name="idUser"/>
       </join-columns>

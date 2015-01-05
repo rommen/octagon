@@ -15,21 +15,29 @@ class NewsfeedController extends SecureController {
                 ->select('n')
                 ->from('CustomerBundle:Newsfeed', 'n');
 
-        //WHERE: category
-        $category = $request->get('categoryId');
-        if ($category != null) {
-            $category = base64_decode($category);
-            $qb->where('n.idCategories = :category')
-                    ->setParameter('category', $category);
-        }
+        //WHERE: id
+        $id = $request->get('id');
+        if ($id != null) {
+            $id = base64_decode($id);
+            $qb->where('n.idNewsfeed = :id')
+                    ->setParameter('id', $id);
+        } else {
+            //WHERE: category
+            $category = $request->get('categoryId');
+            if ($category != null) {
+                $category = base64_decode($category);
+                $qb->where('n.idCategories = :category')
+                        ->setParameter('category', $category);
+            }
 
-        $user = $request->get('userId');
-        if ($user != null) {
-            $user = base64_decode($user);
-            $qb->andWhere('n.idOwner = :owner')
-                    ->setParameter('owner', $user);
+            //WHERE: owner
+            $user = $request->get('userId');
+            if ($user != null) {
+                $user = base64_decode($user);
+                $qb->andWhere('n.idOwner = :owner')
+                        ->setParameter('owner', $user);
+            }
         }
-
         $qb->orderBy('n.idNewsfeed', 'DESC');
 
         $news = $qb->getQuery()->getResult();
@@ -109,11 +117,6 @@ class NewsfeedController extends SecureController {
             $form->handleRequest($request); //map request to form
 
             if ($form->isValid()) {//validate form
-                $em->persist($newsfeed); //update user
-                $em->flush(); //commit
-
-                return $this->redirect('newsfeed/list' . $newsfeed->getIdNewsfeedHash());
-
                 $newsfeed->setDate(new \DateTime());
                 $em->persist($newsfeed); //update user
                 $em->flush(); //commit
@@ -146,7 +149,7 @@ class NewsfeedController extends SecureController {
             $em->persist($newsfeed);
             $em->flush();
 
-            return $this->redirect('/newsfeed/list?id=' . $newsfeed->getIdNewsfeedHash());
+            return $this->redirect('/newsfeed/list');
         }
         return $this->render('CustomerBundle:Newsfeed:newsfeed_add.html.twig', array('form' => $form->createView()));
     }

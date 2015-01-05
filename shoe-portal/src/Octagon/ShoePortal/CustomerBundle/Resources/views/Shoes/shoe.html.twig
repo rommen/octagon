@@ -1,5 +1,11 @@
 {% extends "index.html.twig" %}
 {% block title %}Shoes{% endblock%}
+{% block javascripts %}
+    <script src="{{ asset('js/star-rating.min.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('css/star-rating.min.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
 {% block content %}
     <script>
         navigation('nav_shoes');
@@ -15,6 +21,14 @@
                 {%else%}
                     <a>image cannot be loaded</a>
                 {%endif%}
+                <br/><br/>
+                {%if app.user != null and shoe.idOwner.idUser != app.user.idUser %}
+                <script>$("#input-id").rating();
+                </script>
+                <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs">
+                <br/>
+                {%endif%} 
+                {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
             </div>
             <div class="col-lg-8">
                 <table class="table">
