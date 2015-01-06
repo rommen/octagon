@@ -62,9 +62,24 @@ class UsersController extends SecureController {
 
         $newsfeeds = $qb->getQuery()->getResult();
 
+        //select user comments
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder()
+                ->select('c')
+                ->from('CustomerBundle:Comments', 'c')
+                ->where('c.idSeller = :seller')
+                ->setParameter('seller', $id);
 
 
-        return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user, 'shoes' => $shoes, 'newsfeeds' => $newsfeeds));
+        $qb->orderBy('c.idComments', 'DESC');
+
+        $comments = $qb->getQuery()->getResult();
+
+
+
+        return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user,
+                    'shoes' => $shoes, 'newsfeeds' => $newsfeeds,
+                    'comments' => $comments));
     }
 
     public function registerAction(Request $request) {

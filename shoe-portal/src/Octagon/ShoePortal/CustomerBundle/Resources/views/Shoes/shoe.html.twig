@@ -21,7 +21,13 @@
                 {%else%}
                     <a>image cannot be loaded</a>
                 {%endif%}
-                <br/><br/><br/>
+                <br/><br/>
+                {%if app.user != null and shoe.idOwner.idUser != app.user.idUser %}
+                <script>$("#input-id").rating();
+                </script>
+                <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs">
+                <br/>
+                {%endif%} 
                 {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
             </div>
             <div class="col-lg-8">
@@ -67,11 +73,20 @@
                             <th>Owner</th>
                             <td><a href="/users/view?id={{shoe.idOwner.idUserHash}}">{{shoe.idOwner.username}}</a></td>
                         </tr>
+                        <tr>
+                            <th>ADD Comments</th>
+                            <td>
+                                <div id="addNewsfeed" style="text-align:right;">
+                                    <a href="{{path('_comments_add')}}">
+                                        <button type="button" class="btn btn-primary">Add</button>
+                                    </a>
+                                </div>
+                            </td>    
+                        </tr>
 
                     </tbody>
                 </table>
                 <br/>
-
             </div>
         </div>
     </div>

@@ -12,9 +12,16 @@
     </script> 
     <div>
         {% include "CustomerBundle:Users:user_details.html.twig" %} 
-
-        <br/><br/>
-
+        {%if app.user != null and user.idUser != app.user.idUser %}
+            <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="3.3"/>
+            <script>
+                $("#input-1").rating({showClear:false});
+                
+                $('#input-1').on('rating.change', function (event, value, caption) {
+                    $.ajax({url: '{{path('_rating_add')}}?sellerId={{user.idUserHash}}&value=' + value});
+                });
+            </script>
+        {%endif%}
         <div id="lists">&nbsp;
             <div>
                 <div id="col1" class="col-md-1">
@@ -24,7 +31,8 @@
                     {% include 'CustomerBundle:Shoes:list.html.twig' with shoes %} 
                 </div>
                 <div class="col-md-3">
-                    {% include 'CustomerBundle:Newsfeed:list.html.twig' with newsfeeds %}   </div>
+                    {% include 'CustomerBundle:Newsfeed:list.html.twig' with newsfeeds %} 
+                </div>
                 <style>
                     #shoes, #newsfeeds, #statistics{
                         width: 100%;
@@ -45,6 +53,7 @@
             <div class="clear"></div>
         </div>
     </div>
+    {% include 'CustomerBundle:Comments:list.html.twig' with comments %} 
 
 {% endblock %}  
 
