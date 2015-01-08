@@ -3,6 +3,7 @@
 namespace Octagon\ShoePortal\CustomerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\Query\Expr\Join;
 
 class HomeController extends Controller {
 
@@ -12,9 +13,12 @@ class HomeController extends Controller {
         
         //Shoes
         $qb = $em->createQueryBuilder()
-                ->select('s')
+                ->select(['s', 'AVG(r.value)'])
                 ->from('CustomerBundle:Shoe', 's')
-                ->orderBy('s.idShoe', 'DESC');
+                ->leftJoin('CustomerBundle:Rating', 'r', Join::WITH, 's.idShoe = r.idShoe')
+                ->addSelect('AVG(r.value) AS HIDDEN r_avg')
+                ->groupBy('s.idShoe')
+                ->orderBy('r_avg', 'ASC');
         $shoes = $qb->getQuery()->setMaxResults(10)->getResult();
         
         //Newsfeeds

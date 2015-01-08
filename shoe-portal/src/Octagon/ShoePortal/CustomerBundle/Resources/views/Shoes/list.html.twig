@@ -45,7 +45,8 @@
 </script>
 <div id="shoes" class="left">
     <div class="row">
-        {% for shoe in shoes %}
+        {% for i in shoes %}
+            {% set shoe = i[0]%}
             <a href="/shoes/view?id={{shoe.idShoeHash}}">
                 <div class="item">
                     <div class="well">
@@ -61,11 +62,19 @@
                             <div class="tileTextSecondRow">
                                 <span class="shoePrice">{{shoe.price}} €</span>
                             </div>
+                            <div class="rate-row">
+                                <input class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="{{i[1]}}"/>
+                                <br/>
+                            </div>
                         </div>
                     </div>
                 </div>        
-            </a>
+            </a>           
         {% endfor %}        
     </div>
-
+    <script>
+        $('input.rating').each(function () {
+            $(this).rating('refresh', {readonly: true, showClear: false, showCaption: true});
+        });
+    </script>
 </div>
