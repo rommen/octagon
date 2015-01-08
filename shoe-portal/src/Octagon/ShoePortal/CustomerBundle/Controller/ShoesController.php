@@ -36,7 +36,7 @@ class ShoesController extends SecureController {
         }
 
         $qb->groupBy('s.idShoe')
-                ->orderBy('avgRate', 'ASC');
+            ->orderBy('avgRate', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
 

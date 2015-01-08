@@ -18,7 +18,7 @@ class HomeController extends Controller {
                 ->leftJoin('CustomerBundle:Rating', 'r', Join::WITH, 's.idShoe = r.idShoe')
                 ->addSelect('AVG(r.value) AS HIDDEN r_avg')
                 ->groupBy('s.idShoe')
-                ->orderBy('r_avg', 'ASC');
+                ->orderBy('r_avg', 'DESC');
         $shoes = $qb->getQuery()->setMaxResults(10)->getResult();
         
         //Newsfeeds
