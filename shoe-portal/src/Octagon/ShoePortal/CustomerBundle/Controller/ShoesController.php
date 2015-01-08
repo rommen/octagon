@@ -14,10 +14,10 @@ class ShoesController extends SecureController {
         $em = $this->getDoctrine()->getManager();
 
         $qb = $em->createQueryBuilder()
-        ->select(['s', 'AVG(r.value)'])
-        ->from('CustomerBundle:Shoe', 's')
-        ->leftJoin('CustomerBundle:Rating', 'r', Join::WITH, 's.idShoe = r.idShoe')
-        ->addSelect('AVG(r.value) AS HIDDEN avgRate');
+                ->select(['s', 'AVG(r.value)'])
+                ->from('CustomerBundle:Shoe', 's')
+                ->leftJoin('CustomerBundle:Rating', 'r', Join::WITH, 's.idShoe = r.idShoe')
+                ->addSelect('AVG(r.value) AS HIDDEN avgRate');
 
 
         //WHERE: category
@@ -36,7 +36,7 @@ class ShoesController extends SecureController {
         }
 
         $qb->groupBy('s.idShoe')
-            ->orderBy('avgRate', 'DESC');
+                ->orderBy('avgRate', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
 
@@ -49,7 +49,20 @@ class ShoesController extends SecureController {
             $id = base64_decode($id);
             $shoe = $this->getDoctrine()
                             ->getRepository('CustomerBundle:Shoe')->find($id);
-            return $this->render('CustomerBundle:Shoes:shoe.html.twig', array('shoe' => $shoe));
+
+            //select user comments
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder()
+                    ->select('c')
+                    ->from('CustomerBundle:Comments', 'c')
+                    ->where('c.idShoe = :shoe')
+                    ->setParameter('shoe', $id);
+
+            $qb->orderBy('c.date', 'DESC');
+            $comments = $qb->getQuery()->getResult();
+            
+            return $this->render('CustomerBundle:Shoes:shoe.html.twig', 
+                    array('shoe' => $shoe, 'comments' => $comments));
         } else {
             throw $this->createNotFoundException('Shoe not found');
         }

@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="Comments", indexes={@ORM\Index(name="fk_Comments_User1_idx", columns={"idOwner"}), @ORM\Index(name="fk_Comments_User2_idx", columns={"idSeller"}), @ORM\Index(name="fk_Comments_Shoe1_idx", columns={"idShoe"})})
  * @ORM\Entity
  */
-class Comments
-{
+class Comments {
+
     /**
      * @var string
      *
@@ -65,7 +65,7 @@ class Comments
      * })
      */
     private $idShoe;
-    
+
     /**
      * @var boolean
      *
@@ -73,16 +73,13 @@ class Comments
      */
     private $reported;
 
-
-
     /**
      * Set text
      *
      * @param string $text
      * @return Comments
      */
-    public function setText($text)
-    {
+    public function setText($text) {
         $this->text = $text;
 
         return $this;
@@ -93,8 +90,7 @@ class Comments
      *
      * @return string 
      */
-    public function getText()
-    {
+    public function getText() {
         return $this->text;
     }
 
@@ -104,8 +100,7 @@ class Comments
      * @param \DateTime $date
      * @return Comments
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -116,8 +111,7 @@ class Comments
      *
      * @return \DateTime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -126,9 +120,17 @@ class Comments
      *
      * @return integer 
      */
-    public function getIdComments()
-    {
+    public function getIdComments() {
         return $this->idComments;
+    }
+
+    /**
+     * Get Base64 of idComments
+     *
+     * @return integer 
+     */
+    public function getIdCommentsHash() {
+        return base64_encode($this->idComments);
     }
 
     /**
@@ -137,8 +139,7 @@ class Comments
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $seller
      * @return Comments
      */
-    public function setIdSeller(\Octagon\ShoePortal\CustomerBundle\Entity\User $idSeller = null)
-    {
+    public function setIdSeller(\Octagon\ShoePortal\CustomerBundle\Entity\User $idSeller = null) {
         $this->idSeller = $idSeller;
 
         return $this;
@@ -149,8 +150,7 @@ class Comments
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdSeller()
-    {
+    public function getIdSeller() {
         return $this->idSeller;
     }
 
@@ -160,8 +160,7 @@ class Comments
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\User $owner
      * @return Comments
      */
-    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null)
-    {
+    public function setIdOwner(\Octagon\ShoePortal\CustomerBundle\Entity\User $idOwner = null) {
         $this->idOwner = $idOwner;
 
         return $this;
@@ -172,8 +171,7 @@ class Comments
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\User 
      */
-    public function getIdOwner()
-    {
+    public function getIdOwner() {
         return $this->idOwner;
     }
 
@@ -183,8 +181,7 @@ class Comments
      * @param \Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idShoe
      * @return Comments
      */
-    public function setIdShoe(\Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idShoe = null)
-    {
+    public function setIdShoe(\Octagon\ShoePortal\CustomerBundle\Entity\Shoe $idShoe = null) {
         $this->idShoe = $idShoe;
 
         return $this;
@@ -195,12 +192,10 @@ class Comments
      *
      * @return \Octagon\ShoePortal\CustomerBundle\Entity\Shoe 
      */
-    public function getIdShoe()
-    {
+    public function getIdShoe() {
         return $this->idShoe;
     }
-    
-    
+
     /**
      * Set reported
      *
@@ -221,4 +216,5 @@ class Comments
     public function getReported() {
         return $this->reported;
     }
+
 }

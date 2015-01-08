@@ -75,8 +75,7 @@ class UsersController extends SecureController {
                 ->setParameter('seller', $id);
 
 
-        $qb->orderBy('c.idComments', 'DESC');
-
+        $qb->orderBy('c.date', 'DESC');
         $comments = $qb->getQuery()->getResult();
 
 

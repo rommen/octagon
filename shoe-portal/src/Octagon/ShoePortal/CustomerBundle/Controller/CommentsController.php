@@ -5,6 +5,7 @@ namespace Octagon\ShoePortal\CustomerBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Octagon\ShoePortal\CustomerBundle\Entity\Comments;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Description of CommentsController
@@ -22,33 +23,44 @@ class CommentsController extends SecureController {
     public function addAction(Request $request) {
         $this->checkIfUserLoggedIn();
 
-        //Shoe
-        $comments = new Comments();
-        $comments->setIdOwner($this->getUser());
+        $em = $this->getDoctrine()->getManager();
+        //Comment
+        $comment = new Comments();
+        $comment->setDate(new \DateTime());
+        $comment->setReported(false);
+        $comment->setIdOwner($this->getUser());
+        $comment->setText($request->get('text'));
 
-        $form = $this->createCommentsForm($comments);
-        $form->setAction($this->generateUrl('_comments_add'));
-        $form->add('submit', 'submit', array('label' => 'Add'));
-        $form = $form->getForm();
-
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $comments->setDate(new \DateTime());
-
-            $em->persist($comments);
-            $em->flush();
-
-            return $this->redirect('/comments/list');
+        $id = $request->get('sellerId');
+        if ($id == null) {
+            $id = base64_decode($request->get('shoeId'));
+            
+            $qb = $em->createQueryBuilder()
+                ->select('s')
+                ->from('CustomerBundle:Shoe', 's')
+                ->where('s.idShoe = :id')
+                ->setParameter('id', $id);
+            $idShoe = $qb->getQuery()->getOneOrNullResult();
+            $comment->setIdShoe($idShoe);
+        } else {
+            $id = base64_decode($id);
+            $qb = $em->createQueryBuilder()
+                ->select('s')
+                ->from('CustomerBundle:User', 's')
+                ->where('s.idUser = :id')
+                ->setParameter('id', $id);
+            $idSeller = $qb->getQuery()->getOneOrNullResult();
+            $comment->setIdSeller($idSeller);
         }
-        return $this->render('CustomerBundle:Comments:comments_add.html.twig', array('form' => $form->createView()));
-    }
 
-    private function createCommentsForm(Comments $comments) {
-        return $this->createFormBuilder($comments)
-                        ->add('idComments', 'hidden')
-                        ->add('text')
-                        ->setMethod('POST');
+        $em->persist($comment);
+        $em->flush();
+
+        if($comment->getIdSeller() != null){
+            return $this->redirect('/users/view?id=' . base64_encode($id));            
+        }else{
+            return $this->redirect('/shoes/view?id=' . base64_encode($id));            
+        }        
     }
 
     /**
@@ -58,7 +70,19 @@ class CommentsController extends SecureController {
      * --id - hash of the comment id
      */
     public function reportAction(Request $request) {
-        
+        $id = base64_decode($request->get('id'));
+        if ($id != null) {
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder()
+                            ->update('CustomerBundle:Comments c')
+                            ->where('c.idComments = :id')
+                            ->setParameter('id', $id)
+                            ->set('c.reported', true)
+                            ->getQuery()->execute();
+            return new Response('Reported successfully');
+        } else {
+            throw $this->createNotFoundException('Id not found');
+        }
     }
 
 }

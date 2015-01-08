@@ -53,7 +53,8 @@
             <div class="clear"></div>
         </div>
     </div>
-    {% include 'CustomerBundle:Comments:list.html.twig' with comments %} 
-
+    {% include 'CustomerBundle:Comments:list.html.twig' with comments %}
+    {% include 'CustomerBundle:Comments:comments_add.html.twig' with {'sellerId':user.idUserHash}%} 
+    
 {% endblock %}  
 
