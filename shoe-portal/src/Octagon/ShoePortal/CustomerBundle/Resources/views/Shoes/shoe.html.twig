@@ -23,11 +23,14 @@
                 {%endif%}
                 <br/><br/>
                 {%if app.user != null and shoe.idOwner.idUser != app.user.idUser %}
-                    <script>
-                        $("#input-id").rating();
-                    </script>
-                    <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs">
-                    <br/>
+                   <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="3.3"/>
+            <script>
+                $("#input-1").rating({showClear:false});
+                
+                $('#input-1').on('rating.change', function (event, value, caption) {
+                    $.ajax({url: '{{path('_rating_add')}}?shoeId={{shoe.idShoeHash}}&value=' + value});
+                });
+            </script>
                 {%endif%} 
                 {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
                 {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
