@@ -49,7 +49,6 @@ class CommentsController extends SecureController {
         return $this->createFormBuilder($comments)
                         ->add('idComments', 'hidden')
                         ->add('text')
-                        ->add('date')
                         ->setMethod('POST');
     }
 
