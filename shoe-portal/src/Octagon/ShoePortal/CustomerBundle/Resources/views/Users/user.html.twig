@@ -19,6 +19,7 @@
                 
                 $('#input-1').on('rating.change', function (event, value, caption) {
                     $.ajax({url: '{{path('_rating_add')}}?sellerId={{user.idUserHash}}&value=' + value});
+                    $("#input-1").rating('refresh',{readonly:true});
                 });
             </script>
         {%endif%}

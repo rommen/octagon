@@ -29,6 +29,7 @@
                 
                 $('#input-1').on('rating.change', function (event, value, caption) {
                     $.ajax({url: '{{path('_rating_add')}}?shoeId={{shoe.idShoeHash}}&value=' + value});
+                $("#input-1").rating('refresh',{readonly:true});
                 });
             </script>
                 {%endif%} 
