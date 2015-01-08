@@ -131,12 +131,6 @@ class Shoe extends UploadableEntity {
     private $idCategories;
 
     /**
-     *
-     * @var decimal
-     */
-    private $avgRate = 0;
-
-    /**
      * Set name
      *
      * @param string $name
@@ -444,13 +438,4 @@ class Shoe extends UploadableEntity {
     public function __toString() {
         return $this->name == null ? "" : $this->name;
     }
-
-    function getAvgRate() {
-        return $this->avgRate;
-    }
-
-    function setAvgRate(decimal $avgRate) {
-        $this->avgRate = $avgRate;
-    }
-
 }
