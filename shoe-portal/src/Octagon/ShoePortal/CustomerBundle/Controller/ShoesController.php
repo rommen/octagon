@@ -6,14 +6,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Octagon\ShoePortal\CustomerBundle\Entity\Shoe;
 use Octagon\ShoePortal\CustomerBundle\Entity\User;
+use Doctrine\ORM\Query\Expr\Join;
 
 class ShoesController extends SecureController {
 
     public function listAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
+
         $qb = $em->createQueryBuilder()
-                ->select('s')
-                ->from('CustomerBundle:Shoe', 's');
+        ->select(['s', 'AVG(r.value)'])
+        ->from('CustomerBundle:Shoe', 's')
+        ->leftJoin('CustomerBundle:Rating', 'r', Join::WITH, 's.idShoe = r.idShoe')
+        ->addSelect('AVG(r.value) AS HIDDEN avgRate');
+
 
         //WHERE: category
         $category = $request->get('categoryId');
@@ -30,7 +35,8 @@ class ShoesController extends SecureController {
                     ->setParameter('owner', $user);
         }
 
-        $qb->orderBy('s.idShoe', 'DESC');
+        $qb->groupBy('s.idShoe')
+            ->orderBy('avgRate', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
 

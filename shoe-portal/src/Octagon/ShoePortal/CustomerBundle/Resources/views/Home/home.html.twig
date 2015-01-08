@@ -1,7 +1,12 @@
 {% extends "index.html.twig" %}
 {% block title %}Welcome{% endblock%}
+{% block javascripts %}
+    <script src="{{ asset('js/star-rating.min.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('css/star-rating.min.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
 {% block header %} <!-- Carousel -->
-
 
     <div class="new_html_code">
         <div id="myCarousel1" class="carousel slide">
@@ -66,7 +71,7 @@
                         #col1, #col2>div{
                             border-right: 1px solid darkgrey;
                         }
-                        
+
                         #col2>div{
                             padding-right:10px;
                         }

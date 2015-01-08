@@ -4,6 +4,7 @@ namespace Octagon\ShoePortal\CustomerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Octagon\ShoePortal\CustomerBundle\Entity\User;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * Description of UserController
@@ -27,8 +28,10 @@ class UsersController extends SecureController {
         //select user shoes
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder()
-                ->select('s')
+                ->select(['s', 'AVG(r.value)'])
                 ->from('CustomerBundle:Shoe', 's')
+                ->leftJoin('CustomerBundle:Rating', 'r', Join::WITH, 's.idShoe = r.idShoe')
+                ->addSelect('AVG(r.value) AS HIDDEN avgRate')
                 ->where('s.idOwner = :owner')
                 ->setParameter('owner', $user->getIdUser());
 
@@ -39,7 +42,8 @@ class UsersController extends SecureController {
             $qb->andWhere('s.idCategories = :category')
                     ->setParameter('category', $category);
         }
-        $qb->orderBy('s.idShoe', 'DESC');
+        $qb->groupBy('s.idShoe')
+                ->orderBy('avgRate', 'DESC');
 
         $shoes = $qb->getQuery()->getResult();
 

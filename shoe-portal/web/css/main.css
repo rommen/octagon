@@ -41,3 +41,10 @@ body{
     clear: both;    
 }
 
+.share_twitter{
+    margin-right:7px;
+}
+.share_twitter, share_facebook{
+    float:left;
+}
+

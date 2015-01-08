@@ -14,6 +14,7 @@
             <tr>
                 <th>ID</th>
                 <th>Text</th>
+                <th>Target</th>
                 <th>Reported</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -24,6 +25,13 @@
                 <tr>
                     <td><a href="{{ path('admin_comments_show', { 'id': entity.idComments }) }}">{{ entity.idComments }}</a></td>
                     <td>{{ entity.text }}</td>
+                    {%if entity.idSeller != null %}
+                        <td><a href="{{path('_user')}}?id={{entity.idSeller.idUserHash}}">{{ entity.idSeller.username }}</a></td>
+                        {%elseif entity.idShoe != null%}
+                        <td><a href="{{path('_shoe')}}?id={{entity.idShoe.idShoeHash}}">{{ entity.idShoe.name }}</a></td>
+                        {%else%}
+                        <td>no data</td>
+                    {%endif%}
                     {%if entity.reported == 1%}
                         <td>Yes</td>
                     {%else%}
