@@ -12,9 +12,9 @@
     </script> 
 
     <div class="container-fluid">        
-        <div class="col-lg-12">
+        <div class="col-lg-10">
 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
                 {%if shoe != null %}
                     <img src="{{ asset('images/uploads/')}}{{shoe.fullFileName}}"  onerror="imgError(this);" alt="No shoe image"/>                                
 
@@ -29,6 +29,7 @@
                 <br/>
                 {%endif%} 
                 {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
+                {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
             </div>
             <div class="col-lg-8">
                 <table class="table">

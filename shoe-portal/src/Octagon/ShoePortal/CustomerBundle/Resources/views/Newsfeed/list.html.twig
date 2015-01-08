@@ -74,7 +74,7 @@
                         In <a href="{{path('_newsfeeds')}}?categoryId={{nf.idCategories.idCategoriesHash}}">{{nf.idCategories.name}}</a>
                         <br/><br/>
                         {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'url': app.request.uri~'?id='~nf.idNewsfeedHash}%}
-                                       {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'url': app.request.schemeAndHttpHost~app.request.uri~'?id='~nf.idNewsfeedHash}%}
+                        {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'url':  app.request.uri~'?id='~nf.idNewsfeedHash}%}
 
                     </div>
                     <div style="float:right;">

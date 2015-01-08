@@ -61,13 +61,11 @@
                             <div class="tileTextSecondRow">
                                 <span class="shoePrice">{{shoe.price}} €</span>
                             </div>
-                                                                   {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'url': app.request.schemeAndHttpHost~app.request.uri~'?id='~shoe.idShoeHash}%}
-
                         </div>
                     </div>
                 </div>        
             </a>
         {% endfor %}        
     </div>
-    
+
 </div>
