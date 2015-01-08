@@ -110,6 +110,7 @@
         {%endif%}
     </div>
     {% include 'CustomerBundle:Comments:list.html.twig' with comments %} 
+    {% include 'CustomerBundle:Comments:comments_add.html.twig' with {'shoeId':shoe.idShoeHash}%} 
 {% endblock %}  
 
 

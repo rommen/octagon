@@ -20,7 +20,7 @@
             <div class="comment">
                 <div class="avatar col-lg-2">
                     {%if c.idOwner.avatar != null and c.idOwner.fullFileName != null%}
-                        <img style="height: 100px;" src="{{ asset('images/uploads/')}}{{user.fullFileName}}"/>
+                        <img style="height: 100px;" src="{{ asset('images/uploads/')}}{{c.idOwner.fullFileName}}"/>
                     {%else%}
                         <img style="height: 100px;" src="{{ asset('images/avatar.jpg')}}"/>
                     {%endif%}
@@ -48,5 +48,4 @@
             </div>
         {% endfor %}  
     </div>
-    {{render(controller('CustomerBundle:Comments:add'))}}
 </div>
