@@ -5,6 +5,7 @@ namespace Octagon\ShoePortal\CustomerBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Octagon\ShoePortal\CustomerBundle\Entity\Comments;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Description of CommentsController
@@ -59,7 +60,19 @@ class CommentsController extends SecureController {
      * --id - hash of the comment id
      */
     public function reportAction(Request $request) {
-        
+        $id = base64_decode($request->get('id'));
+        if ($id != null) {
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder()
+                ->update('CustomerBundle:Comments c')
+                ->where('c.idComments = :id')
+                ->setParameter('id', $id)
+                ->set('c.reported', true)
+                ->getQuery()->execute();
+            return new Response('Reported successfully');
+        } else {
+            throw $this->createNotFoundException('Id not found');
+        }
     }
 
 }

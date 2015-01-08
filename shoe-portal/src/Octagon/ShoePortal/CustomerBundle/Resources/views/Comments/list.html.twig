@@ -1,18 +1,52 @@
 <div id="comments">
-    {% for c in comments %}
-        <div class="panel panel-default">
-            <div class="panel-heading" id="panelheder" style="padding:0px;">user comments</div>
-            <div class="panel-body" id="panelbody">
-                {{c.text}}
-            </div>
-            <div class="panel-footer" id="panelfooter">
-                <div style="float:left;">
-
-                    <span>on {{c.date|date('d.m.Y')}}</span><br/>                  
+    <style>
+        #comments{
+            margin-top: 15px;
+        }
+        .comment{
+            border:1px solid lightgrey;
+            margin: 10px;
+            padding: 10px;
+        }
+        .avatar{
+            margin:5px;
+        }
+        .comment-owner{
+            margin-top: 5px;
+        }
+    </style>
+    <div id="comments-list">
+        {% for c in comments %}
+            <div class="comment">
+                <div class="avatar col-lg-2">
+                    {%if c.idOwner.avatar != null and c.idOwner.fullFileName != null%}
+                        <img style="height: 100px;" src="{{ asset('images/uploads/')}}{{user.fullFileName}}"/>
+                    {%else%}
+                        <img style="height: 100px;" src="{{ asset('images/avatar.jpg')}}"/>
+                    {%endif%}
+                    <div class="comment-owner">
+                        <span>
+                            <a href="{{path('_user')}}?id={{c.idOwner.idUserHash}}">
+                                {{c.idOwner.username}}
+                            </a>
+                        </span>
+                        <span>on {{c.date|date('d.m.Y')}}</span>
+                    </div>
                 </div>
-
+                <div class="comment-body">
+                    <div class="comment-text">{{c.text}}</div>
+                    {%if c.idOwner.avatar%}
+                        <div class="comment-report" style="float:right">
+                            
+                            <button type="button" class="btn btn-primary" onclick="$.ajax({url: '{{path('_comments_report')}}?id={{ c.idCommentsHash }}'})">
+                                Report
+                            </button>
+                        </div>
+                    {%endif%}
+                </div>
+                <div class="clear" style="height:1px;">&nbsp;</div>
             </div>
-        </div>
-    {% endfor %}  
+        {% endfor %}  
+    </div>
     {{render(controller('CustomerBundle:Comments:add'))}}
 </div>

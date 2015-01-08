@@ -3,10 +3,8 @@
 {% block content %}
     <script>
         navigation('nav_newsfeeds');
-<<<<<<< HEAD
     </script>
     <div  class="page_container">
-=======
     </script> 
     <style>
         #newsfeeds{
@@ -15,7 +13,6 @@
     }
     </style>
     <div id="newsfeeds" class="page_container">
->>>>>>> a258517a6cedc5707f3f8e2aac6a776503c53b89
         {{render(controller('CustomerBundle:Categories:list', {'categoryId' : app.request.get('categoryId')})) }}
         {% include "CustomerBundle:Newsfeed:list.html.twig" with newsfeeds%}       
     </div>
