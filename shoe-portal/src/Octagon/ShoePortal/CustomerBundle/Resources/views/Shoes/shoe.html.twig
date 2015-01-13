@@ -13,7 +13,6 @@
 
     <div class="container-fluid">        
         <div class="col-lg-10">
-
             <div class="col-lg-2">
                 {%if shoe != null %}
                     <img src="{{ asset('images/uploads/')}}{{shoe.fullFileName}}"  onerror="imgError(this);" alt="No shoe image"/>                                
@@ -22,16 +21,29 @@
                     <a>image cannot be loaded</a>
                 {%endif%}
                 <br/><br/>
-                {%if app.user != null and shoe.idOwner.idUser != app.user.idUser %}
-                   <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="3.3"/>
-            <script>
-                $("#input-1").rating({showClear:false});
-                
-                $('#input-1').on('rating.change', function (event, value, caption) {
-                    $.ajax({url: '{{path('_rating_add')}}?shoeId={{shoe.idShoeHash}}&value=' + value});
-                $("#input-1").rating('refresh',{readonly:true});
-                });
-            </script>
+                {%if app.user != null%}
+                    <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="{{avgRate}}"/>
+                    {%if shoe.idOwner.idUser != app.user.idUser %}
+                        {%if rated != null %}
+                            <br/>
+                            Your rate is {{rated.value}}
+                            <br/><br/>
+                        {%endif%}
+                        <script>
+                            $("#input-1").rating({showClear: false
+                            {%if rated is defined and rated != null %}
+                                    , readonly: true
+                            {%endif%}
+                                });
+
+                            {%if rated == null%}
+                                $('#input-1').on('rating.change', function (event, value, caption) {
+                                    $.ajax({url: '{{path('_rating_add')}}?shoeId={{shoe.idShoeHash}}&value=' + value});
+                                    location.reload();
+                                });
+                            {%endif%}
+                        </script>
+                    {%endif%}
                 {%endif%} 
                 {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
                 {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}

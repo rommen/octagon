@@ -64,7 +64,7 @@
                             </div>
                             <div class="rate-row">
                                 <input class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="{{i[1]}}"/>
-                                
+
                                 <br/>
                             </div>
                         </div>
@@ -75,7 +75,8 @@
     </div>
     <script>
         $('input.rating').each(function () {
-            $(this).rating('refresh', {readonly: true, showClear: false, showCaption: true});
+            if ($(this).attr('id') === undefined)
+                $(this).rating('refresh', {readonly: true, showClear: false, showCaption: true});
         });
     </script>
 </div>

@@ -60,9 +60,26 @@ class ShoesController extends SecureController {
 
             $qb->orderBy('c.date', 'DESC');
             $comments = $qb->getQuery()->getResult();
+
+            $qb = $em->createQueryBuilder()
+                    ->select('AVG(r.value)')
+                    ->from('CustomerBundle:Rating', 'r')
+                    ->where('r.idShoe = :shoe')
+                    ->setParameter('shoe', $id);
+            $avgRate = $qb->getQuery()->getOneOrNullResult();
             
+            $qb = $em->createQueryBuilder()
+                    ->select('r')
+                    ->from('CustomerBundle:Rating', 'r')
+                    ->where('r.idShoe = :shoe')
+                    ->andWhere('r.idOwner = :owner')
+                    ->setParameter('shoe', $id)
+                    ->setParameter('owner', $this->getUser()->getIdUser());
+            $rated = $qb->getQuery()->getOneOrNullResult();
+
             return $this->render('CustomerBundle:Shoes:shoe.html.twig', 
-                    array('shoe' => $shoe, 'comments' => $comments));
+                    array('shoe' => $shoe, 'comments' => $comments, 
+                        'avgRate' => $avgRate[1], 'rated' => $rated));
         } else {
             throw $this->createNotFoundException('Shoe not found');
         }

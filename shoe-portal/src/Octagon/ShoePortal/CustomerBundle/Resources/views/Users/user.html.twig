@@ -12,17 +12,31 @@
     </script> 
     <div>
         {% include "CustomerBundle:Users:user_details.html.twig" %} 
-        {%if app.user != null and user.idUser != app.user.idUser %}
-            <input id="input-1" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="3.3"/>
-            <script>
-                $("#input-1").rating({showClear:false});
-                
-                $('#input-1').on('rating.change', function (event, value, caption) {
-                    $.ajax({url: '{{path('_rating_add')}}?sellerId={{user.idUserHash}}&value=' + value});
-                    $("#input-1").rating('refresh',{readonly:true});
-                });
-            </script>
+        <div style="margin-left: 50px;position: relative; top:-20px">
+        {%if app.user != null %}
+            <input id="input-2" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="{{avgRate}}"/>
+            {% if user.idUser != app.user.idUser %}
+                {%if rated != null %}
+                    <br/>
+                    Your rate is {{rated.value}}
+                {%endif%}
+                <script>
+                    $("#input-2").rating({showClear: false
+                    {%if rated is defined and rated != null %}
+                            , readonly: true
+                    {%endif%}
+                        });
+
+                    {%if rated == null%}
+                        $('#input-2').on('rating.change', function (event, value, caption) {
+                            $.ajax({url: '{{path('_rating_add')}}?sellerId={{user.idUserHash}}&value=' + value});
+                            location.reload();
+                        });
+                    {%endif%}
+                </script>
+            {%endif%}
         {%endif%}
+        </div>
         <div id="lists">&nbsp;
             <div>
                 <div id="col1" class="col-md-1">
@@ -56,6 +70,6 @@
     </div>
     {% include 'CustomerBundle:Comments:list.html.twig' with comments %}
     {% include 'CustomerBundle:Comments:comments_add.html.twig' with {'sellerId':user.idUserHash}%} 
-    
+
 {% endblock %}  
 
