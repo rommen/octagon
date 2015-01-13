@@ -57,8 +57,8 @@
                     {{s.text}}<br/>
                     In <a href="{{path('_statistics')}}?categoryId={{s.idCategories.idCategoriesHash}}">{{s.idCategories.name}}</a>
                     <br/><br/>
-                    {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'url': app.request.uri~'?id='~s.idStatisticsHash}%}
-                    {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'url':  app.request.uri~'?id='~s.idStatisticsHash}%}
+                    {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': s.tile, 'url': app.request.schemeAndHttpHost~'/statistics/list?id='~s.idStatisticsHash}%}
+                    {%include 'CustomerBundle:Shares:share_facebook.html.twig'  with {'text': s.tile, 'url':  app.request.schemeAndHttpHost~'/statistics/list?id='~s.idStatisticsHash}%}
                 </div>
             </div>
         {% endfor %}        
