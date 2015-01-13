@@ -86,21 +86,22 @@ class UsersController extends SecureController {
                 ->setParameter('seller', $id);
         $avgRate = $qb->getQuery()->getOneOrNullResult();
 
-        $qb = $em->createQueryBuilder()
-                ->select('r')
-                ->from('CustomerBundle:Rating', 'r')
-                ->where('r.idSeller = :seller')
-                ->andWhere('r.idOwner = :owner')
-                ->setParameter('seller', $id)
-                ->setParameter('owner', $this->getUser()->getIdUser());
-        $rated = $qb->getQuery()->getOneOrNullResult();
-
-
+        $rated = null;
+        if ($this->getUser() != null) {
+            $qb = $em->createQueryBuilder()
+                    ->select('r')
+                    ->from('CustomerBundle:Rating', 'r')
+                    ->where('r.idSeller = :seller')
+                    ->andWhere('r.idOwner = :owner')
+                    ->setParameter('seller', $id)
+                    ->setParameter('owner', $this->getUser()->getIdUser());
+            $rated = $qb->getQuery()->getOneOrNullResult();
+        }
 
         return $this->render('CustomerBundle:Users:user.html.twig', array('user' => $user,
                     'shoes' => $shoes, 'newsfeeds' => $newsfeeds,
                     'comments' => $comments,
-                    'avgRate' => $avgRate[1], 'rated' => $rated ));
+                    'avgRate' => $avgRate[1], 'rated' => $rated));
     }
 
     public function registerAction(Request $request) {
