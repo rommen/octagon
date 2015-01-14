@@ -125,10 +125,25 @@ class MailboxController extends SecureController {
 
         //create a new Mailbox objectr#
         $email = new Mailbox();
+
+        $to = $request->get('to');
+        if ($to != null) {
+            $to = base64_decode($to);
+            $em = $this->getDoctrine()->getManager();
+            $qb = $em->createQueryBuilder()
+                    ->select('u')
+                    ->from('CustomerBundle:User', 'u')
+                    ->where('u.idUser = :user')
+                    ->setParameter('user', $to);
+
+            $to = $qb->getQuery()->getOneOrNullResult();
+            $email->setIdreceiver($to);
+        }
+
         //identify the sender
         $email->setIdsender($this->getUser());
         //call the created email form
-        $sendMailForm=$this->createSendEmailForm($email);
+        $sendMailForm = $this->createSendEmailForm($email);
         //route along _send_mail
         $sendMailForm->setAction($this->generateUrl('_send_mail'));
         //general form actions
@@ -151,7 +166,7 @@ class MailboxController extends SecureController {
     private function createSendEmailForm(Mailbox $email) {
         return $this->createFormBuilder($email)
                         ->add('idMailbox', 'hidden')
-                        ->add('idReceiver', null, array('label'=> 'Receiver'))
+                        ->add('idReceiver', null, array('label' => 'Receiver'))
                         ->add('title')
                         ->add('text')
                         ->setMethod('POST');
