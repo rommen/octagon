@@ -12,7 +12,7 @@
     </script> 
     <div>
         {% include "CustomerBundle:Users:user_details.html.twig" %} 
-        <div style="margin-left: 50px;position: relative; top:-20px">
+        <div style="margin-left: 50px;">
         {%if app.user != null %}
             <input id="input-2" class="rating" data-min="0" data-max="5" data-step="1" data-size="xs" value="{{avgRate}}"/>
             {% if user.idUser != app.user.idUser %}
