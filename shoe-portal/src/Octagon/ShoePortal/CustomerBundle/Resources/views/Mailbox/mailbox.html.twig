@@ -5,7 +5,7 @@
         navigation('nav_mails');
     </script> 
     <div class="page_container">
-        {% include "CustomerBundle:MailBox:menu.html.twig" %}
+        {% include "CustomerBundle:Mailbox:menu.html.twig" %}
 
         {%if app.request.attributes.get('_route') == '_inbox'%}
             {% include "CustomerBundle:Mailbox:list_inbox.html.twig" with mails%}       
