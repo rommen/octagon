@@ -34,6 +34,8 @@
                         });
                     {%endif%}
                 </script>
+            {%else%}
+                <script>$("#input-2").rating('refresh', {readonly: true});</script>
             {%endif%}
         {%endif%}
         </div>

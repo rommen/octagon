@@ -35,10 +35,11 @@
                 </div>
                 <div class="comment-body">
                     <div class="comment-text">{{c.text}}</div>
-                    {%if c.idOwner.avatar%}
+                    {%if app.user == null or c.idOwner.idUser != app.user.idUser%}
                         <div class="comment-report" style="float:right">
                             
-                            <button type="button" class="btn btn-primary" onclick="$.ajax({url: '{{path('_comments_report')}}?id={{ c.idCommentsHash }}'})">
+                            <button type="button" class="btn btn-primary" 
+                                    onclick="$.ajax({url: '{{path('_comments_report')}}?id={{ c.idCommentsHash }}'});$(this).attr('class', 'btn btn-primary disabled')">
                                 Report
                             </button>
                         </div>

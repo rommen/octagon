@@ -43,6 +43,8 @@
                                 });
                             {%endif%}
                         </script>
+                    {%else%}
+                        <script>$("#input-1").rating('refresh', {readonly: true});</script>
                     {%endif%}
                 {%endif%} 
                 {%include 'CustomerBundle:Shares:share_twitter.html.twig'  with {'text': shoe.name, 'url': app.request.uri}%}
