@@ -49,12 +49,12 @@
                         {% include "CustomerBundle:Shoes:list.html.twig" with shoes %}
                         <a style="position: relative;top: -60px;" class="more" href="{{path('_shoes')}}">More</a>
                     </div>
-                    <div id="col2" class="col-md-3">
+                    <div id="col1" class="col-md-3">
                         <h1>News Feeds</h1>
                         {% include "CustomerBundle:Newsfeed:list.html.twig" with newsfeeds %}
                         <a class="more" href="{{path('_newsfeeds')}}">More</a>
                     </div>
-                    <div class="col-md-3">
+                    <div  class="col-md-3">
                         <h1>Statistics</h1>
                         {% include "CustomerBundle:Statistics:list.html.twig" with statistics %}
                         <a class="more" href="{{path('_statistics')}}">More</a>
